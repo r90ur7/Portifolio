@@ -1,0 +1,2 @@
+C:\Users\Pato\source\repos\Portifolio\reactapp\obj\Debug\reactapp.esproj.SuggestedBindingRedirects.cache
+C:\Users\Pato\source\repos\Portifolio\reactapp\obj\Debug\reactapp.esproj.CoreCompileInputs.cache
