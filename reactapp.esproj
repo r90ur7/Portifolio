@@ -15,10 +15,11 @@
     <Folder Include="src\Components\assets\" />
     <Folder Include="src\Components\common\" />
     <Folder Include="src\Components\modules\" />
-    <Folder Include="src\Components\scripts\celulas\" />
     <Folder Include="src\Components\scripts\moleculas\" />
     <Folder Include="src\Components\utils\" />
     <Folder Include="src\Contexts\" />
     <Folder Include="src\Modal\" />
+    <Folder Include="src\Components\scripts\celulas\Header\" />
+    <Folder Include="src\styles\" />
   </ItemGroup>
 </Project>
