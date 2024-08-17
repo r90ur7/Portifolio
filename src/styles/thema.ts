@@ -1,8 +1,9 @@
 import { extendTheme } from "@chakra-ui/react";
 
-export const theme = extendTheme({
+const PortfolioTheme = extendTheme({
     fonts: {
         heading: 'Roboto',
         body:'Roboto'
     },
 })
+export default PortfolioTheme;
