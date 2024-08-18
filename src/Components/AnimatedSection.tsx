@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Box } from '@chakra-ui/react'
+import { Box, VStack } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 
 interface AnimatedSectionProps {
@@ -7,9 +7,17 @@ interface AnimatedSectionProps {
 }
 
 const AnimatedSection = ({ children }: AnimatedSectionProps) => (
-    <Box as={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 as any }}>
+    <VStack
+        spacing={4}
+        as={motion.div}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transitionDuration={
+            "0.5"
+        }
+    >
         {children}
-    </Box>
+    </VStack>
 )
 
 export default AnimatedSection

@@ -3,7 +3,7 @@ import { Box, Flex, Heading, Text, Image, VStack, HStack, Icon } from '@chakra-u
 import { FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa'
 
 const AboutMe = () => (
-    <Box py={20} px={10} bg="brand.700" color="white">
+    <Box id="about-me" py={20} px={10} bg="brand.700" color="white">
         <Flex direction={{ base: 'column', md: 'row' }} align="center">
             <Image
                 borderRadius="full"
