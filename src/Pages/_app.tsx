@@ -1,6 +1,6 @@
-// pages/_app.tsx
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
+import reportWebVitals from '../reportWebVitals'
 
 const theme = extendTheme({
     colors: {
@@ -28,3 +28,5 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp
+
+reportWebVitals();
