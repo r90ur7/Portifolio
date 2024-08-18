@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/react"
 import AboutMe from "../Components/AboutMe"
 import Contact from "../Components/Contact"
 import Experience from "../Components/Experiencie"
@@ -7,7 +8,7 @@ import Projects from "../Components/Projects"
 import Skills from "../Components/Skills"
 
 const IndexPage = () => (
-    <>
+    <Box>
         <Hero />
         <AboutMe />
         <Experience />
@@ -15,7 +16,7 @@ const IndexPage = () => (
         <Skills />
         <Contact />
         <Footer />
-    </>
+    </Box>
 )
 
 export default IndexPage
