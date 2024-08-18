@@ -30,8 +30,8 @@
     "yup": "^1.4.0"
   },
   "scripts": {
-    "dev": "set HTTPS=true&&next dev&&react-scripts start",
-    "start": "set HTTPS=true&&next start&&react-scripts start",
+    "dev": "set HTTPS=true&&next dev",
+    "start": "set HTTPS=true&&next start",
     "build": "next build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
