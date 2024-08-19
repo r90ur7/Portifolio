@@ -1,14 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     reactStrictMode: true,
+    images: {
+        domains: ['example.com'],
+    },
+    pageExtensions: ['tsx'],
 };
 
-module.exports = {
-  reactStrictMode: true,
-  pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
-  experimental: {
-    srcDir: 'src',
-  },
-};
 
 export default nextConfig;
