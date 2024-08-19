@@ -6,6 +6,7 @@ import Footer from "../Components/Footer"
 import Hero from "../Components/Hero"
 import Projects from "../Components/Projects"
 import Skills from "../Components/Skills"
+import React from "react"
 
 const IndexPage = () => (
     <Box>
