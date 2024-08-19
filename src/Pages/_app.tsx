@@ -1,7 +1,8 @@
 import { ChakraProvider, extendTheme } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
 import reportWebVitals from '../reportWebVitals'
-
+import React from 'react'
+import { SpeedInsights } from "@vercel/speed-insights/next"
 const theme = extendTheme({
     colors: {
         brand: {
@@ -22,6 +23,7 @@ const theme = extendTheme({
 function MyApp({ Component, pageProps }: AppProps) {
     return (
         <ChakraProvider theme={theme}>
+            <SpeedInsights />
             <Component {...pageProps} />
         </ChakraProvider>
     )
