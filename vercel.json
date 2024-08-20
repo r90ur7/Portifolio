@@ -8,7 +8,7 @@
     {
       "src": "/(.*).tsx",
       "dest": "/src/pages/$1.tsx"
-    }
+    },
     {
       "src": "/(.*).tsx",
       "dest": "/index.tsx"
