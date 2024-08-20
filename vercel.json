@@ -1,9 +1,13 @@
 {
-    "version": 2,
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "/src/index.tsx"
-        }
-    ]
+  "version": 2,
+  "routes": [
+    {
+      "src": "/",
+      "dest": "/src/pages/index.tsx"
+    },
+    {
+      "src": "/(.*).tsx",
+      "dest": "/src/pages/$1.tsx"
+    }
+  ]
 }
