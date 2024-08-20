@@ -1,4 +1,4 @@
-import { Box, SimpleGrid, Heading, Text, Image } from '@chakra-ui/react'
+import { Box, SimpleGrid, Heading, Text } from '@chakra-ui/react'
 import { JSXElementConstructor, Key, PromiseLikeOfReactNode, ReactElement, ReactNode, ReactPortal, useEffect, useState } from 'react'
 import axios from 'axios'
 

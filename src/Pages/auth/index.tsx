@@ -9,7 +9,6 @@ import {
     FormErrorMessage,
     Input,
     VStack,
-    Image
 } from "@chakra-ui/react";
 
 const Auth = () => {

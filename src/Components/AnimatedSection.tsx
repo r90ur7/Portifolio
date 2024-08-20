@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Box, VStack } from '@chakra-ui/react'
+import { VStack } from '@chakra-ui/react'
 import { ReactNode } from 'react'
 
 interface AnimatedSectionProps {
