@@ -1,1 +1,96 @@
-"use strict";(()=>{var e={};e.id=888,e.ids=[888],e.modules={3893:(e,r,t)=>{t.a(e,async(e,s)=>{try{t.r(r),t.d(r,{default:()=>u});var i=t(997),a=t(2210),n=t(5553);t(6689);var o=t(7451),c=e([a,o]);[a,o]=c.then?(await c)():c;let d=(0,a.extendTheme)({colors:{brand:{50:"#E9D8FD",100:"#D6BCFA",200:"#B794F4",300:"#9F7AEA",400:"#805AD5",500:"#6B46C1",600:"#553C9A",700:"#44337A",800:"#322659",900:"#21183C"}}}),u=function({Component:e,pageProps:r}){return(0,i.jsxs)(a.ChakraProvider,{theme:d,children:[i.jsx(o.SpeedInsights,{}),i.jsx(e,{...r})]})};(0,n.Z)(),s()}catch(e){s(e)}})},5553:(e,r,t)=>{t.d(r,{Z:()=>s});let s=e=>{e&&e instanceof Function&&Promise.resolve().then(t.t.bind(t,4032,23)).then(({getCLS:r,getFID:t,getFCP:s,getLCP:i,getTTFB:a})=>{r(e),t(e),s(e),i(e),a(e)})}},6689:e=>{e.exports=require("react")},997:e=>{e.exports=require("react/jsx-runtime")},4032:e=>{e.exports=require("web-vitals")},2210:e=>{e.exports=import("@chakra-ui/react")},7451:e=>{e.exports=import("@vercel/speed-insights/next")}};var r=require("../webpack-runtime.js");r.C(e);var t=r(r.s=3893);module.exports=t})();
+"use strict";
+/*
+ * ATTENTION: An "eval-source-map" devtool has been used.
+ * This devtool is neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+(() => {
+var exports = {};
+exports.id = "pages/_app";
+exports.ids = ["pages/_app"];
+exports.modules = {
+
+/***/ "./src/pages/_app.tsx":
+/*!****************************!*\
+  !*** ./src/pages/_app.tsx ***!
+  \****************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {\n__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"react/jsx-dev-runtime\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _chakra_ui_react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @chakra-ui/react */ \"@chakra-ui/react\");\n/* harmony import */ var _reportWebVitals__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../reportWebVitals */ \"./src/reportWebVitals.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_3__);\n/* harmony import */ var _vercel_speed_insights_next__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @vercel/speed-insights/next */ \"@vercel/speed-insights/next\");\nvar __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([_chakra_ui_react__WEBPACK_IMPORTED_MODULE_1__, _vercel_speed_insights_next__WEBPACK_IMPORTED_MODULE_4__]);\n([_chakra_ui_react__WEBPACK_IMPORTED_MODULE_1__, _vercel_speed_insights_next__WEBPACK_IMPORTED_MODULE_4__] = __webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__);\n\n\n\n\n\nconst theme = (0,_chakra_ui_react__WEBPACK_IMPORTED_MODULE_1__.extendTheme)({\n    colors: {\n        brand: {\n            50: \"#E9D8FD\",\n            100: \"#D6BCFA\",\n            200: \"#B794F4\",\n            300: \"#9F7AEA\",\n            400: \"#805AD5\",\n            500: \"#6B46C1\",\n            600: \"#553C9A\",\n            700: \"#44337A\",\n            800: \"#322659\",\n            900: \"#21183C\"\n        }\n    }\n});\nfunction MyApp({ Component, pageProps }) {\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_chakra_ui_react__WEBPACK_IMPORTED_MODULE_1__.ChakraProvider, {\n        theme: theme,\n        children: [\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(_vercel_speed_insights_next__WEBPACK_IMPORTED_MODULE_4__.SpeedInsights, {}, void 0, false, {\n                fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_app.tsx\",\n                lineNumber: 26,\n                columnNumber: 13\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(Component, {\n                ...pageProps\n            }, void 0, false, {\n                fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_app.tsx\",\n                lineNumber: 27,\n                columnNumber: 13\n            }, this)\n        ]\n    }, void 0, true, {\n        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_app.tsx\",\n        lineNumber: 25,\n        columnNumber: 9\n    }, this);\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MyApp);\n(0,_reportWebVitals__WEBPACK_IMPORTED_MODULE_2__[\"default\"])();\n\n__webpack_async_result__();\n} catch(e) { __webpack_async_result__(e); } });//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvcGFnZXMvX2FwcC50c3giLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7Ozs7Ozs7O0FBQThEO0FBRWQ7QUFDdkI7QUFDa0M7QUFDM0QsTUFBTUssUUFBUUosNkRBQVdBLENBQUM7SUFDdEJLLFFBQVE7UUFDSkMsT0FBTztZQUNILElBQUk7WUFDSixLQUFLO1lBQ0wsS0FBSztZQUNMLEtBQUs7WUFDTCxLQUFLO1lBQ0wsS0FBSztZQUNMLEtBQUs7WUFDTCxLQUFLO1lBQ0wsS0FBSztZQUNMLEtBQUs7UUFDVDtJQUNKO0FBQ0o7QUFFQSxTQUFTQyxNQUFNLEVBQUVDLFNBQVMsRUFBRUMsU0FBUyxFQUFZO0lBQzdDLHFCQUNJLDhEQUFDViw0REFBY0E7UUFBQ0ssT0FBT0E7OzBCQUNuQiw4REFBQ0Qsc0VBQWFBOzs7OzswQkFDZCw4REFBQ0s7Z0JBQVcsR0FBR0MsU0FBUzs7Ozs7Ozs7Ozs7O0FBR3BDO0FBRUEsaUVBQWVGLEtBQUtBLEVBQUE7QUFFcEJOLDREQUFlQSIsInNvdXJjZXMiOlsid2VicGFjazovL3JlYWN0YXBwLy4vc3JjL3BhZ2VzL19hcHAudHN4P2Y5ZDYiXSwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgQ2hha3JhUHJvdmlkZXIsIGV4dGVuZFRoZW1lIH0gZnJvbSAnQGNoYWtyYS11aS9yZWFjdCdcbmltcG9ydCB0eXBlIHsgQXBwUHJvcHMgfSBmcm9tICduZXh0L2FwcCdcbmltcG9ydCByZXBvcnRXZWJWaXRhbHMgZnJvbSAnLi4vcmVwb3J0V2ViVml0YWxzJ1xuaW1wb3J0IFJlYWN0IGZyb20gJ3JlYWN0J1xuaW1wb3J0IHsgU3BlZWRJbnNpZ2h0cyB9IGZyb20gXCJAdmVyY2VsL3NwZWVkLWluc2lnaHRzL25leHRcIlxuY29uc3QgdGhlbWUgPSBleHRlbmRUaGVtZSh7XG4gICAgY29sb3JzOiB7XG4gICAgICAgIGJyYW5kOiB7XG4gICAgICAgICAgICA1MDogJyNFOUQ4RkQnLFxuICAgICAgICAgICAgMTAwOiAnI0Q2QkNGQScsXG4gICAgICAgICAgICAyMDA6ICcjQjc5NEY0JyxcbiAgICAgICAgICAgIDMwMDogJyM5RjdBRUEnLFxuICAgICAgICAgICAgNDAwOiAnIzgwNUFENScsXG4gICAgICAgICAgICA1MDA6ICcjNkI0NkMxJyxcbiAgICAgICAgICAgIDYwMDogJyM1NTNDOUEnLFxuICAgICAgICAgICAgNzAwOiAnIzQ0MzM3QScsXG4gICAgICAgICAgICA4MDA6ICcjMzIyNjU5JyxcbiAgICAgICAgICAgIDkwMDogJyMyMTE4M0MnLFxuICAgICAgICB9LFxuICAgIH0sXG59KVxuXG5mdW5jdGlvbiBNeUFwcCh7IENvbXBvbmVudCwgcGFnZVByb3BzIH06IEFwcFByb3BzKSB7XG4gICAgcmV0dXJuIChcbiAgICAgICAgPENoYWtyYVByb3ZpZGVyIHRoZW1lPXt0aGVtZX0+XG4gICAgICAgICAgICA8U3BlZWRJbnNpZ2h0cyAvPlxuICAgICAgICAgICAgPENvbXBvbmVudCB7Li4ucGFnZVByb3BzfSAvPlxuICAgICAgICA8L0NoYWtyYVByb3ZpZGVyPlxuICAgIClcbn1cblxuZXhwb3J0IGRlZmF1bHQgTXlBcHBcblxucmVwb3J0V2ViVml0YWxzKCk7Il0sIm5hbWVzIjpbIkNoYWtyYVByb3ZpZGVyIiwiZXh0ZW5kVGhlbWUiLCJyZXBvcnRXZWJWaXRhbHMiLCJSZWFjdCIsIlNwZWVkSW5zaWdodHMiLCJ0aGVtZSIsImNvbG9ycyIsImJyYW5kIiwiTXlBcHAiLCJDb21wb25lbnQiLCJwYWdlUHJvcHMiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/pages/_app.tsx\n");
+
+/***/ }),
+
+/***/ "./src/reportWebVitals.js":
+/*!********************************!*\
+  !*** ./src/reportWebVitals.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst reportWebVitals = (onPerfEntry)=>{\n    if (onPerfEntry && onPerfEntry instanceof Function) {\n        Promise.resolve(/*! import() */).then(__webpack_require__.t.bind(__webpack_require__, /*! web-vitals */ \"web-vitals\", 23)).then(({ getCLS, getFID, getFCP, getLCP, getTTFB })=>{\n            getCLS(onPerfEntry);\n            getFID(onPerfEntry);\n            getFCP(onPerfEntry);\n            getLCP(onPerfEntry);\n            getTTFB(onPerfEntry);\n        });\n    }\n};\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (reportWebVitals);\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvcmVwb3J0V2ViVml0YWxzLmpzIiwibWFwcGluZ3MiOiI7Ozs7QUFBQSxNQUFNQSxrQkFBa0JDLENBQUFBO0lBQ3RCLElBQUlBLGVBQWVBLHVCQUF1QkMsVUFBVTtRQUNsRCwwSEFBTyxDQUFjQyxJQUFJLENBQUMsQ0FBQyxFQUFFQyxNQUFNLEVBQUVDLE1BQU0sRUFBRUMsTUFBTSxFQUFFQyxNQUFNLEVBQUVDLE9BQU8sRUFBRTtZQUNwRUosT0FBT0g7WUFDUEksT0FBT0o7WUFDUEssT0FBT0w7WUFDUE0sT0FBT047WUFDUE8sUUFBUVA7UUFDVjtJQUNGO0FBQ0Y7QUFFQSxpRUFBZUQsZUFBZUEsRUFBQyIsInNvdXJjZXMiOlsid2VicGFjazovL3JlYWN0YXBwLy4vc3JjL3JlcG9ydFdlYlZpdGFscy5qcz81OWYzIl0sInNvdXJjZXNDb250ZW50IjpbImNvbnN0IHJlcG9ydFdlYlZpdGFscyA9IG9uUGVyZkVudHJ5ID0+IHtcclxuICBpZiAob25QZXJmRW50cnkgJiYgb25QZXJmRW50cnkgaW5zdGFuY2VvZiBGdW5jdGlvbikge1xyXG4gICAgaW1wb3J0KCd3ZWItdml0YWxzJykudGhlbigoeyBnZXRDTFMsIGdldEZJRCwgZ2V0RkNQLCBnZXRMQ1AsIGdldFRURkIgfSkgPT4ge1xyXG4gICAgICBnZXRDTFMob25QZXJmRW50cnkpO1xyXG4gICAgICBnZXRGSUQob25QZXJmRW50cnkpO1xyXG4gICAgICBnZXRGQ1Aob25QZXJmRW50cnkpO1xyXG4gICAgICBnZXRMQ1Aob25QZXJmRW50cnkpO1xyXG4gICAgICBnZXRUVEZCKG9uUGVyZkVudHJ5KTtcclxuICAgIH0pO1xyXG4gIH1cclxufTtcclxuXHJcbmV4cG9ydCBkZWZhdWx0IHJlcG9ydFdlYlZpdGFscztcclxuIl0sIm5hbWVzIjpbInJlcG9ydFdlYlZpdGFscyIsIm9uUGVyZkVudHJ5IiwiRnVuY3Rpb24iLCJ0aGVuIiwiZ2V0Q0xTIiwiZ2V0RklEIiwiZ2V0RkNQIiwiZ2V0TENQIiwiZ2V0VFRGQiJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./src/reportWebVitals.js\n");
+
+/***/ }),
+
+/***/ "react":
+/*!************************!*\
+  !*** external "react" ***!
+  \************************/
+/***/ ((module) => {
+
+module.exports = require("react");
+
+/***/ }),
+
+/***/ "react/jsx-dev-runtime":
+/*!****************************************!*\
+  !*** external "react/jsx-dev-runtime" ***!
+  \****************************************/
+/***/ ((module) => {
+
+module.exports = require("react/jsx-dev-runtime");
+
+/***/ }),
+
+/***/ "web-vitals":
+/*!*****************************!*\
+  !*** external "web-vitals" ***!
+  \*****************************/
+/***/ ((module) => {
+
+module.exports = require("web-vitals");
+
+/***/ }),
+
+/***/ "@chakra-ui/react":
+/*!***********************************!*\
+  !*** external "@chakra-ui/react" ***!
+  \***********************************/
+/***/ ((module) => {
+
+module.exports = import("@chakra-ui/react");;
+
+/***/ }),
+
+/***/ "@vercel/speed-insights/next":
+/*!**********************************************!*\
+  !*** external "@vercel/speed-insights/next" ***!
+  \**********************************************/
+/***/ ((module) => {
+
+module.exports = import("@vercel/speed-insights/next");;
+
+/***/ })
+
+};
+;
+
+// load runtime
+var __webpack_require__ = require("../webpack-runtime.js");
+__webpack_require__.C(exports);
+var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+var __webpack_exports__ = (__webpack_exec__("./src/pages/_app.tsx"));
+module.exports = __webpack_exports__;
+
+})();
