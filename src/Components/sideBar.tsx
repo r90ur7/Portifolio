@@ -2,7 +2,7 @@
 import { Box, Flex, Heading, Text, Image, VStack, HStack, Icon, Link, Button } from '@chakra-ui/react';
 import { FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 const Sidebar = () => {
 
