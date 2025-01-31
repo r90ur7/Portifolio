@@ -199,7 +199,7 @@ const Header = () => {
                                 >
                                     <Box
                                         as="img"
-                                        src="/assets/perfil.jpg"
+                                        src="assets/perfil.png"
                                         alt="Minha Foto"
                                         position="absolute"
                                         w="auto"

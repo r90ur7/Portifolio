@@ -1,17 +1,22 @@
 {
-  "version": 2,
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/src/pages/index.tsx"
+    "version": 2,
+    "build": {
+        "env": {
+            "NPM": "true"
+        }
     },
-    {
-      "src": "/(.*).tsx",
-      "dest": "/src/pages/$1.tsx"
-    },
-    {
-      "src": "/(.*).tsx",
-      "dest": "/index.tsx"
-    }
-  ]
+    "routes": [
+        {
+            "src": "/",
+            "dest": "/src/pages/index.tsx"
+        },
+        {
+            "src": "/(.*).tsx",
+            "dest": "/src/pages/$1.tsx"
+        },
+        {
+            "src": "/(.*).tsx",
+            "dest": "/index.tsx"
+        }
+    ]
 }
