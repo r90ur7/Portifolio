@@ -1,5 +1,5 @@
 import { Box, Heading, Text, Flex, Link, IconButton, VStack, Image, Avatar } from "@chakra-ui/react";
-import { FaGithub, FaLinkedin, FaRegEnvelope } from "react-icons/fa";
+import { FaDownload, FaGithub, FaLinkedin, FaRegEnvelope } from "react-icons/fa";
 import { motion, useAnimation, useScroll } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import { keyframes } from "@emotion/react";
@@ -98,54 +98,73 @@ const Header = () => {
                         Desenvolvedor Full Stack especializado em React Next.js e .NET, com experiência em construção de sistemas educacionais escaláveis e interfaces intuitivas. Combino técnicas ágeis com arquitetura modular para entregas de alta performance.
                     </MotionText>
 
-                    {/* Contatos com animação */}
                     <MotionFlex
+                        flexDirection={"column"}
                         gap={6}
                         mt={4}
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ type: "spring", stiffness: 260, damping: 20, delay: 0.8 }}
                     >
-                        <Link href="#contact" _hover={{ textDecoration: 'none' }}>
+                        <Flex gap={6}>
+                            <Link href="#contact" _hover={{ textDecoration: 'none' }}>
+                                <IconButton
+                                    as={motion.button}
+                                    width="100px"
+                                    aria-label="Contato"
+                                    icon={<FaRegEnvelope color="#096666FF" />}
+                                    variant="solid"
+                                    colorScheme="teal"
+                                    size="lg"
+                                    bg="#0D1B2A"
+                                    borderRadius="md"
+                                    border="0.2px solid"
+                                    borderColor="#9AA6C4FF"
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.9 }}
+                                />
+                            </Link>
+                            <Link href="https://github.com/r90ur7" isExternal>
+                                <IconButton
+                                    as={motion.button}
+                                    width="100px"
+                                    aria-label="GitHub"
+                                    icon={<FaGithub color="#096666FF" />}
+                                    variant="solid"
+                                    colorScheme="teal"
+                                    size="lg"
+                                    bg="#0D1B2A"
+                                    borderRadius="md"
+                                    border="0.2px solid"
+                                    borderColor="#9AA6C4FF"
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.9 }}
+                                />
+                            </Link>
+                            <Link href="https://www.linkedin.com/in/gustavo-rallenson/" isExternal>
+                                <IconButton
+                                    as={motion.button}
+                                    width="100px"
+                                    aria-label="LinkedIn"
+                                    icon={<FaLinkedin color="#096666FF" />}
+                                    variant="solid"
+                                    colorScheme="teal"
+                                    size="lg"
+                                    bg="#0D1B2A"
+                                    borderRadius="md"
+                                    border="0.2px solid"
+                                    borderColor="#9AA6C4FF"
+                                    whileHover={{ scale: 1.1 }}
+                                    whileTap={{ scale: 0.9 }}
+                                />
+                            </Link>
+                        </Flex>
+                        <Link href="https://bronze-stormy-55.tiiny.site" isExternal mt={4} width="100%">
                             <IconButton
                                 as={motion.button}
-                                width="100px"
-                                aria-label="Contato"
-                                icon={<FaRegEnvelope />}
-                                variant="solid"
-                                colorScheme="teal"
-                                size="lg"
-                                bg="#0D1B2A"
-                                borderRadius="md"
-                                border="0.2px solid"
-                                borderColor="#9AA6C4FF"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
-                            />
-                        </Link>
-                        <Link href="https://github.com/r90ur7" isExternal>
-                            <IconButton
-                                as={motion.button}
-                                width="100px"
-                                aria-label="Contato"
-                                icon={<FaGithub />}
-                                variant="solid"
-                                colorScheme="teal"
-                                size="lg"
-                                bg="#0D1B2A"
-                                borderRadius="md"
-                                border="0.2px solid"
-                                borderColor="#9AA6C4FF"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
-                            />
-                        </Link>
-                        <Link href="https://www.linkedin.com/in/gustavo-rallenson/" isExternal>
-                            <IconButton
-                                as={motion.button}
-                                width="100px"
-                                aria-label="Contato"
-                                icon={<FaLinkedin />}
+                                width="100%"
+                                aria-label="Portfólio"
+                                icon={< FaDownload color="#096666FF" />}
                                 variant="solid"
                                 colorScheme="teal"
                                 size="lg"
