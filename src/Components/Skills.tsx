@@ -4,7 +4,6 @@ const skills = [
     { name: 'JavaScript', level: 'Avançado' },
     { name: 'React', level: 'Avançado' },
     { name: 'Next.js', level: 'Intermediário' },
-    // Adicione mais habilidades
 ]
 
 const Skills = () => (

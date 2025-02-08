@@ -5,8 +5,7 @@ import { FaNodeJs, FaPython, FaJs, FaHtml5, FaCss3Alt } from "react-icons/fa";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Sidebar from "@/Components/sideBar";
-import Contact from "@/Components/Contact";
-import Experience from "@/Components/Experiencie";
+import Experience from "@/Components/modules/experiencie";
 
 const technologies = [
     { name: "Node.js", icon: <FaNodeJs size={40} /> },

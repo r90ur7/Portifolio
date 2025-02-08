@@ -1,7 +1,7 @@
 // Footer.jsx
 import { Box, Text, Button, Flex, Link } from "@chakra-ui/react";
 import { FaGithub, FaLinkedin, FaRegEnvelope, FaArrowUp } from "react-icons/fa";
-import ContactForm from "../modules/ContactForm";
+import ContactForm from "../modules/contactForm";
 import { keyframes } from "@emotion/react";
 
 const pulse = keyframes`
