@@ -1,5 +1,5 @@
 import { Box, Heading, Text, SimpleGrid, Flex, Tag, Icon, Button } from "@chakra-ui/react";
-import { FaPython, FaDatabase, FaBrain, FaChartLine } from "react-icons/fa";
+import { FaPython, FaDatabase, FaBrain, FaChartLine, FaReact, FaUserCheck, FaUserFriends } from "react-icons/fa";
 import Carrousel from "./carrousel";
 
 const About = () => {
@@ -21,10 +21,10 @@ const About = () => {
                     textAlign="center"
                     mb={4}
                 >
-                    Transformando Dados em Insights
+                    Transformando Visões em Interfaces que Conectam
                 </Heading>
                 <Text fontSize="xl" color="gray.400" textAlign="center">
-                    Código que resolve problemas reais através da inovação tecnológica
+                    Soluções que resolvem problemas reais através da inovação tecnológica
                 </Text>
             </Flex>
             <SimpleGrid columns={{ base: 1, md: 2 }} spacing={12}>
@@ -38,30 +38,28 @@ const About = () => {
                     borderColor="rgba(182, 80, 242, 0.2)"
                 >
                     <Text fontSize="lg" color="gray.300" mb={6} lineHeight="tall">
-                        Como <strong>Analista de Sistemas Full Stack</strong>, combino expertise técnica em
-                        <strong> Python</strong>, <strong>Power BI</strong> e <strong>Business Intelligence</strong> para
-                        desenvolver soluções que transformam dados brutos em estratégias acionáveis. Minha jornada inclui:
+                        Como <strong>Desenvolvedor Full Stack</strong>, combino expertise técnica em <strong>React</strong> ,<strong>Ts</strong>, <strong>Next.js</strong> e <strong>C#</strong> para desenvolver soluções que transformam ideias em interfaces modernas e funcionais. Minha jornada inclui:
                     </Text>
 
                     <Flex direction="column" gap={4}>
                         <Flex align="center">
                             <Icon as={FaChartLine} color="purple.400" mr={3} boxSize={6} />
                             <Text color="gray.200">
-                                <strong>+3 anos</strong> implementando sistemas de análise preditiva
+                                Integração Full Stack com <strong>Experiência em C# (.NET) para desenvolvimento de APIs robustas</strong>, agéis e escalaveis
                             </Text>
                         </Flex>
 
                         <Flex align="center">
                             <Icon as={FaDatabase} color="purple.400" mr={3} boxSize={6} />
                             <Text color="gray.200">
-                                Arquitetura de <strong>Data Warehouses</strong> otimizados
+                                <strong>2 anos</strong> implementando Segurança de páginas via API Server-Side e gerenciamento de contexto
                             </Text>
                         </Flex>
 
                         <Flex align="center">
                             <Icon as={FaBrain} color="purple.400" mr={3} boxSize={6} />
                             <Text color="gray.200">
-                                Modelos de <strong>Machine Learning</strong> em produção
+                                Modelos de <strong>chatbots e e-commerce</strong> em produção
                             </Text>
                         </Flex>
                     </Flex>
@@ -83,9 +81,9 @@ const About = () => {
 
                     <SimpleGrid columns={2} spacing={4}>
                         {[
-                            { icon: FaPython, label: "Automação com Python", color: "#4B8BBE" },
-                            { icon: FaDatabase, label: "Engenharia de Dados", color: "#B650F2" },
-                            { icon: FaChartLine, label: "Business Intelligence", color: "#9AA6C4" },
+                            { icon: FaReact, label: "Desenvolvimento Moderno", color: "#4B8BBE" },
+                            { icon: FaDatabase, label: "Integração Continua", color: "#B650F2" },
+                            { icon: FaUserFriends, label: "Experiência do Usuário (UX)", color: "#9AA6C4" },
                             { icon: FaBrain, label: "IA Aplicada", color: "#FFD43B" },
                         ].map((skill, index) => (
                             <Flex
