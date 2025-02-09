@@ -2,7 +2,7 @@ import { Box, Heading, Text, Flex } from "@chakra-ui/react";
 import { FaBriefcase } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react"; // Adicionamos useState
 
 const MotionBox = motion(Box);
 const MotionFlex = motion(Flex);
@@ -10,18 +10,18 @@ const MotionFlex = motion(Flex);
 const ProfessionalExperience = () => {
     const experiences = [
         {
-            role: "Desenvolvedor Front-end(PJ)",
-            company: "Ohana  Software",
+            role: "Desenvolvedor Front-end",
+            company: "Ohana Software",
             period: "2023 - 2024",
             description:
-                "Construção de aplicações web completas ultilizando React, TypeScript, React-query, ChakraUi, zod, React Context e metodologias ágeis(Jyra).",
+                "Construção de aplicações web completas utilizando React, TypeScript, React-query, ChakraUi, zod, React Context e metodologias ágeis (Jira).",
         },
         {
-            role: "Desenvolvedor Front-end(PJ)",
+            role: "Desenvolvedor Front-end",
             company: "ImW",
             period: "2023 - 2024",
             description:
-                "Desenvolvimento de Soluções técnologicas para Gestão regional de uma instituição religiosa de medio porte com Laravel, Sql, php e metodologias ágeis(Skrum e kannban).",
+                "Desenvolvimento de soluções tecnológicas para gestão regional de uma instituição religiosa de médio porte com Laravel, SQL, PHP e metodologias ágeis (Scrum e Kanban).",
         },
         {
             role: "Desenvolvimento e inovação",
@@ -55,6 +55,20 @@ const ProfessionalExperience = () => {
         hidden: { opacity: 0, x: index % 2 === 0 ? -50 : 50 },
         visible: { opacity: 1, x: 0, transition: { duration: 0.5, delay: index * 0.2 } },
     });
+
+    // Estado para controlar a rotação de cada cartão
+    const [flippedCards, setFlippedCards] = useState<boolean[]>(
+        new Array(experiences.length).fill(false)
+    );
+
+    // Função para alternar a rotação de um cartão específico
+    const toggleFlip = (index: number) => {
+        setFlippedCards((prev) => {
+            const newFlippedCards = [...prev];
+            newFlippedCards[index] = !newFlippedCards[index];
+            return newFlippedCards;
+        });
+    };
 
     return (
         <MotionBox
@@ -90,6 +104,8 @@ const ProfessionalExperience = () => {
                         variants={itemVariants(index)}
                         initial="hidden"
                         animate={controls}
+                        onClick={() => toggleFlip(index)} // Alterna a rotação ao clicar
+                        cursor="pointer"
                     >
                         <MotionBox
                             position="relative"
@@ -97,8 +113,10 @@ const ProfessionalExperience = () => {
                             h="100%"
                             style={{ transformStyle: "preserve-3d" }}
                             transition="transform 0.6s"
-                            whileHover={{ rotateY: 180 }}
-                            cursor="pointer"
+                            animate={{
+                                rotateY: flippedCards[index] ? 180 : 0, // Controla a rotação com base no estado
+                            }}
+                            whileHover={{ rotateY: 180 }} // Animação de hover para desktop
                         >
                             {/* Lado da frente do cartão */}
                             <MotionBox

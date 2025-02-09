@@ -44,15 +44,15 @@ const About = () => {
             animate={controls}
             maxW="1200px"
             mx="auto"
-            py={20}
+            py={{ base: 10, md: 20 }}
             px={{ base: 4, md: 8 }}
             id="about"
         >
             {/* Cabeçalho da seção */}
-            <Flex direction="column" align="center" mb={16}>
+            <Flex direction="column" align="center" mb={{ base: 8, md: 16 }}>
                 <Heading
                     as="h1"
-                    fontSize="4xl"
+                    fontSize={{ base: "2xl", md: "4xl" }}
                     fontWeight="bold"
                     bgGradient="linear(to-r, #B650F2, #9AA6C4)"
                     bgClip="text"
@@ -61,24 +61,23 @@ const About = () => {
                 >
                     Transformando Visões em Interfaces que Conectam
                 </Heading>
-                <Text fontSize="xl" color="gray.400" textAlign="center">
+                <Text fontSize={{ base: "md", md: "xl" }} color="gray.400" textAlign="center">
                     Soluções que resolvem problemas reais através da inovação tecnológica
                 </Text>
             </Flex>
 
-            <SimpleGrid columns={{ base: 1, md: 2 }} spacing={12}>
+            <SimpleGrid columns={{ base: 1, md: 2 }} spacing={{ base: 8, md: 12 }}>
                 {/* Coluna com informações do desenvolvedor */}
                 <MotionBox
-                    p={8}
+                    p={{ base: 6, md: 8 }}
                     bg="rgba(13, 27, 42, 0.7)"
                     borderRadius="2xl"
                     backdropFilter="blur(10px)"
                     boxShadow="0 8px 32px rgba(0, 0, 0, 0.1)"
                     border="1px solid"
                     borderColor="rgba(182, 80, 242, 0.2)"
-                // Aqui você pode também definir animações individuais se desejar
                 >
-                    <Text fontSize="lg" color="gray.300" mb={6} lineHeight="tall">
+                    <Text fontSize={{ base: "md", md: "lg" }} color="gray.300" mb={6} lineHeight="tall">
                         Como <strong>Desenvolvedor Full Stack</strong>, combino expertise técnica em{" "}
                         <strong>React</strong>, <strong>Ts</strong>, <strong>Next.js</strong> e{" "}
                         <strong>C#</strong> para desenvolver soluções que transformam ideias em
@@ -88,21 +87,21 @@ const About = () => {
                     <Flex direction="column" gap={4}>
                         <Flex align="center">
                             <Icon as={FaChartLine} color="purple.400" mr={3} boxSize={6} />
-                            <Text color="gray.200">
+                            <Text fontSize={{ base: "sm", md: "md" }} color="gray.200">
                                 Integração Full Stack com <strong>Experiência em C# (.NET) para desenvolvimento de APIs robustas</strong>, ágeis e escaláveis
                             </Text>
                         </Flex>
 
                         <Flex align="center">
                             <Icon as={FaDatabase} color="purple.400" mr={3} boxSize={6} />
-                            <Text color="gray.200">
+                            <Text fontSize={{ base: "sm", md: "md" }} color="gray.200">
                                 <strong>2 anos</strong> implementando segurança de páginas via API Server-Side e gerenciamento de contexto
                             </Text>
                         </Flex>
 
                         <Flex align="center">
                             <Icon as={FaBrain} color="purple.400" mr={3} boxSize={6} />
-                            <Text color="gray.200">
+                            <Text fontSize={{ base: "sm", md: "md" }} color="gray.200">
                                 Modelos de <strong>chatbots e e-commerce</strong> em produção
                             </Text>
                         </Flex>
@@ -111,7 +110,7 @@ const About = () => {
 
                 {/* Coluna dos Pilares */}
                 <MotionBox
-                    p={8}
+                    p={{ base: 6, md: 8 }}
                     bg="rgba(13, 27, 42, 0.7)"
                     borderRadius="2xl"
                     backdropFilter="blur(10px)"
@@ -119,11 +118,11 @@ const About = () => {
                     border="1px solid"
                     borderColor="rgba(182, 80, 242, 0.2)"
                 >
-                    <Heading fontSize="2xl" color="white" mb={6}>
+                    <Heading fontSize={{ base: "xl", md: "2xl" }} color="white" mb={6}>
                         Pilares da Minha Atuação
                     </Heading>
 
-                    <SimpleGrid columns={2} spacing={4}>
+                    <SimpleGrid columns={{ base: 1, md: 2 }} spacing={4}>
                         {[
                             { icon: FaReact, label: "Desenvolvimento Moderno", color: "#4B8BBE" },
                             { icon: FaDatabase, label: "Integração Continua", color: "#B650F2" },
@@ -142,8 +141,10 @@ const About = () => {
                                 }}
                                 transition="all 0.3s ease"
                             >
-                                <Icon as={skill.icon} color={skill.color} boxSize={8} mr={3} />
-                                <Text color="gray.200">{skill.label}</Text>
+                                <Icon as={skill.icon} color={skill.color} boxSize={{ base: 6, md: 8 }} mr={3} />
+                                <Text fontSize={{ base: "sm", md: "md" }} color="gray.200">
+                                    {skill.label}
+                                </Text>
                             </Flex>
                         ))}
                     </SimpleGrid>
@@ -155,6 +156,7 @@ const About = () => {
                             color="white"
                             _hover={{ bgGradient: "linear(to-r, #C86BFD, #5A4494)" }}
                             rightIcon={<FaBrain />}
+                            size={{ base: "md", md: "lg" }}
                         >
                             Ver Especializações
                         </Button>
