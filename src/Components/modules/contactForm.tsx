@@ -1,16 +1,22 @@
-import { Box, Text, Input, Textarea, Button, Flex } from "@chakra-ui/react";
+import { useState } from 'react';
+import { Box, Text, Input, Textarea, Button, Flex, useToast } from "@chakra-ui/react";
 import { FaRegEnvelope } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 
-// Crie uma versão "motion" do Box e do Button do Chakra
 const MotionBox = motion(Box);
 const MotionButton = motion(Button);
 const MotionInput = motion(Input);
 const MotionTextarea = motion(Textarea);
 
 const ContactForm = () => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const toast = useToast();
+
     // Configuração do Intersection Observer
     const controls = useAnimation();
     const [ref, inView] = useInView({
@@ -18,7 +24,6 @@ const ContactForm = () => {
         triggerOnce: false,
     });
 
-    // Atualiza a animação conforme o elemento entra ou sai da viewport
     useEffect(() => {
         if (inView) {
             controls.start("visible");
@@ -27,16 +32,59 @@ const ContactForm = () => {
         }
     }, [controls, inView]);
 
-    // Definição dos "variants" para o container principal
     const containerVariants = {
         hidden: { opacity: 0, y: 50, transition: { duration: 0.5 } },
         visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
     };
 
-    // Variants para os elementos do formulário
     const itemVariants = {
         hidden: { opacity: 0, y: 20 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setStatus('loading');
+
+        try {
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name,
+                    email,
+                    message,
+                    to: 'rallenson900@gmail.com'
+                }),
+            });
+
+            if (response.ok) {
+                setStatus('success');
+                toast({
+                    title: "Mensagem enviada!",
+                    description: "Entrarei em contato em breve.",
+                    status: "success",
+                    duration: 5000,
+                    isClosable: true,
+                });
+                setName('');
+                setEmail('');
+                setMessage('');
+            } else {
+                throw new Error('Falha no envio');
+            }
+        } catch (error) {
+            setStatus('error');
+            toast({
+                title: "Erro no envio",
+                description: "Houve um problema ao enviar sua mensagem. Tente novamente mais tarde.",
+                status: "error",
+                duration: 5000,
+                isClosable: true,
+            });
+        }
     };
 
     return (
@@ -53,6 +101,8 @@ const ContactForm = () => {
             borderRadius="2xl"
             backdropFilter="blur(10px)"
             boxShadow="0 8px 32px rgba(0, 0, 0, 0.1)"
+            as="form"
+            onSubmit={handleSubmit}
         >
             <Text
                 fontSize="4xl"
@@ -77,6 +127,9 @@ const ContactForm = () => {
                     variants={itemVariants}
                     initial="hidden"
                     animate={controls}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
                 />
 
                 <MotionInput
@@ -91,6 +144,9 @@ const ContactForm = () => {
                     variants={itemVariants}
                     initial="hidden"
                     animate={controls}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
                 />
 
                 <MotionTextarea
@@ -105,6 +161,9 @@ const ContactForm = () => {
                     variants={itemVariants}
                     initial="hidden"
                     animate={controls}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    required
                 />
 
                 <MotionButton
@@ -120,8 +179,10 @@ const ContactForm = () => {
                     animate={controls}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
+                    isLoading={status === 'loading'}
+                    loadingText="Enviando..."
                 >
-                    Enviar Mensagem
+                    {status === 'success' ? 'Enviado!' : 'Enviar Mensagem'}
                 </MotionButton>
             </Flex>
         </MotionBox>
