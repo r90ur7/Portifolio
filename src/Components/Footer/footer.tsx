@@ -39,16 +39,15 @@ const Footer = () => {
                 >
                     {/* Redes Sociais */}
                     <Flex gap={6}>
-                        <Link href="https://github.com/seu-usuario" isExternal _hover={{ textDecoration: "none" }}>
+                        <Link href="https://github.com/r90ur7" isExternal _hover={{ textDecoration: "none" }}>
                             <FaGithub
                                 size="28px"
                                 color="#9AA6C4"
                                 style={{ transition: "all 0.3s" }}
-                            // Note: _hover não funciona diretamente em ícones, considere envolver o ícone em um componente Box se quiser estilizar o hover
                             />
                         </Link>
 
-                        <Link href="https://linkedin.com/in/seu-perfil" isExternal _hover={{ textDecoration: "none" }}>
+                        <Link href="https://linkedin.com/in/gustavo-rallenson" isExternal _hover={{ textDecoration: "none" }}>
                             <FaLinkedin
                                 size="28px"
                                 color="#9AA6C4"
@@ -56,7 +55,7 @@ const Footer = () => {
                             />
                         </Link>
 
-                        <Link href="mailto:seu-email@exemplo.com" _hover={{ textDecoration: "none" }}>
+                        <Link href="mailto:Rallenson900@gmail.com" _hover={{ textDecoration: "none" }}>
                             <FaRegEnvelope
                                 size="28px"
                                 color="#9AA6C4"

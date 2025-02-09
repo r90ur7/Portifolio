@@ -1,6 +1,13 @@
 import { Box, Heading, Flex, Text } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 import { FaGraduationCap } from "react-icons/fa";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
+
+// Crie uma versão "motion" do Box do Chakra
+const MotionBox = motion(Box);
+const MotionFlex = motion(Flex);
 
 const pulse = keyframes`
   0% { transform: scale(1); }
@@ -11,30 +18,62 @@ const pulse = keyframes`
 const Education = () => {
     const formations = [
         {
-            title: "Graduação em Sistemas de Informação",
+            title: "Bacharelado em Sistemas de Informação",
             institution: "Centro Universitário Geraldo Di Biase",
             period: "2021 - 2025",
             description:
-                "Formação focada em análise e desenvolvimento de sistemas, com ênfase em gestão de TI e arquitetura de software.",
+                "Curso superior com foco em análise e desenvolvimento de sistemas, gestão de TI e arquitetura de software.",
         },
         {
-            title: "MBA em Gestão de Tecnologia da Informação",
-            institution: "Pontifícia Universidade Católica",
-            period: "2024 - 2025",
+            title: "Especialização em Design Centrado no Usuário",
+            institution: "PUCRS",
+            period: "2025",
             description:
-                "Especialização em governança de TI e gestão estratégica de projetos tecnológicos.",
+                "Especialização em design centrado no usuário, abordando técnicas avançadas de UX e UI.",
         },
         {
-            title: "Certificação em Inteligência Artificial",
-            institution: "Deep Learning Institute",
+            title: "Programa de Formação de Desenvolvedores M3 Academy",
+            institution: "m3Academy (atualmente Cadastra)",
             period: "2023",
             description:
-                "Desenvolvimento de modelos de machine learning e implementação de soluções de IA em produção.",
+                "Programa intensivo de desenvolvimento front-end com foco em tecnologias modernas e melhores práticas.",
         },
     ];
 
+    // Configuração do Intersection Observer
+    const controls = useAnimation();
+    const [ref, inView] = useInView({
+        threshold: 0.3,
+        triggerOnce: false,
+    });
+
+    // Atualiza a animação conforme o elemento entra ou sai da viewport
+    useEffect(() => {
+        if (inView) {
+            controls.start("visible");
+        } else {
+            controls.start("hidden");
+        }
+    }, [controls, inView]);
+
+    // Definição dos "variants" para o container principal
+    const containerVariants = {
+        hidden: { opacity: 0, y: 50, transition: { duration: 0.5 } },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    };
+
+    // Variants para os itens da formação (agora uma função que recebe index)
+    const itemVariants = (index: any) => ({
+        hidden: { opacity: 0, x: index % 2 === 0 ? -50 : 50 },
+        visible: { opacity: 1, x: 0, transition: { duration: 0.5, delay: index * 0.2 } },
+    });
+
     return (
-        <Box
+        <MotionBox
+            ref={ref}
+            variants={containerVariants}
+            initial="hidden"
+            animate={controls}
             maxW="1200px"
             mx="auto"
             py={20}
@@ -54,8 +93,8 @@ const Education = () => {
             </Heading>
 
             <Box position="relative" mx="auto" maxW="800px" pb="10">
-                {/* Linha vertical central */}
-                <Box
+                {/* Linha vertical central animada */}
+                <MotionBox
                     position="absolute"
                     top="0"
                     left="50%"
@@ -63,15 +102,21 @@ const Education = () => {
                     width="2px"
                     height="100%"
                     bg="gray.300"
+                    initial={{ scaleY: 0 }}
+                    animate={{ scaleY: 1 }}
+                    transition={{ duration: 1, delay: 0.5 }}
                 />
 
                 {formations.map((formation, index) => (
-                    <Flex
+                    <MotionFlex
                         key={index}
                         mb="10"
                         align="center"
                         justify="center"
                         position="relative"
+                        variants={itemVariants(index)} // Passa o index para itemVariants
+                        initial="hidden"
+                        animate={controls}
                     >
                         {index % 2 === 0 ? (
                             <>
@@ -93,7 +138,7 @@ const Education = () => {
 
                                 {/* Marcador central */}
                                 <Box flex="0.1" display="flex" alignItems="center" justifyContent="center">
-                                    <Box
+                                    <MotionBox
                                         width="16px"
                                         height="16px"
                                         borderRadius="full"
@@ -102,9 +147,11 @@ const Education = () => {
                                         display="flex"
                                         alignItems="center"
                                         justifyContent="center"
+                                        whileHover={{ scale: 1.2 }}
+                                        transition={{ type: "spring", stiffness: 300 }}
                                     >
                                         <FaGraduationCap size={10} color="white" />
-                                    </Box>
+                                    </MotionBox>
                                 </Box>
 
                                 {/* Espaço vazio à direita */}
@@ -117,7 +164,7 @@ const Education = () => {
 
                                 {/* Marcador central */}
                                 <Box flex="0.1" display="flex" alignItems="center" justifyContent="center">
-                                    <Box
+                                    <MotionBox
                                         width="16px"
                                         height="16px"
                                         borderRadius="full"
@@ -126,9 +173,11 @@ const Education = () => {
                                         display="flex"
                                         alignItems="center"
                                         justifyContent="center"
+                                        whileHover={{ scale: 1.2 }}
+                                        transition={{ type: "spring", stiffness: 300 }}
                                     >
                                         <FaGraduationCap size={10} color="white" />
-                                    </Box>
+                                    </MotionBox>
                                 </Box>
 
                                 {/* Conteúdo à direita */}
@@ -148,10 +197,10 @@ const Education = () => {
                                 </Box>
                             </>
                         )}
-                    </Flex>
+                    </MotionFlex>
                 ))}
             </Box>
-        </Box>
+        </MotionBox>
     );
 };
 

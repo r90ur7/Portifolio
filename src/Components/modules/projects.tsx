@@ -13,7 +13,13 @@ import {
     Tooltip
 } from "@chakra-ui/react";
 import { FaGithub, FaStar, FaCodeBranch } from "react-icons/fa";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 import setupGithubApi from "@/api/setupApi";
+
+// Crie uma versão "motion" do Box do Chakra
+const MotionBox = motion(Box);
+const MotionFlex = motion(Flex);
 
 const Projects = () => {
     const [repositories, setRepositories] = useState([] as any);
@@ -24,11 +30,36 @@ const Projects = () => {
     const githubUsername = process.env.NEXT_PUBLIC_GITHUB_USERNAME!;
     const githubList = process.env.NEXT_PUBLIC_GITHUB_LIST!;
 
-
-
-
     // Configure a API do GitHub
     const { api } = setupGithubApi(githubToken, githubUsername, githubList);
+
+    // Configuração do Intersection Observer
+    const controls = useAnimation();
+    const [ref, inView] = useInView({
+        threshold: 0.3,
+        triggerOnce: false,
+    });
+
+    // Atualiza a animação conforme o elemento entra ou sai da viewport
+    useEffect(() => {
+        if (inView) {
+            controls.start("visible");
+        } else {
+            controls.start("hidden");
+        }
+    }, [controls, inView]);
+
+    // Definição dos "variants" para o container principal
+    const containerVariants = {
+        hidden: { opacity: 0, y: 50, transition: { duration: 0.5 } },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    };
+
+    // Variants para os itens dos projetos (agora uma função que recebe index)
+    const itemVariants = (index: number) => ({
+        hidden: { opacity: 0, y: 50 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: index * 0.2 } },
+    });
 
     useEffect(() => {
         const fetchRepositories = async () => {
@@ -82,7 +113,11 @@ const Projects = () => {
     }
 
     return (
-        <Box
+        <MotionBox
+            ref={ref}
+            variants={containerVariants}
+            initial="hidden"
+            animate={controls}
             maxW="1200px"
             mx="auto"
             py={20}
@@ -106,85 +141,91 @@ const Projects = () => {
                     columns={{ base: 1, md: 2, lg: 3 }}
                     spacing={8}
                 >
-                    {repositories.map((repo: any) => (
-                        <Box
+                    {repositories.map((repo: any, index: number) => (
+                        <MotionBox
                             key={repo.id}
-                            position="relative"
-                            p={6}
-                            bg="rgba(13, 27, 42, 0.7)"
-                            borderRadius="2xl"
-                            backdropFilter="blur(10px)"
-                            boxShadow="0 8px 32px rgba(0, 0, 0, 0.1)"
-                            _hover={{
-                                transform: "translateY(-5px)",
-                                boxShadow: "0 12px 40px rgba(182, 80, 242, 0.2)"
-                            }}
-                            transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+                            variants={itemVariants(index)} // Passa o index para itemVariants
+                            initial="hidden"
+                            animate={controls}
                         >
                             <Box
-                                _before={{
-                                    content: '""',
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 0,
-                                    borderRadius: '2xl',
-                                    border: '1px solid',
-                                    borderColor: 'rgba(182, 80, 242, 0.3)',
-                                    zIndex: -1
+                                position="relative"
+                                p={6}
+                                bg="rgba(13, 27, 42, 0.7)"
+                                borderRadius="2xl"
+                                backdropFilter="blur(10px)"
+                                boxShadow="0 8px 32px rgba(0, 0, 0, 0.1)"
+                                _hover={{
+                                    transform: "translateY(-5px)",
+                                    boxShadow: "0 12px 40px rgba(182, 80, 242, 0.2)"
                                 }}
+                                transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
                             >
-                                <Link href={repo.html_url} isExternal _hover={{ textDecoration: "none" }}>
-                                    <Flex direction="column" h="full">
-                                        <Flex align="center" mb={4}>
-                                            <Icon as={FaGithub} boxSize={6} color="purple.400" mr={3} />
-                                            <Text
-                                                fontWeight="bold"
-                                                fontSize="xl"
-                                                bgGradient="linear(to-r, #B650F2, #9AA6C4)"
-                                                bgClip="text"
-                                            >
-                                                {repo.name}
+                                <Box
+                                    _before={{
+                                        content: '""',
+                                        position: 'absolute',
+                                        top: 0,
+                                        left: 0,
+                                        right: 0,
+                                        bottom: 0,
+                                        borderRadius: '2xl',
+                                        border: '1px solid',
+                                        borderColor: 'rgba(182, 80, 242, 0.3)',
+                                        zIndex: -1
+                                    }}
+                                >
+                                    <Link href={repo.html_url} isExternal _hover={{ textDecoration: "none" }}>
+                                        <Flex direction="column" h="full">
+                                            <Flex align="center" mb={4}>
+                                                <Icon as={FaGithub} boxSize={6} color="purple.400" mr={3} />
+                                                <Text
+                                                    fontWeight="bold"
+                                                    fontSize="xl"
+                                                    bgGradient="linear(to-r, #B650F2, #9AA6C4)"
+                                                    bgClip="text"
+                                                >
+                                                    {repo.name}
+                                                </Text>
+                                            </Flex>
+
+                                            <Text color="gray.300" flex={1} mb={6}>
+                                                {repo.description || "Projeto desenvolvido com tecnologias modernas"}
                                             </Text>
-                                        </Flex>
 
-                                        <Text color="gray.300" flex={1} mb={6}>
-                                            {repo.description || "Projeto desenvolvido com tecnologias modernas"}
-                                        </Text>
-
-                                        {/* Tecnologias */}
-                                        <Flex wrap="wrap" gap={2} mb={6}>
-                                            {repo.languages.map((language: string) => (
-                                                <Tooltip key={language} label={language} hasArrow>
-                                                    <Tag
-                                                        size="md"
-                                                        variant="subtle"
-                                                        colorScheme="purple"
-                                                        borderRadius="full"
-                                                        bg="rgba(182, 80, 242, 0.1)"
-                                                    >
-                                                        <TagLabel>{language}</TagLabel>
-                                                    </Tag>
-                                                </Tooltip>
-                                            ))}
-                                        </Flex>
-
-                                        {/* Estatísticas */}
-                                        <Flex justify="space-between" color="gray.400">
-                                            <Flex align="center">
-                                                <Icon as={FaStar} mr={2} />
-                                                <Text>{repo.stargazers_count}</Text>
+                                            {/* Tecnologias */}
+                                            <Flex wrap="wrap" gap={2} mb={6}>
+                                                {repo.languages.map((language: string) => (
+                                                    <Tooltip key={language} label={language} hasArrow>
+                                                        <Tag
+                                                            size="md"
+                                                            variant="subtle"
+                                                            colorScheme="purple"
+                                                            borderRadius="full"
+                                                            bg="rgba(182, 80, 242, 0.1)"
+                                                        >
+                                                            <TagLabel>{language}</TagLabel>
+                                                        </Tag>
+                                                    </Tooltip>
+                                                ))}
                                             </Flex>
-                                            <Flex align="center">
-                                                <Icon as={FaCodeBranch} mr={2} />
-                                                <Text>{repo.forks_count}</Text>
+
+                                            {/* Estatísticas */}
+                                            <Flex justify="space-between" color="gray.400">
+                                                <Flex align="center">
+                                                    <Icon as={FaStar} mr={2} />
+                                                    <Text>{repo.stargazers_count}</Text>
+                                                </Flex>
+                                                <Flex align="center">
+                                                    <Icon as={FaCodeBranch} mr={2} />
+                                                    <Text>{repo.forks_count}</Text>
+                                                </Flex>
                                             </Flex>
                                         </Flex>
-                                    </Flex>
-                                </Link>
+                                    </Link>
+                                </Box>
                             </Box>
-                        </Box>
+                        </MotionBox>
                     ))}
                 </SimpleGrid>
             ) : (
@@ -192,7 +233,7 @@ const Projects = () => {
                     Nenhum projeto encontrado na lista especificada
                 </Text>
             )}
-        </Box>
+        </MotionBox>
     );
 };
 

@@ -1,16 +1,54 @@
-import { Box, Heading, Text, SimpleGrid, Flex, Tag, Icon, Button } from "@chakra-ui/react";
-import { FaPython, FaDatabase, FaBrain, FaChartLine, FaReact, FaUserCheck, FaUserFriends } from "react-icons/fa";
-import Carrousel from "./carrousel";
+import { useEffect } from "react";
+import { Box, Heading, Text, SimpleGrid, Flex, Icon, Button } from "@chakra-ui/react";
+import {
+    FaDatabase,
+    FaBrain,
+    FaChartLine,
+    FaReact,
+    FaUserFriends,
+} from "react-icons/fa";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+
+// Crie uma versão "motion" do Box do Chakra
+const MotionBox = motion(Box);
 
 const About = () => {
+    // Configuração do Intersection Observer
+    const controls = useAnimation();
+    const [ref, inView] = useInView({
+        threshold: 0.3,      // Quando 30% do elemento estiver visível
+        triggerOnce: false,  // Permite que a animação ocorra repetidamente
+    });
+
+    // Atualiza a animação conforme o elemento entra ou sai da viewport
+    useEffect(() => {
+        if (inView) {
+            controls.start("visible");
+        } else {
+            controls.start("hidden");
+        }
+    }, [controls, inView]);
+
+    // Definição dos "variants" para o container principal
+    const containerVariants = {
+        hidden: { opacity: 0, y: 50, transition: { duration: 0.5 } },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    };
+
     return (
-        <Box
+        <MotionBox
+            ref={ref} // Atribua o ref para o Intersection Observer
+            variants={containerVariants}
+            initial="hidden"
+            animate={controls}
             maxW="1200px"
             mx="auto"
             py={20}
             px={{ base: 4, md: 8 }}
             id="about"
         >
+            {/* Cabeçalho da seção */}
             <Flex direction="column" align="center" mb={16}>
                 <Heading
                     as="h1"
@@ -27,8 +65,10 @@ const About = () => {
                     Soluções que resolvem problemas reais através da inovação tecnológica
                 </Text>
             </Flex>
+
             <SimpleGrid columns={{ base: 1, md: 2 }} spacing={12}>
-                <Box
+                {/* Coluna com informações do desenvolvedor */}
+                <MotionBox
                     p={8}
                     bg="rgba(13, 27, 42, 0.7)"
                     borderRadius="2xl"
@@ -36,23 +76,27 @@ const About = () => {
                     boxShadow="0 8px 32px rgba(0, 0, 0, 0.1)"
                     border="1px solid"
                     borderColor="rgba(182, 80, 242, 0.2)"
+                // Aqui você pode também definir animações individuais se desejar
                 >
                     <Text fontSize="lg" color="gray.300" mb={6} lineHeight="tall">
-                        Como <strong>Desenvolvedor Full Stack</strong>, combino expertise técnica em <strong>React</strong> ,<strong>Ts</strong>, <strong>Next.js</strong> e <strong>C#</strong> para desenvolver soluções que transformam ideias em interfaces modernas e funcionais. Minha jornada inclui:
+                        Como <strong>Desenvolvedor Full Stack</strong>, combino expertise técnica em{" "}
+                        <strong>React</strong>, <strong>Ts</strong>, <strong>Next.js</strong> e{" "}
+                        <strong>C#</strong> para desenvolver soluções que transformam ideias em
+                        interfaces modernas e funcionais. Minha jornada inclui:
                     </Text>
 
                     <Flex direction="column" gap={4}>
                         <Flex align="center">
                             <Icon as={FaChartLine} color="purple.400" mr={3} boxSize={6} />
                             <Text color="gray.200">
-                                Integração Full Stack com <strong>Experiência em C# (.NET) para desenvolvimento de APIs robustas</strong>, agéis e escalaveis
+                                Integração Full Stack com <strong>Experiência em C# (.NET) para desenvolvimento de APIs robustas</strong>, ágeis e escaláveis
                             </Text>
                         </Flex>
 
                         <Flex align="center">
                             <Icon as={FaDatabase} color="purple.400" mr={3} boxSize={6} />
                             <Text color="gray.200">
-                                <strong>2 anos</strong> implementando Segurança de páginas via API Server-Side e gerenciamento de contexto
+                                <strong>2 anos</strong> implementando segurança de páginas via API Server-Side e gerenciamento de contexto
                             </Text>
                         </Flex>
 
@@ -63,10 +107,10 @@ const About = () => {
                             </Text>
                         </Flex>
                     </Flex>
-                </Box>
+                </MotionBox>
 
-                {/* Coluna de Habilidades */}
-                <Box
+                {/* Coluna dos Pilares */}
+                <MotionBox
                     p={8}
                     bg="rgba(13, 27, 42, 0.7)"
                     borderRadius="2xl"
@@ -94,34 +138,30 @@ const About = () => {
                                 align="center"
                                 _hover={{
                                     transform: "translateY(-3px)",
-                                    boxShadow: "0 4px 12px rgba(182, 80, 242, 0.2)"
+                                    boxShadow: "0 4px 12px rgba(182, 80, 242, 0.2)",
                                 }}
                                 transition="all 0.3s ease"
                             >
-                                <Icon
-                                    as={skill.icon}
-                                    color={skill.color}
-                                    boxSize={8}
-                                    mr={3}
-                                />
+                                <Icon as={skill.icon} color={skill.color} boxSize={8} mr={3} />
                                 <Text color="gray.200">{skill.label}</Text>
                             </Flex>
                         ))}
                     </SimpleGrid>
 
-                    <Button
-                        mt={8}
-                        w="full"
-                        bgGradient="linear(to-r, #B650F2, #48307A)"
-                        color="white"
-                        _hover={{ bgGradient: "linear(to-r, #C86BFD, #5A4494)" }}
-                        rightIcon={<FaBrain />}
-                    >
-                        Ver Especializações
-                    </Button>
-                </Box>
+                    <Box mt={8}>
+                        <Button
+                            w="full"
+                            bgGradient="linear(to-r, #B650F2, #48307A)"
+                            color="white"
+                            _hover={{ bgGradient: "linear(to-r, #C86BFD, #5A4494)" }}
+                            rightIcon={<FaBrain />}
+                        >
+                            Ver Especializações
+                        </Button>
+                    </Box>
+                </MotionBox>
             </SimpleGrid>
-        </Box>
+        </MotionBox>
     );
 };
 

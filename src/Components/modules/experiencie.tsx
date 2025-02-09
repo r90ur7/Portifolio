@@ -1,35 +1,67 @@
 import { Box, Heading, Text, Flex } from "@chakra-ui/react";
 import { FaBriefcase } from "react-icons/fa";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
+
+const MotionBox = motion(Box);
+const MotionFlex = motion(Flex);
 
 const ProfessionalExperience = () => {
     const experiences = [
         {
-            role: "Desenvolvedor Front-end",
-            company: "Empresa XYZ",
-            period: "2020 - 2022",
+            role: "Desenvolvedor Front-end(PJ)",
+            company: "Ohana  Software",
+            period: "2023 - 2024",
             description:
-                "Desenvolvimento e manutenção de interfaces web utilizando React, Next.js e Chakra UI, contribuindo para a melhoria da experiência do usuário.",
+                "Construção de aplicações web completas ultilizando React, TypeScript, React-query, ChakraUi, zod, React Context e metodologias ágeis(Jyra).",
         },
         {
-            role: "Desenvolvedor Full Stack",
-            company: "Tech Solutions",
-            period: "2022 - 2023",
+            role: "Desenvolvedor Front-end(PJ)",
+            company: "ImW",
+            period: "2023 - 2024",
             description:
-                "Construção de aplicações web completas, trabalhando tanto no front-end quanto no back-end com Node.js, Express e MongoDB.",
+                "Desenvolvimento de Soluções técnologicas para Gestão regional de uma instituição religiosa de medio porte com Laravel, Sql, php e metodologias ágeis(Skrum e kannban).",
         },
         {
-            role: "Líder de Projetos",
-            company: "Inovatech",
+            role: "Desenvolvimento e inovação",
+            company: "UGB-Ferp",
             period: "2023 - Atual",
             description:
-                "Gerenciamento de equipes e projetos, assegurando entregas de alta qualidade dentro dos prazos, com foco em metodologias ágeis.",
+                "Desenvolvo interfaces para sistemas de gestão escolar com C#, Flutter e Moodle, focando em otimização avançada e garantindo alta performance.",
         },
     ];
 
+    const controls = useAnimation();
+    const [ref, inView] = useInView({
+        threshold: 0.3,
+        triggerOnce: false,
+    });
+
+    useEffect(() => {
+        if (inView) {
+            controls.start("visible");
+        } else {
+            controls.start("hidden");
+        }
+    }, [controls, inView]);
+
+    const containerVariants = {
+        hidden: { opacity: 0, y: 50, transition: { duration: 0.5 } },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+    };
+
+    const itemVariants = (index: any) => ({
+        hidden: { opacity: 0, x: index % 2 === 0 ? -50 : 50 },
+        visible: { opacity: 1, x: 0, transition: { duration: 0.5, delay: index * 0.2 } },
+    });
+
     return (
-        <Box
+        <MotionBox
+            ref={ref}
+            variants={containerVariants}
+            initial="hidden"
+            animate={controls}
             maxW="1200px"
             mx="auto"
             py={20}
@@ -48,25 +80,28 @@ const ProfessionalExperience = () => {
                 Experiência Profissional
             </Heading>
 
-            <Flex wrap="wrap" justify="center" gap={8}>
+            <MotionFlex wrap="wrap" justify="center" gap={8}>
                 {experiences.map((exp, index) => (
-                    <Box
+                    <MotionBox
                         key={index}
                         w={{ base: "100%", sm: "300px" }}
                         h="200px"
                         style={{ perspective: "1000px" }}
+                        variants={itemVariants(index)}
+                        initial="hidden"
+                        animate={controls}
                     >
-                        <Box
+                        <MotionBox
                             position="relative"
                             w="100%"
                             h="100%"
                             style={{ transformStyle: "preserve-3d" }}
                             transition="transform 0.6s"
-                            _hover={{ transform: "rotateY(180deg)" }}
+                            whileHover={{ rotateY: 180 }}
                             cursor="pointer"
                         >
                             {/* Lado da frente do cartão */}
-                            <Box
+                            <MotionBox
                                 position="absolute"
                                 w="100%"
                                 h="100%"
@@ -95,8 +130,9 @@ const ProfessionalExperience = () => {
                                 <Text color="purple.300" fontSize="sm">
                                     {exp.company}
                                 </Text>
-                            </Box>
-                            <Box
+                            </MotionBox>
+                            {/* Lado de trás do cartão */}
+                            <MotionBox
                                 position="absolute"
                                 w="100%"
                                 h="100%"
@@ -113,12 +149,12 @@ const ProfessionalExperience = () => {
                                 <Text color="gray.300" fontSize="sm">
                                     {exp.description}
                                 </Text>
-                            </Box>
-                        </Box>
-                    </Box>
+                            </MotionBox>
+                        </MotionBox>
+                    </MotionBox>
                 ))}
-            </Flex>
-        </Box>
+            </MotionFlex>
+        </MotionBox>
     );
 };
 
