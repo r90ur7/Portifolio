@@ -17,7 +17,6 @@ const ContactForm = () => {
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const toast = useToast();
 
-    // Configuração do Intersection Observer
     const controls = useAnimation();
     const [ref, inView] = useInView({
         threshold: 0.3,

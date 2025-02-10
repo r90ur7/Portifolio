@@ -36,8 +36,9 @@ const Projects = () => {
     // Configuração do Intersection Observer
     const controls = useAnimation();
     const [ref, inView] = useInView({
-        threshold: 0.3,
+        threshold: 0.1, // Reduzido para garantir que a animação seja acionada em telas menores
         triggerOnce: false,
+        rootMargin: "-50px 0px", // Adiciona uma margem para evitar que a animação seja acionada prematuramente
     });
 
     // Atualiza a animação conforme o elemento entra ou sai da viewport
@@ -123,6 +124,7 @@ const Projects = () => {
             py={20}
             px={{ base: 4, md: 8 }}
             id="projects"
+            minH="80vh" // Garante que a seção ocupe mais espaço vertical em telas menores
         >
             <Heading
                 as="h2"
