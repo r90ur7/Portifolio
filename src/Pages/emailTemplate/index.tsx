@@ -7,7 +7,7 @@ interface WeatherForecast {
     summary: string;
 }
 
-interface AppState {
+interface AppState {  
     forecasts: WeatherForecast[];
     loading: boolean;
 }

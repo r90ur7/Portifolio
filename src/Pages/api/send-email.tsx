@@ -1,6 +1,6 @@
 import { Resend } from 'resend';
 import { NextApiRequest, NextApiResponse } from 'next/types';
-import Email from '../teste/Email';
+import Email from '../emailTemplate/Email';
 
 const resend = new Resend('re_KrmGciog_7P2aFvkRc4DwHjf3XUFdCqka');
 
@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const { name, email, message } = req.body;
 
         const data = await resend.emails.send({
-            from: 'onboarding@resend.dev',
+            from: `${email}`,
             to: 'rallenson900@gmail.com',
             subject: `Nova mensagem de ${name}`,
             react: Email({

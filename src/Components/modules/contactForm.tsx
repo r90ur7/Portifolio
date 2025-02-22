@@ -15,8 +15,8 @@ const ContactForm = () => {
     const [message, setMessage] = useState('');
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
     const toast = useToast();
-
     const controls = useAnimation();
+
     const [ref, inView] = useInView({
         threshold: 0.3,
         triggerOnce: false,
