@@ -1,9 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Box, Text, Input, Textarea, Button, Flex, useToast } from "@chakra-ui/react";
 import { FaRegEnvelope } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useEffect } from "react";
 
 const MotionBox = motion(Box);
 const MotionButton = motion(Button);
@@ -45,40 +44,45 @@ const ContactForm = () => {
         e.preventDefault();
         setStatus('loading');
 
+        const emailData = {
+            name,
+            email,
+            message,
+        };
+
         try {
             const response = await fetch('/api/send-email', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    name,
-                    email,
-                    message,
-                    to: 'rallenson900@gmail.com'
-                }),
+                body: JSON.stringify(emailData)
             });
 
-            if (response.ok) {
-                setStatus('success');
-                toast({
-                    title: "Mensagem enviada!",
-                    description: "Entrarei em contato em breve.",
-                    status: "success",
-                    duration: 5000,
-                    isClosable: true,
-                });
-                setName('');
-                setEmail('');
-                setMessage('');
-            } else {
-                throw new Error('Falha no envio');
+            if (!response.ok) {
+                throw new Error('Erro ao enviar email');
             }
+
+            setStatus('success');
+            toast({
+                title: "Mensagem enviada!",
+                description: "Entrarei em contato em breve.",
+                status: "success",
+                duration: 5000,
+                isClosable: true,
+            });
+
+            // Limpar formulário
+            setName('');
+            setEmail('');
+            setMessage('');
+
         } catch (error) {
+            console.error('Erro ao enviar email:', error);
             setStatus('error');
             toast({
-                title: "Erro no envio",
-                description: "Houve um problema ao enviar sua mensagem. Tente novamente mais tarde.",
+                title: "Erro ao enviar mensagem",
+                description: "Por favor, tente novamente mais tarde.",
                 status: "error",
                 duration: 5000,
                 isClosable: true,

@@ -127,7 +127,7 @@ const About = () => {
                             { icon: FaReact, label: "Desenvolvimento Moderno", color: "#4B8BBE" },
                             { icon: FaDatabase, label: "Integração Continua", color: "#B650F2" },
                             { icon: FaUserFriends, label: "Experiência do Usuário (UX)", color: "#9AA6C4" },
-                            { icon: FaBrain, label: "IA Aplicada", color: "#FFD43B" },
+                            { icon: FaBrain, label: "Design Interativo com Foco Cognitivo", color: "#FFD43B" },
                         ].map((skill, index) => (
                             <Flex
                                 key={index}
