@@ -19,7 +19,6 @@ import setupGithubApi from "@/pages/api/setupApi";
 
 // Crie uma versão "motion" do Box do Chakra
 const MotionBox = motion(Box);
-const MotionFlex = motion(Flex);
 
 const Projects = () => {
     const [repositories, setRepositories] = useState([] as any);
@@ -98,7 +97,11 @@ const Projects = () => {
         };
 
         fetchRepositories();
-    }, []);
+    }, [
+        api,
+        githubUsername,
+        githubList
+    ]);
 
     if (loading) {
         return (

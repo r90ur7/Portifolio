@@ -1,4 +1,4 @@
-import { Box, SimpleGrid, Heading, VStack, Text } from '@chakra-ui/react'
+import { Box, SimpleGrid, Heading, Text } from '@chakra-ui/react'
 
 const skills = [
     { name: 'JavaScript', level: 'Avançado' },

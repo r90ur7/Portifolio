@@ -1,8 +1,7 @@
-import { Box, Heading, Text, Flex, Link, IconButton, VStack, Image, Avatar } from "@chakra-ui/react";
+import { Box, Heading, Text, Flex, Link, IconButton, VStack } from "@chakra-ui/react";
 import { FaDownload, FaGithub, FaLinkedin, FaRegEnvelope } from "react-icons/fa";
-import { motion, useAnimation, useScroll } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import React, { useState, useEffect } from "react";
-import { keyframes } from "@emotion/react";
 
 const MotionBox = motion(Box);
 const MotionHeading = motion(Heading);

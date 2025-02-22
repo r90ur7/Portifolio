@@ -1,13 +1,10 @@
 // components/Sidebar.tsx
-import { Box, Flex, Heading, Text, Image, VStack, HStack, Icon, Link, Button } from '@chakra-ui/react';
-import { FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
+import { Box, Flex, Heading, Text, Image, HStack, Icon, Link, Button } from '@chakra-ui/react';
+import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 
 const Sidebar = () => {
-
-    const [isFixed, setIsFixed] = useState(true);
-
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [numbOIfLines, setNumberOflines] = useState(100);
 
@@ -15,7 +12,7 @@ const Sidebar = () => {
         setIsCollapsed(!isCollapsed);
     };
     const toggleNumbers = () => {
-        if (numbOIfLines == 2) {
+        if (numbOIfLines === 2) {
             setNumberOflines(!isCollapsed ? 2 : 100);
         } else {
             setTimeout(() => {
@@ -75,7 +72,6 @@ const Sidebar = () => {
                 </Link>
             </HStack>
         </Flex>
-        {/* <Contact/> */}
     </Box>
     );
 };
