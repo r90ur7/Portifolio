@@ -1,1 +1,1 @@
-{"/_error":"pages/_error.js","/_app":"pages/_app.js","/_document":"pages/_document.js","/api/send-email":"pages/api/send-email.js","/api/setupApi":"pages/api/setupApi.js","/":"pages/index.html","/teste/Email":"pages/teste/Email.html","/teste":"pages/teste.html","/404":"pages/404.html"}
+{"/_app":"pages/_app.js","/_document":"pages/_document.js","/api/send-email":"pages/api/send-email.js","/":"pages/index.html","/api/setupApi":"pages/api/setupApi.js","/teste/Email":"pages/teste/Email.html","/teste":"pages/teste.html","/_error":"pages/_error.js","/404":"pages/404.html"}
