@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST='{"..\\\\node_modules\\\\@react-email\\\\render\\\\dist\\\\browser\\\\index.mjs -> react-dom/server":{"id":null,"files":[]},"reportWebVitals.js -> web-vitals":{"id":2131,"files":["static/chunks/131.7c5d1e5d56643f2a.js"]}}';
+self.__REACT_LOADABLE_MANIFEST="{\"reportWebVitals.js -> web-vitals\":{\"id\":\"reportWebVitals.js -> web-vitals\",\"files\":[\"static/chunks/node_modules_web-vitals_dist_web-vitals_js.js\"]}}"

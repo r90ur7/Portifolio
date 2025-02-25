@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const { name, email, message } = req.body;
 
         const data = await resend.emails.send({
-            from: `${email}`,
+            from: 'Rallenson@resend.dev',
             to: 'rallenson900@gmail.com',
             subject: `Nova mensagem de ${name}`,
             react: Email({
