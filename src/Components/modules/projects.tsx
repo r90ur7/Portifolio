@@ -15,7 +15,7 @@ import {
 import { FaGithub, FaStar, FaCodeBranch } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import setupGithubApi from "@/Pages/api/setupApi";
+import setupGithubApi from "@/pages/api/setupGithubApi";
 
 // Crie uma versão "motion" do Box do Chakra
 const MotionBox = motion(Box);
