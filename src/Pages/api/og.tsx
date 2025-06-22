@@ -17,6 +17,13 @@ const iconMap: Record<string, string> = {
     aws: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg',
     sql: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg',
     django: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/django/django-plain.svg',
+    laravel: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-plain.svg',
+    vue: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg',
+    angular: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg',
+    flutter: 'https://cdn.jsdelivr.net/gh/devicons,devicon/icons/flutter/flutter-original.svg',
+    ".net": 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg',
+    java: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg',
+    csharp: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg',
 };
 const defaultIcon = 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg';
 
