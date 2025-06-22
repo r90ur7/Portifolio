@@ -10,37 +10,35 @@ import {
     Icon,
     Tag,
     TagLabel,
-    Tooltip
+    Tooltip,
+    Skeleton,
+    Image
 } from "@chakra-ui/react";
 import { FaGithub, FaStar, FaCodeBranch } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import setupGithubApi from "@/pages/api/setupGithubApi";
 
-// Crie uma versão "motion" do Box do Chakra
+// Cria uma versão "motion" do Box
 const MotionBox = motion(Box);
 
 const Projects = () => {
     const [repositories, setRepositories] = useState([] as any);
     const [loading, setLoading] = useState(true);
 
-    // Acesse as variáveis de ambiente
     const githubToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN!;
     const githubUsername = process.env.NEXT_PUBLIC_GITHUB_USERNAME!;
     const githubList = process.env.NEXT_PUBLIC_GITHUB_LIST!;
 
-    // Configure a API do GitHub
     const { api } = setupGithubApi(githubToken, githubUsername, githubList);
 
-    // Configuração do Intersection Observer
     const controls = useAnimation();
     const [ref, inView] = useInView({
-        threshold: 0.1, // Reduzido para garantir que a animação seja acionada em telas menores
+        threshold: 0.1,
         triggerOnce: false,
-        rootMargin: "-50px 0px", // Adiciona uma margem para evitar que a animação seja acionada prematuramente
+        rootMargin: "-50px 0px",
     });
 
-    // Atualiza a animação conforme o elemento entra ou sai da viewport
     useEffect(() => {
         if (inView) {
             controls.start("visible");
@@ -49,13 +47,11 @@ const Projects = () => {
         }
     }, [controls, inView]);
 
-    // Definição dos "variants" para o container principal
     const containerVariants = {
         hidden: { opacity: 0, y: 50, transition: { duration: 0.5 } },
         visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
     };
 
-    // Variants para os itens dos projetos (agora uma função que recebe index)
     const itemVariants = (index: number) => ({
         hidden: { opacity: 0, y: 50 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: index * 0.2 } },
@@ -64,15 +60,12 @@ const Projects = () => {
     useEffect(() => {
         const fetchRepositories = async () => {
             try {
-                // Busca os repositórios
                 const reposResponse = await api.get(`/users/${githubUsername}/repos`);
 
-                // Filtra os repositórios
                 const reposFromList = reposResponse.data.filter((repo: any) =>
                     repo.topics.includes(githubList)
                 );
 
-                // Para cada repositório, busca as linguagens
                 const reposWithLanguages = await Promise.all(
                     reposFromList.map(async (repo: any) => {
                         const languagesResponse = await api.get(repo.languages_url);
@@ -97,11 +90,8 @@ const Projects = () => {
         };
 
         fetchRepositories();
-    }, [
-        api,
-        githubUsername,
-        githubList
-    ]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     if (loading) {
         return (
@@ -127,7 +117,7 @@ const Projects = () => {
             py={20}
             px={{ base: 4, md: 8 }}
             id="projects"
-            minH="80vh" // Garante que a seção ocupe mais espaço vertical em telas menores
+            minH="80vh"
         >
             <Heading
                 as="h2"
@@ -149,7 +139,7 @@ const Projects = () => {
                     {repositories.map((repo: any, index: number) => (
                         <MotionBox
                             key={repo.id}
-                            variants={itemVariants(index)} // Passa o index para itemVariants
+                            variants={itemVariants(index)}
                             initial="hidden"
                             animate={controls}
                         >
@@ -166,6 +156,23 @@ const Projects = () => {
                                 }}
                                 transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
                             >
+                                {/* Imagem do projeto */}
+                                <Box mb={4}>
+                                    <Link href={repo.homepage || repo.html_url} isExternal>
+                                        <Skeleton isLoaded>
+                                            <Image
+                                                src={`/api/og?repo=${encodeURIComponent(repo.name)}&desc=${encodeURIComponent(repo.description || '')}&author=${githubUsername}`}
+                                                alt={repo.name}
+                                                borderRadius="lg"
+                                                objectFit="cover"
+                                                w="100%"
+                                                h="150px"
+                                                fallbackSrc="/fallback-project.png"
+                                            />
+                                        </Skeleton>
+                                    </Link>
+                                </Box>
+
                                 <Box
                                     _before={{
                                         content: '""',
@@ -235,7 +242,7 @@ const Projects = () => {
                 </SimpleGrid>
             ) : (
                 <Text textAlign="center" color="gray.400">
-                    Nenhum projeto encontrado na lista especificada
+                    Nenhum projeto encontrado na lista especificada.
                 </Text>
             )}
         </MotionBox>
