@@ -13,6 +13,43 @@
     }
 }
 
+.custom-tech-dots {
+    position: static !important;
+    display: flex !important;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 48px !important;
+    bottom: 0 !important;
+    z-index: 2;
+}
+
+.slick-list{
+    margin: 48px;
+}
+
+.custom-tech-dots li {
+    list-style: none;
+    display: inline-block;
+    margin: 0 4px;
+    padding: 0;
+}
+.custom-tech-dots li {
+    width: 48px;
+    height: 48px;
+    margin: 0 4px;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-tech-dots li.slick-active span {
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px #B650F2;
+    background: rgba(182, 80, 242, 0.1);
+    transition: box-shadow 0.3s;
+}
+
 .App-header {
     background-color: #282c34;
     min-height: 100vh;

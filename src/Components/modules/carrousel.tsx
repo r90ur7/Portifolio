@@ -48,7 +48,7 @@ const TechnologiesSection = () => {
     };
 
     const settings = {
-        dots: false, // Remove os pontos de navegação
+        dots: true, // Ativa os dots
         infinite: true, // Loop infinito
         speed: 2200, // Velocidade do carrossel
         slidesToShow: 5, // Quantidade de slides visíveis
@@ -58,14 +58,24 @@ const TechnologiesSection = () => {
         cssEase: "linear", // Transição linear
         pauseOnHover: true, // Pausa ao passar o mouse
         arrows: false, // Remove as setas de navegação
+        customPaging: function (i: number) {
+            return (
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 40 }}>
+                    <span style={{ fontSize: '2rem', color: technologies[i].color, filter: 'drop-shadow(0 0 5px rgba(182, 80, 242, 0.3))' }}>
+                        {technologies[i].icon}
+                    </span>
+                </div>
+            );
+        },
+        dotsClass: "slick-dots custom-tech-dots",
         responsive: [
             {
                 breakpoint: 1024,
-                settings: { slidesToShow: 3 } // 3 slides em telas menores que 1024px
+                settings: { slidesToShow: 3 }
             },
             {
                 breakpoint: 768,
-                settings: { slidesToShow: 2 } // 2 slides em telas menores que 768px
+                settings: { slidesToShow: 2 }
             }
         ]
     };
