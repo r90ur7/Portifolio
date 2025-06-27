@@ -3,6 +3,26 @@
         {
             "projectName": "Dojo",
             "imageURL": "images/project-images/Dojo.png"
+        },
+        {
+            "projectName": "challenge-algorithms",
+            "imageURL": "images/project-images/Chjs.png"
+        },
+        {
+            "projectName": "challenge-landing-page",
+            "imageURL": "images/project-images/HTmLCH.png"
+        },
+        {
+            "projectName": "MudaMundo",
+            "imageURL": "images/project-images/mudaMundi.jpg"
+        },
+        {
+            "projectName": "OnepiecePage",
+            "imageURL": "images/project-images/LuffySite.png"
+        },
+        {
+            "projectName": "ohana-list",
+            "imageURL": "images/project-images/Ohana_List.png"
         }
     ]
 }

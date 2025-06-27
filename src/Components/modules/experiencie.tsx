@@ -26,7 +26,7 @@ const ProfessionalExperience = () => {
         {
             role: "Desenvolvimento e inovação",
             company: "UGB-Ferp",
-            period: "2023 - Atual",
+            period: "2023 - 2025",
             description:
                 "Desenvolvo interfaces para sistemas de gestão escolar com C#, Flutter e Moodle, focando em otimização avançada e garantindo alta performance.",
         },
@@ -56,12 +56,10 @@ const ProfessionalExperience = () => {
         visible: { opacity: 1, x: 0, transition: { duration: 0.5, delay: index * 0.2 } },
     });
 
-    // Estado para controlar a rotação de cada cartão
     const [flippedCards, setFlippedCards] = useState<boolean[]>(
         new Array(experiences.length).fill(false)
     );
 
-    // Função para alternar a rotação de um cartão específico
     const toggleFlip = (index: number) => {
         setFlippedCards((prev) => {
             const newFlippedCards = [...prev];
@@ -104,7 +102,7 @@ const ProfessionalExperience = () => {
                         variants={itemVariants(index)}
                         initial="hidden"
                         animate={controls}
-                        onClick={() => toggleFlip(index)} // Alterna a rotação ao clicar
+                        onClick={() => toggleFlip(index)}
                         cursor="pointer"
                     >
                         <MotionBox
@@ -114,11 +112,10 @@ const ProfessionalExperience = () => {
                             style={{ transformStyle: "preserve-3d" }}
                             transition="transform 0.6s"
                             animate={{
-                                rotateY: flippedCards[index] ? 180 : 0, // Controla a rotação com base no estado
+                                rotateY: flippedCards[index] ? 180 : 0,
                             }}
-                            whileHover={{ rotateY: 180 }} // Animação de hover para desktop
+                            whileHover={{ rotateY: 180 }}
                         >
-                            {/* Lado da frente do cartão */}
                             <MotionBox
                                 position="absolute"
                                 w="100%"
@@ -149,7 +146,6 @@ const ProfessionalExperience = () => {
                                     {exp.company}
                                 </Text>
                             </MotionBox>
-                            {/* Lado de trás do cartão */}
                             <MotionBox
                                 position="absolute"
                                 w="100%"

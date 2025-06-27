@@ -28,6 +28,12 @@
     margin: 48px;
 }
 
+.slick-track {
+    min-height: 260px !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
 .custom-tech-dots li {
     list-style: none;
     display: inline-block;

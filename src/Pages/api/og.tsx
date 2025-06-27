@@ -4,7 +4,6 @@ export const config = {
     runtime: 'edge',
 };
 
-// Mapeamento de palavras-chave para URLs de ícones (SVG/PNG públicos)
 const iconMap: Record<string, string> = {
     react: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg',
     node: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg',
