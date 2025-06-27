@@ -5,15 +5,12 @@ import React from 'react';
 import { Box, Text, Flex, useToast } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
-// Hooks customizados (Single Responsibility)
 import { useContactForm } from './hooks/useContactForm';
 import { useContactFormAnimation } from './hooks/useContactFormAnimation';
 
-// Factory para criação de serviços
 import { ContactFormServiceFactory, Environment } from './factories/ServiceFactory';
 import { ContactFormController } from './controllers/ContactFormController';
 
-// Componentes UI (Single Responsibility)
 import { FormInput, FormTextarea } from './form/FormFields';
 import { SubmitButton } from './form/SubmitButton';
 
@@ -31,18 +28,15 @@ const ContactFormAdvanced: React.FC<ContactFormAdvancedProps> = ({
     environment = Environment.DEVELOPMENT,
     customConfig = {}
 }) => {
-    // Hooks customizados encapsulam responsabilidades específicas
     const { formData, status, setStatus, formStateManager } = useContactForm();
     const { ref, controls, variants } = useContactFormAnimation({
         threshold: customConfig.animationThreshold || 0.3,
         triggerOnce: customConfig.triggerOnce || false
     });
 
-    // Factory Pattern - cria serviços baseado no ambiente
     const toast = useToast();
     const services = ContactFormServiceFactory.createServices(toast, environment);
 
-    // Controller que orquestra as operações (Single Responsibility + Dependency Injection)
     const controller = new ContactFormController(
         services.emailService,
         services.notificationService,
@@ -82,7 +76,6 @@ const ContactFormAdvanced: React.FC<ContactFormAdvancedProps> = ({
                 Vamos Trabalhar Juntos?
             </Text>
 
-            {/* Badge para mostrar o ambiente atual (apenas em desenvolvimento) */}
             {environment === Environment.DEVELOPMENT && (
                 <Box
                     position="absolute"
@@ -100,7 +93,6 @@ const ContactFormAdvanced: React.FC<ContactFormAdvancedProps> = ({
             )}
 
             <Flex direction="column" maxW="600px" mx="auto" gap={6}>
-                {/* Componentes especializados (Single Responsibility) */}
                 <FormInput
                     placeholder="Seu Nome"
                     value={formData.name}
@@ -142,7 +134,6 @@ const ContactFormAdvanced: React.FC<ContactFormAdvancedProps> = ({
 
 export default ContactFormAdvanced;
 
-// HOC para diferentes configurações de ambiente
 export const ContactFormDevelopment = () => (
     <ContactFormAdvanced environment={Environment.DEVELOPMENT} />
 );

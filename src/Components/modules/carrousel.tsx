@@ -48,16 +48,16 @@ const TechnologiesSection = () => {
     };
 
     const settings = {
-        dots: true, // Ativa os dots
-        infinite: true, // Loop infinito
-        speed: 2200, // Velocidade do carrossel
-        slidesToShow: 5, // Quantidade de slides visíveis
-        slidesToScroll: 1, // Quantidade de slides para rolar
-        autoplay: true, // Autoplay ativado
-        autoplaySpeed: 0, // Velocidade do autoplay (0 para contínuo)
-        cssEase: "linear", // Transição linear
-        pauseOnHover: true, // Pausa ao passar o mouse
-        arrows: false, // Remove as setas de navegação
+        dots: true,
+        infinite: true,
+        speed: 2200,
+        slidesToShow: 5,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 0,
+        cssEase: "linear",
+        pauseOnHover: true,
+        arrows: false,
         customPaging: function (i: number) {
             return (
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 40 }}>

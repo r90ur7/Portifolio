@@ -2,7 +2,7 @@ import { Box, Heading, Text, Flex } from "@chakra-ui/react";
 import { FaBriefcase } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useEffect, useState } from "react"; // Adicionamos useState
+import { useEffect, useState } from "react";
 
 const MotionBox = motion(Box);
 const MotionFlex = motion(Flex);

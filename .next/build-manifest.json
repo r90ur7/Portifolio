@@ -1,31 +1,48 @@
 {
   "polyfillFiles": [
-    "static/chunks/polyfills.js"
+    "static/chunks/polyfills-42372ed130431b0a.js"
   ],
-  "devFiles": [
-    "static/chunks/react-refresh.js"
-  ],
+  "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/development/_buildManifest.js",
-    "static/development/_ssgManifest.js"
+    "static/47tzXGud4sCY_VUJ-g6qY/_buildManifest.js",
+    "static/47tzXGud4sCY_VUJ-g6qY/_ssgManifest.js"
   ],
   "rootMainFiles": [],
   "pages": {
     "/": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/index.js"
+      "static/chunks/webpack-cc00c6757c64ebe1.js",
+      "static/chunks/framework-64ad27b21261a9ce.js",
+      "static/chunks/main-fca65bceb586a99a.js",
+      "static/chunks/cb355538-04a80ad60000317e.js",
+      "static/chunks/980-ea4bff2a6b123c58.js",
+      "static/css/71cd3b0e4d35ce24.css",
+      "static/chunks/pages/index-f4a851bc54fcb8db.js"
     ],
     "/_app": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/_app.js"
+      "static/chunks/webpack-cc00c6757c64ebe1.js",
+      "static/chunks/framework-64ad27b21261a9ce.js",
+      "static/chunks/main-fca65bceb586a99a.js",
+      "static/css/ea661a08d5393c33.css",
+      "static/chunks/pages/_app-748a06c780c7618d.js"
     ],
     "/_error": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/_error.js"
+      "static/chunks/webpack-cc00c6757c64ebe1.js",
+      "static/chunks/framework-64ad27b21261a9ce.js",
+      "static/chunks/main-fca65bceb586a99a.js",
+      "static/chunks/pages/_error-7a92967bea80186d.js"
+    ],
+    "/emailTemplate": [
+      "static/chunks/webpack-cc00c6757c64ebe1.js",
+      "static/chunks/framework-64ad27b21261a9ce.js",
+      "static/chunks/main-fca65bceb586a99a.js",
+      "static/chunks/pages/emailTemplate-17b949ad9e4dcd05.js"
+    ],
+    "/emailTemplate/Email": [
+      "static/chunks/webpack-cc00c6757c64ebe1.js",
+      "static/chunks/framework-64ad27b21261a9ce.js",
+      "static/chunks/main-fca65bceb586a99a.js",
+      "static/chunks/pages/emailTemplate/Email-891ce8a24a35810f.js"
     ]
   },
   "ampFirstPages": []

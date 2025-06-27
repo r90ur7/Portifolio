@@ -16,11 +16,11 @@ export class EmailServiceFactory {
     static create(environment: Environment): IEmailService {
         switch (environment) {
             case Environment.DEVELOPMENT:
-                return new EmailService(); // Implementação padrão
+                return new EmailService();
             case Environment.PRODUCTION:
-                return new EmailService(); // Poderia ser SendGrid, AWS SES, etc.
+                return new EmailService();
             case Environment.TEST:
-                return new MockEmailService(); // Para testes
+                return new MockEmailService();
             default:
                 return new EmailService();
         }
@@ -50,7 +50,7 @@ export class ValidationServiceFactory {
             case Environment.DEVELOPMENT:
                 return new ValidationService();
             case Environment.PRODUCTION:
-                return new AdvancedValidationService(); // Validação mais rigorosa
+                return new AdvancedValidationService();
             case Environment.TEST:
                 return new MockValidationService();
             default:
@@ -91,7 +91,6 @@ class AdvancedValidationService implements IValidationService {
     validateForm(data: any): { isValid: boolean; errors: string[] } {
         const errors: string[] = [];
 
-        // Validações mais rigorosas
         if (!data.name || data.name.trim().length < 2) {
             errors.push('Nome deve ter pelo menos 2 caracteres');
         }
