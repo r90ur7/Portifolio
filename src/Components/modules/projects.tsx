@@ -18,6 +18,7 @@ import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import setupGithubApi from "@/pages/api/setupGithubApi";
 import Masonry from 'react-masonry-css';
+import projectImages from "@/data/projectImages.json";
 
 const MotionBox = motion(Box);
 
@@ -65,8 +66,17 @@ const Projects = () => {
                     repo.topics.includes(githubList)
                 );
 
+                // Adiciona featureImage se houver correspondência no JSON
+                const postsWithImages = reposFromList.map((repo: any) => {
+                    const match = projectImages.projects.find((img: any) => img.projectName === repo.name);
+                    if (match) {
+                        repo.featureImage = match.imageURL;
+                    }
+                    return repo;
+                });
+
                 const reposWithLanguages = await Promise.all(
-                    reposFromList.map(async (repo: any) => {
+                    postsWithImages.map(async (repo: any) => {
                         const languagesResponse = await api.get(repo.languages_url);
                         const languages = Object.entries(languagesResponse.data)
                             .sort((a: any, b: any) => b[1] - a[1])
@@ -164,7 +174,7 @@ const Projects = () => {
                                         <Link href={repo.homepage || repo.html_url} isExternal>
                                             <Skeleton isLoaded>
                                                 <Image
-                                                    src={`/api/og?repo=${encodeURIComponent(repo.name)}&desc=${encodeURIComponent(repo.description || '')}&author=${githubUsername}`}
+                                                    src={repo.featureImage || `/api/og?repo=${encodeURIComponent(repo.name)}&desc=${encodeURIComponent(repo.description || '')}&author=${githubUsername}`}
                                                     alt={repo.name}
                                                     borderRadius="lg"
                                                     objectFit="cover"
