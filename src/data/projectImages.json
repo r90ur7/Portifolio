@@ -17,12 +17,24 @@
             "imageURL": "images/project-images/mudaMundi.jpg"
         },
         {
-            "projectName": "OnepiecePage",
+            "projectName": "OnePiecePage",
             "imageURL": "images/project-images/LuffySite.png"
         },
         {
             "projectName": "ohana-list",
             "imageURL": "images/project-images/Ohana_List.png"
+        },
+        {
+            "projectName": "challenge-tourist-attractions",
+            "imageURL": "images/project-images/Turistico.png"
+        },
+        {
+            "projectName": "Portifolio-API",
+            "imageURL": "images/project-images/Portifolio-API.png"
+        },
+        {
+            "projectName": "Portifolio-Admin",
+            "imageURL": "images/project-images/Portifolio-Admin.png"
         }
     ]
 }
