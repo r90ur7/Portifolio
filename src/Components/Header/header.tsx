@@ -55,10 +55,10 @@ const Header = () => {
                 gap={{ base: 6, md: 12 }}
             >
                 <VStack
-                    align={{ base: "center", md: "flex-start" }} // Alinhamento responsivo
-                    textAlign={{ base: "center", md: "left" }} // Texto centralizado em mobile
+                    align={{ base: "center", md: "flex-start" }}
+                    textAlign={{ base: "center", md: "left" }}
                     spacing={4}
-                    maxW={{ base: "100%", md: "50%" }} // Largura máxima responsiva
+                    maxW={{ base: "100%", md: "50%" }}
                 >
                     <MotionHeading
                         as="h1"

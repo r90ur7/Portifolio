@@ -66,11 +66,14 @@ const Projects = () => {
                     repo.topics.includes(githubList)
                 );
 
-                // Adiciona featureImage se houver correspondência no JSON
                 const postsWithImages = reposFromList.map((repo: any) => {
+                    console.log('Repo name:', repo.name); // Debug
                     const match = projectImages.projects.find((img: any) => img.projectName === repo.name);
                     if (match) {
+                        console.log('Match found:', match); // Debug
                         repo.featureImage = match.imageURL;
+                    } else {
+                        console.log('No match for:', repo.name); // Debug
                     }
                     return repo;
                 });
@@ -174,13 +177,13 @@ const Projects = () => {
                                         <Link href={repo.homepage || repo.html_url} isExternal>
                                             <Skeleton isLoaded>
                                                 <Image
-                                                    src={repo.featureImage || `/api/og?repo=${encodeURIComponent(repo.name)}&desc=${encodeURIComponent(repo.description || '')}&author=${githubUsername}`}
+                                                    src={repo.featureImage}
                                                     alt={repo.name}
                                                     borderRadius="lg"
                                                     objectFit="cover"
                                                     w="100%"
                                                     h="150px"
-                                                    fallbackSrc="/fallback-project.png"
+                                                    fallbackSrc={`/api/og?repo=${encodeURIComponent(repo.name)}&desc=${encodeURIComponent(repo.description || '')}&author=${githubUsername}`}
                                                 />
                                             </Skeleton>
                                         </Link>
@@ -215,7 +218,7 @@ const Projects = () => {
                                                 </Flex>
 
                                                 <Text color="gray.300" flex={1} mb={6}>
-                                                    {repo.description || "Projeto desenvolvido com tecnologias modernas"}
+                                                    {repo.description || ""}
                                                 </Text>
                                                 <Flex wrap="wrap" gap={2} mb={6}>
                                                     {repo.languages.map((language: string) => (
