@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 import {
     Box,
     Text,
@@ -111,15 +112,21 @@ const Projects = () => {
                 );
 
                 setRepositories(reposWithLanguages);
+                Cookies.set('portfolio_github_projects_cached', JSON.stringify(reposWithLanguages), { expires: 2 / 24 });
             } catch (error) {
                 console.error("Erro ao buscar repositórios:", error);
             } finally {
                 setLoading(false);
             }
         };
-
-        fetchRepositories();
-    }, []);
+        const cachedRepos = Cookies.get('portfolio_github_projects_cached');
+        if (cachedRepos) {
+            setRepositories(JSON.parse(cachedRepos));
+            setLoading(false);
+        } else {
+            fetchRepositories();
+        }
+    }, [api, githubList, githubUsername]);
 
     const totalPages = Math.ceil(repositories.length / itemsPerPage);
     const startIndex = (currentPage - 1) * itemsPerPage;
@@ -202,16 +209,23 @@ const Projects = () => {
                                         }}
                                         transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
                                     >
-                                        <Box mb={4}>
+                                        <Box mb={4} w="100%" maxW="480px" mx="auto" display="flex" alignItems="center" justifyContent="center" minH="260px" minW="320px">
                                             <Link href={repo.homepage || repo.html_url} isExternal>
                                                 <Skeleton isLoaded>
                                                     <Image
                                                         src={repo.featureImage}
                                                         alt={repo.name}
                                                         borderRadius="lg"
-                                                        objectFit="cover"
+                                                        objectFit="contain"
                                                         w="100%"
-                                                        h="150px"
+                                                        minW="320px"
+                                                        maxW="480px"
+                                                        h="260px"
+                                                        minH="200px"
+                                                        maxH="320px"
+                                                        display="block"
+                                                        mx="auto"
+                                                        my="auto"
                                                         fallbackSrc={`/api/og?repo=${encodeURIComponent(repo.name)}&desc=${encodeURIComponent(repo.description || '')}&author=${githubUsername}`}
                                                     />
                                                 </Skeleton>
