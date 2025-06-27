@@ -41,6 +41,7 @@ const Projects = () => {
         triggerOnce: false,
         rootMargin: "-50px 0px",
     });
+    const [pageTrigger, setPageTrigger] = useState(0);
 
     useEffect(() => {
         if (inView) {
@@ -48,7 +49,7 @@ const Projects = () => {
         } else {
             controls.start("hidden");
         }
-    }, [controls, inView]);
+    }, [controls, inView, pageTrigger]);
 
     const containerVariants = {
         hidden: { opacity: 0, y: 50, transition: { duration: 0.5 } },
@@ -127,7 +128,8 @@ const Projects = () => {
 
     const goToPage = (page: number) => {
         setCurrentPage(page);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        controls.set("hidden");
+        setPageTrigger(prev => prev + 1);
     };
 
     if (loading) {
