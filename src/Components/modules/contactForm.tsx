@@ -1,99 +1,45 @@
-import { useState, useEffect } from 'react';
-import { Box, Text, Input, Textarea, Button, Flex, useToast } from "@chakra-ui/react";
-import { FaRegEnvelope } from "react-icons/fa";
-import { motion, useAnimation } from "framer-motion";
-import { useInView } from "react-intersection-observer";
+import React from 'react';
+import { Box, Text, Flex, useToast } from "@chakra-ui/react";
+import { motion } from "framer-motion";
+
+import { useContactForm } from './hooks/useContactForm';
+import { useContactFormAnimation } from './hooks/useContactFormAnimation';
+
+import { EmailService, NotificationService, ValidationService } from './services/contact.services';
+import { ContactFormController } from './controllers/ContactFormController';
+
+import { FormInput, FormTextarea } from './form/FormFields';
+import { SubmitButton } from './form/SubmitButton';
 
 const MotionBox = motion(Box);
-const MotionButton = motion(Button);
-const MotionInput = motion(Input);
-const MotionTextarea = motion(Textarea);
 
-const ContactForm = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
-    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-    const toast = useToast();
-    const controls = useAnimation();
-
-    const [ref, inView] = useInView({
+const ContactForm: React.FC = () => {
+    const { formData, status, setStatus, formStateManager } = useContactForm();
+    const { ref, controls, variants } = useContactFormAnimation({
         threshold: 0.3,
-        triggerOnce: false,
+        triggerOnce: false
     });
 
-    useEffect(() => {
-        if (inView) {
-            controls.start("visible");
-        } else {
-            controls.start("hidden");
-        }
-    }, [controls, inView]);
+    const toast = useToast();
+    const emailService = new EmailService();
+    const notificationService = new NotificationService(toast);
+    const validationService = new ValidationService();
 
-    const containerVariants = {
-        hidden: { opacity: 0, y: 50, transition: { duration: 0.5 } },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-    };
+    const controller = new ContactFormController(
+        emailService,
+        notificationService,
+        validationService,
+        formStateManager
+    );
 
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-    };
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setStatus('loading');
-
-        const emailData = {
-            name,
-            email,
-            message,
-        };
-
-        try {
-            const response = await fetch('/api/send-email', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(emailData)
-            });
-
-            if (!response.ok) {
-                throw new Error('Erro ao enviar email');
-            }
-
-            setStatus('success');
-            toast({
-                title: "Mensagem enviada!",
-                description: "Entrarei em contato em breve.",
-                status: "success",
-                duration: 5000,
-                isClosable: true,
-            });
-
-            // Limpar formulário
-            setName('');
-            setEmail('');
-            setMessage('');
-
-        } catch (error) {
-            console.error('Erro ao enviar email:', error);
-            setStatus('error');
-            toast({
-                title: "Erro ao enviar mensagem",
-                description: "Por favor, tente novamente mais tarde.",
-                status: "error",
-                duration: 5000,
-                isClosable: true,
-            });
-        }
+    const handleSubmit = (e: React.FormEvent) => {
+        controller.handleSubmit(e, setStatus);
     };
 
     return (
         <MotionBox
             ref={ref}
-            variants={containerVariants}
+            variants={variants.containerVariants}
             initial="hidden"
             animate={controls}
             maxW="1200px"
@@ -119,74 +65,40 @@ const ContactForm = () => {
             </Text>
 
             <Flex direction="column" maxW="600px" mx="auto" gap={6}>
-                <MotionInput
+                <FormInput
                     placeholder="Seu Nome"
-                    size="lg"
-                    bg="rgba(255, 255, 255, 0.05)"
-                    border="1px solid"
-                    borderColor="rgba(182, 80, 242, 0.3)"
-                    _focus={{ borderColor: "#B650F2" }}
-                    _placeholder={{ color: "gray.400" }}
-                    variants={itemVariants}
-                    initial="hidden"
-                    animate={controls}
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
+                    value={formData.name}
+                    onChange={(value) => formStateManager.updateField('name', value)}
+                    variants={variants.itemVariants}
+                    controls={controls}
                     required
                 />
 
-                <MotionInput
+                <FormInput
                     placeholder="Seu Email"
                     type="email"
-                    size="lg"
-                    bg="rgba(255, 255, 255, 0.05)"
-                    border="1px solid"
-                    borderColor="rgba(182, 80, 242, 0.3)"
-                    _focus={{ borderColor: "#B650F2" }}
-                    _placeholder={{ color: "gray.400" }}
-                    variants={itemVariants}
-                    initial="hidden"
-                    animate={controls}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    value={formData.email}
+                    onChange={(value) => formStateManager.updateField('email', value)}
+                    variants={variants.itemVariants}
+                    controls={controls}
                     required
                 />
 
-                <MotionTextarea
+                <FormTextarea
                     placeholder="Sua Mensagem"
-                    size="lg"
-                    rows={6}
-                    bg="rgba(255, 255, 255, 0.05)"
-                    border="1px solid"
-                    borderColor="rgba(182, 80, 242, 0.3)"
-                    _focus={{ borderColor: "#B650F2" }}
-                    _placeholder={{ color: "gray.400" }}
-                    variants={itemVariants}
-                    initial="hidden"
-                    animate={controls}
-                    value={message}
-                    onChange={(e) => setMessage(e.target.value)}
+                    value={formData.message}
+                    onChange={(value) => formStateManager.updateField('message', value)}
+                    variants={variants.itemVariants}
+                    controls={controls}
                     required
                 />
 
-                <MotionButton
-                    size="lg"
-                    bgGradient="linear(to-r, #B650F2, #362558)"
-                    color="white"
-                    _hover={{ bgGradient: "linear(to-r, #C86BFD, #48307A)" }}
-                    _active={{ transform: "scale(0.98)" }}
-                    rightIcon={<FaRegEnvelope />}
-                    type="submit"
-                    variants={itemVariants}
-                    initial="hidden"
-                    animate={controls}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+                <SubmitButton
                     isLoading={status === 'loading'}
-                    loadingText="Enviando..."
-                >
-                    {status === 'success' ? 'Enviado!' : 'Enviar Mensagem'}
-                </MotionButton>
+                    status={status}
+                    variants={variants.itemVariants}
+                    controls={controls}
+                />
             </Flex>
         </MotionBox>
     );
