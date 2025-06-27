@@ -29,12 +29,16 @@
             "imageURL": "images/project-images/Turistico.png"
         },
         {
-            "projectName": "Portifolio-API",
-            "imageURL": "images/project-images/Portifolio-API.png"
+            "projectName": "mini-erp",
+            "imageURL": "images/project-images/miniErp.jpg"
         },
         {
-            "projectName": "Portifolio-Admin",
-            "imageURL": "images/project-images/Portifolio-Admin.png"
+            "projectName": "Django",
+            "imageURL": "images/project-images/Django.png"
+        },
+        {
+            "projectName": "DSMOVIE",
+            "imageURL": "images/project-images/DSmovie.png"
         }
     ]
 }
