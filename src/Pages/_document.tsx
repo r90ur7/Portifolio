@@ -16,54 +16,77 @@ export default function Document() {
             <script
                 dangerouslySetInnerHTML={{
                     __html: `
-                        // Prevenir que extensões do navegador causem erros
+                        // BLOQUEAR COMPLETAMENTE EXTENSÕES DO NAVEGADOR (Claude, etc)
                         (function() {
+                            // Bloquear ANTES de qualquer coisa ser executada
+                            const blockPatterns = ['claude', 'inject.js', 'chrome-extension://', 'web_accessible_resources'];
+                            
+                            // Interceptar console ANTES de qualquer extensão
                             const originalError = console.error;
                             const originalWarn = console.warn;
+                            const originalLog = console.log;
+                            
+                            const shouldBlock = (message) => {
+                                const msg = String(message).toLowerCase();
+                                return blockPatterns.some(pattern => msg.includes(pattern));
+                            };
                             
                             console.error = function(...args) {
-                                const message = args.join(' ');
-                                if (
-                                    message.includes('Claude') || 
-                                    message.includes('inject.js') ||
-                                    message.includes('chrome-extension://') ||
-                                    message.includes('web_accessible_resources') ||
-                                    message.includes('Denying load')
-                                ) {
-                                    return; // Silenciar erros de extensões
-                                }
+                                if (shouldBlock(args.join(' '))) return;
                                 originalError.apply(console, args);
                             };
                             
                             console.warn = function(...args) {
-                                const message = args.join(' ');
-                                if (
-                                    message.includes('chrome-extension://') ||
-                                    message.includes('web_accessible_resources') ||
-                                    message.includes('Denying load') ||
-                                    message.includes('translation.json') ||
-                                    message.includes('styles.css')
-                                ) {
-                                    return; // Silenciar avisos de extensões
-                                }
+                                if (shouldBlock(args.join(' '))) return;
                                 originalWarn.apply(console, args);
                             };
                             
-                            // Prevenir erros globais de extensões
-                            window.addEventListener('error', function(e) {
-                                const errorMsg = e.message || '';
-                                const source = e.filename || '';
-                                if (
-                                    errorMsg.includes('Claude') || 
-                                    errorMsg.includes('inject.js') ||
-                                    errorMsg.includes('chrome-extension://') ||
-                                    errorMsg.includes('web_accessible_resources') ||
-                                    source.includes('chrome-extension://')
-                                ) {
+                            console.log = function(...args) {
+                                if (shouldBlock(args.join(' '))) return;
+                                originalLog.apply(console, args);
+                            };
+                            
+                            // Bloquear erros ANTES que sejam lançados
+                            const errorHandler = function(e) {
+                                const msg = (e.message || '').toLowerCase();
+                                const src = (e.filename || e.source || '').toLowerCase();
+                                if (shouldBlock(msg) || shouldBlock(src)) {
+                                    e.stopImmediatePropagation();
                                     e.preventDefault();
+                                    e.stopPropagation();
+                                    return false;
+                                }
+                            };
+                            
+                            window.addEventListener('error', errorHandler, true);
+                            window.addEventListener('unhandledrejection', function(e) {
+                                const reason = String(e.reason || '').toLowerCase();
+                                if (shouldBlock(reason)) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
                                     return false;
                                 }
                             }, true);
+                            
+                            // Bloquear tentativas de injeção de scripts
+                            const observer = new MutationObserver(function(mutations) {
+                                mutations.forEach(function(mutation) {
+                                    mutation.addedNodes.forEach(function(node) {
+                                        if (node.nodeType === 1) {
+                                            const id = (node.id || '').toLowerCase();
+                                            const className = (node.className || '').toLowerCase();
+                                            if (shouldBlock(id) || shouldBlock(className)) {
+                                                node.remove();
+                                            }
+                                        }
+                                    });
+                                });
+                            });
+                            
+                            observer.observe(document.documentElement, {
+                                childList: true,
+                                subtree: true
+                            });
                         })();
                     `,
                 }}

@@ -1,20 +1,28 @@
-import React from "react";
-import { Box, VStack } from "@chakra-ui/react";
+import React, { lazy, Suspense } from "react";
+import { Box, VStack, Spinner, Center } from "@chakra-ui/react";
 import Header from "@/Components/Header/header";
 import Footer from "@/Components/Footer/footer";
 import Navigation from "@/Components/Navigation";
-import Projects from "@/Components/modules/projects";
-import Education from "@/Components/modules/education";
-import ProfessionalExperience from "@/Components/modules/experiencie";
-import About from "@/Components/modules/about";
-import TechnologiesSection from "@/Components/modules/carrousel";
-import Stats from "@/Components/modules/stats";
-import SkillsRadar from "@/Components/modules/skillsRadar";
-import CTA from "@/Components/modules/cta";
-import ContactForm from "@/Components/modules/contactForm";
 import AnimatedSection from "@/Components/AnimatedSection";
 import SectionSeparator from "@/Components/common/SectionSeparator";
 import BackgroundEffects from "@/Components/common/BackgroundEffects";
+
+// Lazy load de componentes pesados
+const Projects = lazy(() => import("@/Components/modules/projects"));
+const Education = lazy(() => import("@/Components/modules/education"));
+const ProfessionalExperience = lazy(() => import("@/Components/modules/experiencie"));
+const About = lazy(() => import("@/Components/modules/about"));
+const TechnologiesSection = lazy(() => import("@/Components/modules/carrousel"));
+const Stats = lazy(() => import("@/Components/modules/stats"));
+const SkillsRadar = lazy(() => import("@/Components/modules/skillsRadar"));
+const CTA = lazy(() => import("@/Components/modules/cta"));
+const ContactForm = lazy(() => import("@/Components/modules/contactForm"));
+
+const LoadingFallback = () => (
+    <Center py={20}>
+        <Spinner size="xl" color="purple.500" thickness="4px" speed="0.65s" />
+    </Center>
+);
 
 const IndexPage = () => (
     <Box
@@ -42,7 +50,9 @@ const IndexPage = () => (
                 {/* About Section */}
                 <Box width="100%">
                     <AnimatedSection delay={0.2}>
-                        <About />
+                        <Suspense fallback={<LoadingFallback />}>
+                            <About />
+                        </Suspense>
                     </AnimatedSection>
                 </Box>
 
@@ -51,7 +61,9 @@ const IndexPage = () => (
                 {/* Stats Section */}
                 <Box width="100%">
                     <AnimatedSection delay={0.2}>
-                        <Stats />
+                        <Suspense fallback={<LoadingFallback />}>
+                            <Stats />
+                        </Suspense>
                     </AnimatedSection>
                 </Box>
 
@@ -60,11 +72,15 @@ const IndexPage = () => (
                 {/* Skills Section (Radar + Carousel) */}
                 <Box width="100%">
                     <AnimatedSection delay={0.2}>
-                        <SkillsRadar />
+                        <Suspense fallback={<LoadingFallback />}>
+                            <SkillsRadar />
+                        </Suspense>
                     </AnimatedSection>
                     <Box height="50px" />
                     <AnimatedSection delay={0.3}>
-                        <TechnologiesSection />
+                        <Suspense fallback={<LoadingFallback />}>
+                            <TechnologiesSection />
+                        </Suspense>
                     </AnimatedSection>
                 </Box>
 
@@ -73,7 +89,9 @@ const IndexPage = () => (
                 {/* Experience Section */}
                 <Box width="100%">
                     <AnimatedSection delay={0.2}>
-                        <ProfessionalExperience />
+                        <Suspense fallback={<LoadingFallback />}>
+                            <ProfessionalExperience />
+                        </Suspense>
                     </AnimatedSection>
                 </Box>
 
@@ -82,7 +100,9 @@ const IndexPage = () => (
                 {/* Education Section */}
                 <Box width="100%">
                     <AnimatedSection delay={0.2}>
-                        <Education />
+                        <Suspense fallback={<LoadingFallback />}>
+                            <Education />
+                        </Suspense>
                     </AnimatedSection>
                 </Box>
 
@@ -91,7 +111,9 @@ const IndexPage = () => (
                 {/* Projects Section */}
                 <Box width="100%">
                     <AnimatedSection delay={0.2}>
-                        <Projects />
+                        <Suspense fallback={<LoadingFallback />}>
+                            <Projects />
+                        </Suspense>
                     </AnimatedSection>
                 </Box>
 
@@ -100,7 +122,9 @@ const IndexPage = () => (
                 {/* CTA Section */}
                 <Box width="100%">
                     <AnimatedSection delay={0.2}>
-                        <CTA />
+                        <Suspense fallback={<LoadingFallback />}>
+                            <CTA />
+                        </Suspense>
                     </AnimatedSection>
                 </Box>
 
@@ -109,7 +133,9 @@ const IndexPage = () => (
                 {/* Contact Section */}
                 <Box width="100%" id="contact" pb={20}>
                     <AnimatedSection delay={0.2}>
-                        <ContactForm />
+                        <Suspense fallback={<LoadingFallback />}>
+                            <ContactForm />
+                        </Suspense>
                     </AnimatedSection>
                 </Box>
 

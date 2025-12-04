@@ -20,9 +20,7 @@ const gradientShift = keyframes`
 const BackgroundEffects = () => {
   const { animationsEnabled } = useAnimations();
 
-  React.useEffect(() => {
-    console.log('🎨 Animations enabled:', animationsEnabled);
-  }, [animationsEnabled]);
+  // Removido console.log para melhor performance
 
   return (
     <Box

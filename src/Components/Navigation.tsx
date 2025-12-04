@@ -34,53 +34,67 @@ const Navigation = () => {
     const activeColor = useColorModeValue('#B650F2', '#C86BFD');
 
     useEffect(() => {
+        let ticking = false;
+        let lastScrollY = 0;
+
         const handleScroll = () => {
             const scrollY = window.scrollY;
 
-            // Mostrar menu após rolar 100px
-            setIsVisible(scrollY > 100);
+            // Throttle: só processar se passou tempo suficiente ou mudou significativamente
+            if (!ticking && Math.abs(scrollY - lastScrollY) > 10) {
+                window.requestAnimationFrame(() => {
+                    // Mostrar menu após rolar 100px
+                    setIsVisible(scrollY > 100);
 
-            // Mostrar botão "Voltar ao topo" após rolar 300px
-            setShowScrollTop(scrollY > 300);
+                    // Mostrar botão "Voltar ao topo" após rolar 300px
+                    setShowScrollTop(scrollY > 300);
 
-            // Detectar seção ativa
-            const sections = navItems.map(item => {
-                const element = document.getElementById(item.id);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    return {
-                        id: item.id,
-                        top: rect.top,
-                        bottom: rect.bottom,
-                    };
-                }
-                return null;
-            }).filter(Boolean) as Array<{ id: string; top: number; bottom: number }>;
+                    // Detectar seção ativa (só se mudou significativamente)
+                    if (Math.abs(scrollY - lastScrollY) > 50) {
+                        const sections = navItems.map(item => {
+                            const element = document.getElementById(item.id);
+                            if (element) {
+                                const rect = element.getBoundingClientRect();
+                                return {
+                                    id: item.id,
+                                    top: rect.top,
+                                    bottom: rect.bottom,
+                                };
+                            }
+                            return null;
+                        }).filter(Boolean) as Array<{ id: string; top: number; bottom: number }>;
 
-            // Verificar se estamos no topo
-            if (scrollY < 200) {
-                setActiveSection('home');
-                return;
-            }
+                        // Verificar se estamos no topo
+                        if (scrollY < 200) {
+                            setActiveSection('home');
+                        } else {
+                            // Encontrar a seção visível
+                            const currentSection = sections.find(section => {
+                                return section.top <= 150 && section.bottom >= 150;
+                            });
 
-            // Encontrar a seção visível
-            const currentSection = sections.find(section => {
-                return section.top <= 150 && section.bottom >= 150;
-            });
+                            if (currentSection) {
+                                setActiveSection(currentSection.id);
+                            } else {
+                                // Se nenhuma seção está visível, usar a última que passou
+                                const passedSections = sections.filter(s => s.top < 150);
+                                if (passedSections.length > 0) {
+                                    const lastPassed = passedSections[passedSections.length - 1];
+                                    setActiveSection(lastPassed.id);
+                                }
+                            }
+                        }
+                    }
 
-            if (currentSection) {
-                setActiveSection(currentSection.id);
-            } else {
-                // Se nenhuma seção está visível, usar a última que passou
-                const passedSections = sections.filter(s => s.top < 150);
-                if (passedSections.length > 0) {
-                    const lastPassed = passedSections[passedSections.length - 1];
-                    setActiveSection(lastPassed.id);
-                }
+                    lastScrollY = scrollY;
+                    ticking = false;
+                });
+
+                ticking = true;
             }
         };
 
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         handleScroll(); // Verificar estado inicial
 
         return () => window.removeEventListener('scroll', handleScroll);
@@ -252,7 +266,6 @@ const Navigation = () => {
                                 aria-label="Toggle animations"
                                 icon={<FaMagic />}
                                 onClick={() => {
-                                    console.log('🔘 Toggle button clicked! Current state:', animationsEnabled);
                                     toggleAnimations();
                                 }}
                                 size="lg"

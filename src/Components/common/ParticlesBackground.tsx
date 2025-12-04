@@ -59,7 +59,7 @@ const ParticlesBackground = () => {
                     value: "transparent",
                 },
             },
-            fpsLimit: 15, // Drasticamente reduzido para performance máxima
+            fpsLimit: 10, // Muito reduzido para performance máxima
             pauseOnBlur: false,
             pauseOnOutsideViewport: false,
             interactivity: {
@@ -94,8 +94,8 @@ const ParticlesBackground = () => {
                 },
                 links: {
                     color: "#8b5cf6",
-                    distance: 250, // Aumentado para menos links
-                    enable: true,
+                    distance: 300, // Aumentado ainda mais para menos links
+                    enable: false, // DESABILITADO para melhor performance
                     opacity: 0.04,
                     width: 1,
                 },
@@ -106,14 +106,15 @@ const ParticlesBackground = () => {
                         default: "bounce",
                     },
                     random: false,
-                    speed: 0.2, // Muito mais lento
+                    speed: 0.1, // Ainda mais lento
                     straight: false,
                 },
                 number: {
                     density: {
                         enable: true,
+                        area: 800, // Área maior = menos partículas
                     },
-                    value: 10, // Apenas 10 partículas para performance máxima
+                    value: 5, // Reduzido para apenas 5 partículas
                 },
                 opacity: {
                     value: 0.15,
