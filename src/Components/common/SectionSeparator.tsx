@@ -2,14 +2,15 @@ import React from 'react';
 import { Box, Flex } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 
+const MotionFlex = motion(Flex);
+
 const SectionSeparator = () => {
     return (
-        <Flex
+        <MotionFlex
             align="center"
             justify="center"
             py={20}
             w="full"
-            as={motion.div}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
@@ -36,7 +37,7 @@ const SectionSeparator = () => {
                 bgGradient="linear(to-l, transparent, purple.500)"
                 opacity={0.4}
             />
-        </Flex>
+        </MotionFlex>
     );
 };
 

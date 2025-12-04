@@ -1,86 +1,51 @@
-"use strict";
-/*
- * ATTENTION: An "eval-source-map" devtool has been used.
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
-(() => {
-var exports = {};
-exports.id = "pages/_document";
-exports.ids = ["pages/_document"];
-exports.modules = {
-
-/***/ "./src/pages/_document.tsx":
-/*!*********************************!*\
-  !*** ./src/pages/_document.tsx ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Document)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"react/jsx-dev-runtime\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var next_document__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/document */ \"./node_modules/next/document.js\");\n/* harmony import */ var next_document__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_document__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\nfunction Document() {\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_document__WEBPACK_IMPORTED_MODULE_1__.Html, {\n        lang: \"pt\",\n        children: [\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_document__WEBPACK_IMPORTED_MODULE_1__.Head, {\n                children: [\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"title\", {\n                        children: \"Portif\\xf3lio\"\n                    }, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                        lineNumber: 8,\n                        columnNumber: 13\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"link\", {\n                        rel: \"icon\",\n                        type: \"image/png\",\n                        href: \"/images/icons/DevIco.png\"\n                    }, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                        lineNumber: 9,\n                        columnNumber: 13\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"link\", {\n                        rel: \"shortcut icon\",\n                        type: \"image/png\",\n                        href: \"/images/icons/DevIco.png\"\n                    }, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                        lineNumber: 10,\n                        columnNumber: 13\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"link\", {\n                        rel: \"apple-touch-icon\",\n                        href: \"/images/icons/DevIco.png\"\n                    }, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                        lineNumber: 11,\n                        columnNumber: 13\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"link\", {\n                        href: \"https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap\",\n                        rel: \"stylesheet\"\n                    }, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                        lineNumber: 12,\n                        columnNumber: 13\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"script\", {\n                        dangerouslySetInnerHTML: {\n                            __html: `\n                        // Prevenir que extensões do navegador causem erros\n                        (function() {\n                            const originalError = console.error;\n                            const originalWarn = console.warn;\n                            \n                            console.error = function(...args) {\n                                const message = args.join(' ');\n                                if (\n                                    message.includes('Claude') || \n                                    message.includes('inject.js') ||\n                                    message.includes('chrome-extension://') ||\n                                    message.includes('web_accessible_resources') ||\n                                    message.includes('Denying load')\n                                ) {\n                                    return; // Silenciar erros de extensões\n                                }\n                                originalError.apply(console, args);\n                            };\n                            \n                            console.warn = function(...args) {\n                                const message = args.join(' ');\n                                if (\n                                    message.includes('chrome-extension://') ||\n                                    message.includes('web_accessible_resources') ||\n                                    message.includes('Denying load') ||\n                                    message.includes('translation.json') ||\n                                    message.includes('styles.css')\n                                ) {\n                                    return; // Silenciar avisos de extensões\n                                }\n                                originalWarn.apply(console, args);\n                            };\n                            \n                            // Prevenir erros globais de extensões\n                            window.addEventListener('error', function(e) {\n                                const errorMsg = e.message || '';\n                                const source = e.filename || '';\n                                if (\n                                    errorMsg.includes('Claude') || \n                                    errorMsg.includes('inject.js') ||\n                                    errorMsg.includes('chrome-extension://') ||\n                                    errorMsg.includes('web_accessible_resources') ||\n                                    source.includes('chrome-extension://')\n                                ) {\n                                    e.preventDefault();\n                                    return false;\n                                }\n                            }, true);\n                        })();\n                    `\n                        }\n                    }, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                        lineNumber: 16,\n                        columnNumber: 13\n                    }, this)\n                ]\n            }, void 0, true, {\n                fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                lineNumber: 7,\n                columnNumber: 9\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"body\", {\n                children: [\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_document__WEBPACK_IMPORTED_MODULE_1__.Main, {}, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                        lineNumber: 73,\n                        columnNumber: 13\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_document__WEBPACK_IMPORTED_MODULE_1__.NextScript, {}, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                        lineNumber: 74,\n                        columnNumber: 13\n                    }, this)\n                ]\n            }, void 0, true, {\n                fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                lineNumber: 72,\n                columnNumber: 9\n            }, this)\n        ]\n    }, void 0, true, {\n        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n        lineNumber: 6,\n        columnNumber: 7\n    }, this);\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvcGFnZXMvX2RvY3VtZW50LnRzeCIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7OztBQUE2RDtBQUNuQztBQUVYLFNBQVNLO0lBQ3RCLHFCQUNJLDhEQUFDTCwrQ0FBSUE7UUFBQ00sTUFBSzs7MEJBQ1QsOERBQUNMLCtDQUFJQTs7a0NBQ0QsOERBQUNNO2tDQUFNOzs7Ozs7a0NBQ1AsOERBQUNDO3dCQUFLQyxLQUFJO3dCQUFPQyxNQUFLO3dCQUFZQyxNQUFLOzs7Ozs7a0NBQ3ZDLDhEQUFDSDt3QkFBS0MsS0FBSTt3QkFBZ0JDLE1BQUs7d0JBQVlDLE1BQUs7Ozs7OztrQ0FDaEQsOERBQUNIO3dCQUFLQyxLQUFJO3dCQUFtQkUsTUFBSzs7Ozs7O2tDQUNsQyw4REFBQ0g7d0JBQ0dHLE1BQUs7d0JBQ0xGLEtBQUk7Ozs7OztrQ0FFUiw4REFBQ0c7d0JBQ0dDLHlCQUF5Qjs0QkFDckJDLFFBQVEsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7b0JBa0RULENBQUM7d0JBQ0w7Ozs7Ozs7Ozs7OzswQkFHUiw4REFBQ0M7O2tDQUNHLDhEQUFDYiwrQ0FBSUE7Ozs7O2tDQUNMLDhEQUFDQyxxREFBVUE7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBSXZCIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vcmVhY3RhcHAvLi9zcmMvcGFnZXMvX2RvY3VtZW50LnRzeD8xODhlIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEh0bWwsIEhlYWQsIE1haW4sIE5leHRTY3JpcHQgfSBmcm9tIFwibmV4dC9kb2N1bWVudFwiO1xuaW1wb3J0IFJlYWN0IGZyb20gXCJyZWFjdFwiO1xuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBEb2N1bWVudCgpIHtcbiAgcmV0dXJuIChcbiAgICAgIDxIdG1sIGxhbmc9XCJwdFwiPlxuICAgICAgICA8SGVhZD5cbiAgICAgICAgICAgIDx0aXRsZT5Qb3J0aWbDs2xpbzwvdGl0bGU+XG4gICAgICAgICAgICA8bGluayByZWw9XCJpY29uXCIgdHlwZT1cImltYWdlL3BuZ1wiIGhyZWY9XCIvaW1hZ2VzL2ljb25zL0Rldkljby5wbmdcIiAvPlxuICAgICAgICAgICAgPGxpbmsgcmVsPVwic2hvcnRjdXQgaWNvblwiIHR5cGU9XCJpbWFnZS9wbmdcIiBocmVmPVwiL2ltYWdlcy9pY29ucy9EZXZJY28ucG5nXCIgLz5cbiAgICAgICAgICAgIDxsaW5rIHJlbD1cImFwcGxlLXRvdWNoLWljb25cIiBocmVmPVwiL2ltYWdlcy9pY29ucy9EZXZJY28ucG5nXCIgLz5cbiAgICAgICAgICAgIDxsaW5rXG4gICAgICAgICAgICAgICAgaHJlZj1cImh0dHBzOi8vZm9udHMuZ29vZ2xlYXBpcy5jb20vY3NzMj9mYW1pbHk9V29yaytTYW5zOndnaHRANDAwOzUwMDs2MDA7NzAwOzgwMCZkaXNwbGF5PXN3YXBcIlxuICAgICAgICAgICAgICAgIHJlbD1cInN0eWxlc2hlZXRcIlxuICAgICAgICAgICAgLz5cbiAgICAgICAgICAgIDxzY3JpcHRcbiAgICAgICAgICAgICAgICBkYW5nZXJvdXNseVNldElubmVySFRNTD17e1xuICAgICAgICAgICAgICAgICAgICBfX2h0bWw6IGBcbiAgICAgICAgICAgICAgICAgICAgICAgIC8vIFByZXZlbmlyIHF1ZSBleHRlbnPDtWVzIGRvIG5hdmVnYWRvciBjYXVzZW0gZXJyb3NcbiAgICAgICAgICAgICAgICAgICAgICAgIChmdW5jdGlvbigpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBvcmlnaW5hbEVycm9yID0gY29uc29sZS5lcnJvcjtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBvcmlnaW5hbFdhcm4gPSBjb25zb2xlLndhcm47XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc29sZS5lcnJvciA9IGZ1bmN0aW9uKC4uLmFyZ3MpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc3QgbWVzc2FnZSA9IGFyZ3Muam9pbignICcpO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZiAoXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBtZXNzYWdlLmluY2x1ZGVzKCdDbGF1ZGUnKSB8fCBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG1lc3NhZ2UuaW5jbHVkZXMoJ2luamVjdC5qcycpIHx8XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBtZXNzYWdlLmluY2x1ZGVzKCdjaHJvbWUtZXh0ZW5zaW9uOi8vJykgfHxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG1lc3NhZ2UuaW5jbHVkZXMoJ3dlYl9hY2Nlc3NpYmxlX3Jlc291cmNlcycpIHx8XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBtZXNzYWdlLmluY2x1ZGVzKCdEZW55aW5nIGxvYWQnKVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybjsgLy8gU2lsZW5jaWFyIGVycm9zIGRlIGV4dGVuc8O1ZXNcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBvcmlnaW5hbEVycm9yLmFwcGx5KGNvbnNvbGUsIGFyZ3MpO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIH07XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc29sZS53YXJuID0gZnVuY3Rpb24oLi4uYXJncykge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBtZXNzYWdlID0gYXJncy5qb2luKCcgJyk7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmIChcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG1lc3NhZ2UuaW5jbHVkZXMoJ2Nocm9tZS1leHRlbnNpb246Ly8nKSB8fFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbWVzc2FnZS5pbmNsdWRlcygnd2ViX2FjY2Vzc2libGVfcmVzb3VyY2VzJykgfHxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG1lc3NhZ2UuaW5jbHVkZXMoJ0RlbnlpbmcgbG9hZCcpIHx8XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBtZXNzYWdlLmluY2x1ZGVzKCd0cmFuc2xhdGlvbi5qc29uJykgfHxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG1lc3NhZ2UuaW5jbHVkZXMoJ3N0eWxlcy5jc3MnKVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICApIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybjsgLy8gU2lsZW5jaWFyIGF2aXNvcyBkZSBleHRlbnPDtWVzXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgb3JpZ2luYWxXYXJuLmFwcGx5KGNvbnNvbGUsIGFyZ3MpO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIH07XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgLy8gUHJldmVuaXIgZXJyb3MgZ2xvYmFpcyBkZSBleHRlbnPDtWVzXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgd2luZG93LmFkZEV2ZW50TGlzdGVuZXIoJ2Vycm9yJywgZnVuY3Rpb24oZSkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBlcnJvck1zZyA9IGUubWVzc2FnZSB8fCAnJztcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc3Qgc291cmNlID0gZS5maWxlbmFtZSB8fCAnJztcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZXJyb3JNc2cuaW5jbHVkZXMoJ0NsYXVkZScpIHx8IFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZXJyb3JNc2cuaW5jbHVkZXMoJ2luamVjdC5qcycpIHx8XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBlcnJvck1zZy5pbmNsdWRlcygnY2hyb21lLWV4dGVuc2lvbjovLycpIHx8XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBlcnJvck1zZy5pbmNsdWRlcygnd2ViX2FjY2Vzc2libGVfcmVzb3VyY2VzJykgfHxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHNvdXJjZS5pbmNsdWRlcygnY2hyb21lLWV4dGVuc2lvbjovLycpXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIGZhbHNlO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgfSwgdHJ1ZSk7XG4gICAgICAgICAgICAgICAgICAgICAgICB9KSgpO1xuICAgICAgICAgICAgICAgICAgICBgLFxuICAgICAgICAgICAgICAgIH19XG4gICAgICAgICAgICAvPlxuICAgICAgICA8L0hlYWQ+XG4gICAgICAgIDxib2R5PlxuICAgICAgICAgICAgPE1haW4gLz5cbiAgICAgICAgICAgIDxOZXh0U2NyaXB0IC8+XG4gICAgICAgIDwvYm9keT5cbiAgICAgIDwvSHRtbD5cbiAgKTtcbn0iXSwibmFtZXMiOlsiSHRtbCIsIkhlYWQiLCJNYWluIiwiTmV4dFNjcmlwdCIsIlJlYWN0IiwiRG9jdW1lbnQiLCJsYW5nIiwidGl0bGUiLCJsaW5rIiwicmVsIiwidHlwZSIsImhyZWYiLCJzY3JpcHQiLCJkYW5nZXJvdXNseVNldElubmVySFRNTCIsIl9faHRtbCIsImJvZHkiXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./src/pages/_document.tsx\n");
-
-/***/ }),
-
-/***/ "next/dist/compiled/next-server/pages.runtime.dev.js":
-/*!**********************************************************************!*\
-  !*** external "next/dist/compiled/next-server/pages.runtime.dev.js" ***!
-  \**********************************************************************/
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/next-server/pages.runtime.dev.js");
-
-/***/ }),
-
-/***/ "react":
-/*!************************!*\
-  !*** external "react" ***!
-  \************************/
-/***/ ((module) => {
-
-module.exports = require("react");
-
-/***/ }),
-
-/***/ "react/jsx-dev-runtime":
-/*!****************************************!*\
-  !*** external "react/jsx-dev-runtime" ***!
-  \****************************************/
-/***/ ((module) => {
-
-module.exports = require("react/jsx-dev-runtime");
-
-/***/ }),
-
-/***/ "react/jsx-runtime":
-/*!************************************!*\
-  !*** external "react/jsx-runtime" ***!
-  \************************************/
-/***/ ((module) => {
-
-module.exports = require("react/jsx-runtime");
-
-/***/ }),
-
-/***/ "path":
-/*!***********************!*\
-  !*** external "path" ***!
-  \***********************/
-/***/ ((module) => {
-
-module.exports = require("path");
-
-/***/ })
-
-};
-;
-
-// load runtime
-var __webpack_require__ = require("../webpack-runtime.js");
-__webpack_require__.C(exports);
-var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next","vendor-chunks/@swc"], () => (__webpack_exec__("./src/pages/_document.tsx")));
-module.exports = __webpack_exports__;
-
-})();
+"use strict";(()=>{var e={};e.id=660,e.ids=[660],e.modules={1070:(e,s,r)=>{r.r(s),r.d(s,{default:()=>o});var n=r(997),i=r(6859);function o(){return(0,n.jsxs)(i.Html,{lang:"pt",children:[(0,n.jsxs)(i.Head,{children:[n.jsx("title",{children:"Portif\xf3lio"}),n.jsx("link",{rel:"icon",type:"image/png",href:"/images/icons/DevIco.png"}),n.jsx("link",{rel:"shortcut icon",type:"image/png",href:"/images/icons/DevIco.png"}),n.jsx("link",{rel:"apple-touch-icon",href:"/images/icons/DevIco.png"}),n.jsx("link",{href:"https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap",rel:"stylesheet"}),n.jsx("script",{dangerouslySetInnerHTML:{__html:`
+                        // Prevenir que extens\xf5es do navegador causem erros
+                        (function() {
+                            const originalError = console.error;
+                            const originalWarn = console.warn;
+                            
+                            console.error = function(...args) {
+                                const message = args.join(' ');
+                                if (
+                                    message.includes('Claude') || 
+                                    message.includes('inject.js') ||
+                                    message.includes('chrome-extension://') ||
+                                    message.includes('web_accessible_resources') ||
+                                    message.includes('Denying load')
+                                ) {
+                                    return; // Silenciar erros de extens\xf5es
+                                }
+                                originalError.apply(console, args);
+                            };
+                            
+                            console.warn = function(...args) {
+                                const message = args.join(' ');
+                                if (
+                                    message.includes('chrome-extension://') ||
+                                    message.includes('web_accessible_resources') ||
+                                    message.includes('Denying load') ||
+                                    message.includes('translation.json') ||
+                                    message.includes('styles.css')
+                                ) {
+                                    return; // Silenciar avisos de extens\xf5es
+                                }
+                                originalWarn.apply(console, args);
+                            };
+                            
+                            // Prevenir erros globais de extens\xf5es
+                            window.addEventListener('error', function(e) {
+                                const errorMsg = e.message || '';
+                                const source = e.filename || '';
+                                if (
+                                    errorMsg.includes('Claude') || 
+                                    errorMsg.includes('inject.js') ||
+                                    errorMsg.includes('chrome-extension://') ||
+                                    errorMsg.includes('web_accessible_resources') ||
+                                    source.includes('chrome-extension://')
+                                ) {
+                                    e.preventDefault();
+                                    return false;
+                                }
+                            }, true);
+                        })();
+                    `}})]}),(0,n.jsxs)("body",{children:[n.jsx(i.Main,{}),n.jsx(i.NextScript,{})]})]})}r(6689)},2785:e=>{e.exports=require("next/dist/compiled/next-server/pages.runtime.prod.js")},6689:e=>{e.exports=require("react")},997:e=>{e.exports=require("react/jsx-runtime")},5315:e=>{e.exports=require("path")}};var s=require("../webpack-runtime.js");s.C(e);var r=e=>s(s.s=e),n=s.X(0,[859],()=>r(1070));module.exports=n})();

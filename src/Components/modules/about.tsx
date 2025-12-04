@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Box, Heading, Text, SimpleGrid, Flex, Icon, Badge, VStack, HStack } from "@chakra-ui/react";
+import { Box, Heading, Text, SimpleGrid, Flex, Icon, Badge, VStack } from "@chakra-ui/react";
 import {
     FaCode,
     FaServer,
@@ -7,14 +7,12 @@ import {
     FaRocket,
     FaGraduationCap,
     FaBriefcase,
-    FaLaptopCode,
     FaStar
 } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 const MotionBox = motion(Box);
-const MotionFlex = motion(Flex);
 
 const TimelineItem = ({ icon, year, title, description, delay, isLast = false }: any) => (
     <Flex gap={4} position="relative">

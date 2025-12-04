@@ -1,15 +1,5 @@
 import { Box, Text, Button, Flex, Link, SimpleGrid, Icon, Input, InputGroup, InputRightElement, IconButton, VStack, HStack, Divider } from "@chakra-ui/react";
-import { FaGithub, FaLinkedin, FaRegEnvelope, FaArrowUp, FaDownload, FaPaperPlane, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
-import { keyframes } from "@emotion/react";
-import { motion } from "framer-motion";
-
-const MotionBox = motion(Box);
-
-const pulse = keyframes`
-  0% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-  100% { transform: translateY(0); }
-`;
+import { FaGithub, FaLinkedin, FaRegEnvelope, FaArrowUp, FaDownload, FaPaperPlane, FaMapMarkerAlt } from "react-icons/fa";
 
 const Footer = () => {
     const scrollToTop = () => {

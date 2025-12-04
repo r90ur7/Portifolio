@@ -12,8 +12,6 @@ import {
     Text,
     Heading,
     Flex,
-    Tag,
-    TagLabel,
     Button,
     Icon,
     HStack,
@@ -24,7 +22,6 @@ import {
     Tab,
     TabPanel,
     Badge,
-    Tooltip,
     IconButton,
     SimpleGrid,
     Link

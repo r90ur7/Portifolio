@@ -8,7 +8,7 @@ import {
     ResponsiveContainer,
     Tooltip
 } from 'recharts';
-import { Box, Heading, Text, VStack, useColorModeValue, Flex } from '@chakra-ui/react';
+import { Box, Heading, Text, VStack, Flex } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
@@ -134,7 +134,9 @@ const SkillsRadar = () => {
                             >
                                 <RadarChart cx="50%" cy="50%" outerRadius="70%" data={data}>
                                     <PolarGrid stroke={gridColor} />
+                                    {/* @ts-ignore - recharts type compatibility issue with React 18 */}
                                     <PolarAngleAxis dataKey="subject" tick={{ fill: textColor, fontSize: 14 }} />
+                                    {/* @ts-ignore - recharts type compatibility issue with React 18 */}
                                     <PolarRadiusAxis angle={30} domain={[0, 100]} tick={false} axisLine={false} />
                                     <Radar
                                         name="Competência"

@@ -1,9 +1,10 @@
-import { Box, Heading, Flex, Text, Icon, Badge, Tooltip, Tabs, TabList, Tab, VStack, useColorModeValue } from "@chakra-ui/react";
+import { Box, Heading, Flex, Text, Icon, Badge, Tabs, TabList, Tab, VStack } from "@chakra-ui/react";
 import {
-    SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiHtml5, SiCss3, SiChakraui, SiTailwindcss,
-    SiNodedotjs, SiDotnet, SiCsharp, SiPython, SiPostgresql, SiMongodb, SiRedis,
-    SiDocker, SiKubernetes, SiAmazonaws, SiGit, SiGithub, SiFigma, SiPostman, SiVisualstudiocode
+    SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiChakraui, SiTailwindcss,
+    SiNodedotjs, SiDotnet, SiSharp, SiPostgresql, SiMongodb,
+    SiDocker, SiAmazon, SiGit, SiFigma, SiPostman
 } from "react-icons/si";
+import { FaCode } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useEffect, useState } from "react";
@@ -26,18 +27,18 @@ const skillsData: { [key: string]: any[] } = {
     ],
     "Backend": [
         { name: ".NET Core", icon: SiDotnet, color: "#512BD4", level: 85, proficiency: "Avançado", desc: "Framework cross-platform." },
-        { name: "C#", icon: SiCsharp, color: "#239120", level: 90, proficiency: "Avançado", desc: "Linguagem robusta e tipada." },
+        { name: "C#", icon: SiSharp, color: "#239120", level: 90, proficiency: "Avançado", desc: "Linguagem robusta e tipada." },
         { name: "Node.js", icon: SiNodedotjs, color: "#339933", level: 80, proficiency: "Intermediário", desc: "JS no servidor." },
         { name: "PostgreSQL", icon: SiPostgresql, color: "#336791", level: 75, proficiency: "Intermediário", desc: "SQL robusto e confiável." },
         { name: "MongoDB", icon: SiMongodb, color: "#47A248", level: 70, proficiency: "Intermediário", desc: "NoSQL flexível." },
     ],
     "DevOps": [
         { name: "Docker", icon: SiDocker, color: "#2496ED", level: 75, proficiency: "Intermediário", desc: "Containers em qualquer lugar." },
-        { name: "AWS", icon: SiAmazonaws, color: "#FF9900", level: 60, proficiency: "Básico", desc: "Cloud Computing." },
+        { name: "AWS", icon: SiAmazon, color: "#FF9900", level: 60, proficiency: "Básico", desc: "Cloud Computing." },
         { name: "Git", icon: SiGit, color: "#F05032", level: 90, proficiency: "Avançado", desc: "Versionamento essencial." },
     ],
     "Tools": [
-        { name: "VS Code", icon: SiVisualstudiocode, color: "#007ACC", level: 95, proficiency: "Especialista", desc: "Editor favorito." },
+        { name: "VS Code", icon: FaCode, color: "#007ACC", level: 95, proficiency: "Especialista", desc: "Editor favorito." },
         { name: "Figma", icon: SiFigma, color: "#F24E1E", level: 70, proficiency: "Intermediário", desc: "Design e prototipagem." },
         { name: "Postman", icon: SiPostman, color: "#FF6C37", level: 85, proficiency: "Avançado", desc: "Teste de APIs." },
     ]

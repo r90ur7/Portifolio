@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box, Heading, Text, Button, Flex, Icon, VStack, Container } from '@chakra-ui/react';
+import { Box, Heading, Text, Button, Flex, Icon, Container } from '@chakra-ui/react';
 import { motion } from 'framer-motion';
-import { FaCalendarAlt, FaEnvelope, FaWhatsapp, FaArrowRight } from 'react-icons/fa';
+import { FaCalendarAlt, FaEnvelope, FaArrowRight } from 'react-icons/fa';
 
 const MotionBox = motion(Box);
 const MotionButton = motion(Button);

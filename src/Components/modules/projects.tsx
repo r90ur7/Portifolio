@@ -1,17 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Cookies from "js-cookie";
 import {
     Box,
     Text,
-    Link,
     Heading,
     Spinner,
     Flex,
     Icon,
     Tag,
-    TagLabel,
-    Tooltip,
-    Skeleton,
     Image,
     Button,
     HStack,
@@ -22,19 +17,15 @@ import {
     Badge,
     Tabs,
     TabList,
-    Tab,
-    SimpleGrid
+    Tab
 } from "@chakra-ui/react";
-import { FaGithub, FaStar, FaCodeBranch, FaSearch, FaExternalLinkAlt, FaPlay, FaFire } from "react-icons/fa";
+import { FaGithub, FaStar, FaCodeBranch, FaSearch, FaExternalLinkAlt } from "react-icons/fa";
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import setupGithubApi from "@/pages/api/setupGithubApi";
 import Masonry from 'react-masonry-css';
-import projectImages from "@/data/projectImages.json";
 import ProjectModal from "./projectModal";
 
 const MotionBox = motion(Box);
-const MotionImage = motion(Image);
 
 const Projects = () => {
     const [repositories, setRepositories] = useState([] as any);
@@ -45,12 +36,6 @@ const Projects = () => {
     const [selectedProject, setSelectedProject] = useState(null);
 
     const { isOpen, onOpen, onClose } = useDisclosure();
-
-    const githubToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN!;
-    const githubUsername = process.env.NEXT_PUBLIC_GITHUB_USERNAME!;
-    const githubList = process.env.NEXT_PUBLIC_GITHUB_LIST!;
-
-    const { api } = setupGithubApi(githubToken, githubUsername, githubList);
 
     const controls = useAnimation();
     const [ref, inView] = useInView({
