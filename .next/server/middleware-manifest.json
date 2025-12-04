@@ -33,7 +33,7 @@
       ],
       "env": {
         "__NEXT_BUILD_ID": "development",
-        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "0g3gaevA34dt0sbXF7mO+q3/9x5OFq/jjbnp+E0Kpsk="
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "8uqDp09KTe0ASgnq+OUCwdaj/o3gE6GfjB5xB2ufhEg="
       }
     }
   },

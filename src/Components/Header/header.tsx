@@ -2,6 +2,8 @@ import { Box, Heading, Text, Flex, Link, IconButton, VStack } from "@chakra-ui/r
 import { FaDownload, FaGithub, FaLinkedin, FaRegEnvelope } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import React, { useState, useEffect } from "react";
+import { TypeAnimation } from 'react-type-animation';
+import ParticlesBackground from "@/Components/common/ParticlesBackground";
 
 const MotionBox = motion(Box);
 const MotionHeading = motion(Heading);
@@ -47,6 +49,9 @@ const Header = () => {
             animate={controls}
             initial={{ opacity: 0 }}
         >
+            {/* Partículas de fundo */}
+            <ParticlesBackground />
+
             <Flex
                 flexWrap="wrap"
                 justifyContent="center"
@@ -64,28 +69,47 @@ const Header = () => {
                         as="h1"
                         size={{ base: "xl", md: "2xl" }}
                         fontWeight="bold"
-                        bgGradient="linear(to-t, #B650F2, #362558)"
+                        bgGradient="linear(to-r, #B650F2, #C86BFD, #B650F2)"
                         bgClip="text"
-                        filter="brightness(1.2)"
+                        filter="brightness(1.3)"
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.2 }}
                         textAlign={{ base: "center", md: "justify" }}
+                        textShadow="0 0 40px rgba(182, 80, 242, 0.3)"
                     >
                         Rallenson Silva
                     </MotionHeading>
 
-                    <MotionText
+                    <Box
                         fontSize={{ base: "lg", md: "xl" }}
-                        color="gray.600"
                         fontWeight="medium"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
-                        textAlign={"justify"}
+                        minH={{ base: "60px", md: "40px" }}
+                        textAlign={{ base: "center", md: "justify" }}
                     >
-                        Engenheiro de Software | Desenvolvedor Full Stack
-                    </MotionText>
+                        <TypeAnimation
+                            sequence={[
+                                'Engenheiro de Software',
+                                2000,
+                                'Desenvolvedor Full Stack',
+                                2000,
+                                'Especialista em React & Next.js',
+                                2000,
+                                'Desenvolvedor .NET',
+                                2000,
+                            ]}
+                            wrapper="span"
+                            speed={50}
+                            style={{
+                                background: 'linear-gradient(to right, #9AA6C4, #B650F2)',
+                                WebkitBackgroundClip: 'text',
+                                WebkitTextFillColor: 'transparent',
+                                backgroundClip: 'text',
+                                display: 'inline-block',
+                            }}
+                            repeat={Infinity}
+                        />
+                    </Box>
 
                     <MotionText
                         maxWidth="600px"
@@ -114,16 +138,40 @@ const Header = () => {
                                     as={motion.button}
                                     width="100px"
                                     aria-label="Contato"
-                                    icon={<FaRegEnvelope color="#096666FF" />}
+                                    icon={<FaRegEnvelope size={20} />}
                                     variant="solid"
-                                    colorScheme="teal"
                                     size="lg"
-                                    bg="#0D1B2A"
-                                    borderRadius="md"
-                                    border="0.2px solid"
-                                    borderColor="#9AA6C4FF"
-                                    whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.9 }}
+                                    bg="rgba(13, 27, 42, 0.4)"
+                                    backdropFilter="blur(20px) saturate(180%)"
+                                    borderRadius="xl"
+                                    border="1px solid"
+                                    borderColor="rgba(182, 80, 242, 0.4)"
+                                    color="#B650F2"
+                                    boxShadow="0 8px 32px rgba(182, 80, 242, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
+                                    position="relative"
+                                    overflow="hidden"
+                                    _before={{
+                                        content: '""',
+                                        position: "absolute",
+                                        top: 0,
+                                        left: "-100%",
+                                        width: "100%",
+                                        height: "100%",
+                                        background: "linear-gradient(90deg, transparent, rgba(182, 80, 242, 0.3), transparent)",
+                                        transition: "left 0.5s ease"
+                                    }}
+                                    _hover={{
+                                        bg: "rgba(182, 80, 242, 0.25)",
+                                        borderColor: "#B650F2",
+                                        boxShadow: "0 12px 40px rgba(182, 80, 242, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+                                        transform: "translateY(-2px)",
+                                        _before: {
+                                            left: "100%"
+                                        }
+                                    }}
+                                    whileHover={{ scale: 1.05, y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    transition="all 0.3s ease"
                                 />
                             </Link>
                             <Link href="https://github.com/r90ur7" isExternal>
@@ -131,16 +179,40 @@ const Header = () => {
                                     as={motion.button}
                                     width="100px"
                                     aria-label="GitHub"
-                                    icon={<FaGithub color="#096666FF" />}
+                                    icon={<FaGithub size={20} />}
                                     variant="solid"
-                                    colorScheme="teal"
                                     size="lg"
-                                    bg="#0D1B2A"
-                                    borderRadius="md"
-                                    border="0.2px solid"
-                                    borderColor="#9AA6C4FF"
-                                    whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.9 }}
+                                    bg="rgba(13, 27, 42, 0.4)"
+                                    backdropFilter="blur(20px) saturate(180%)"
+                                    borderRadius="xl"
+                                    border="1px solid"
+                                    borderColor="rgba(154, 166, 196, 0.4)"
+                                    color="#9AA6C4"
+                                    boxShadow="0 8px 32px rgba(154, 166, 196, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
+                                    position="relative"
+                                    overflow="hidden"
+                                    _before={{
+                                        content: '""',
+                                        position: "absolute",
+                                        top: 0,
+                                        left: "-100%",
+                                        width: "100%",
+                                        height: "100%",
+                                        background: "linear-gradient(90deg, transparent, rgba(154, 166, 196, 0.3), transparent)",
+                                        transition: "left 0.5s ease"
+                                    }}
+                                    _hover={{
+                                        bg: "rgba(154, 166, 196, 0.25)",
+                                        borderColor: "#9AA6C4",
+                                        boxShadow: "0 12px 40px rgba(154, 166, 196, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+                                        transform: "translateY(-2px)",
+                                        _before: {
+                                            left: "100%"
+                                        }
+                                    }}
+                                    whileHover={{ scale: 1.05, y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    transition="all 0.3s ease"
                                 />
                             </Link>
                             <Link href="https://www.linkedin.com/in/gustavo-rallenson/" isExternal>
@@ -148,34 +220,81 @@ const Header = () => {
                                     as={motion.button}
                                     width="100px"
                                     aria-label="LinkedIn"
-                                    icon={<FaLinkedin color="#096666FF" />}
+                                    icon={<FaLinkedin size={20} />}
                                     variant="solid"
-                                    colorScheme="teal"
                                     size="lg"
-                                    bg="#0D1B2A"
-                                    borderRadius="md"
-                                    border="0.2px solid"
-                                    borderColor="#9AA6C4FF"
-                                    whileHover={{ scale: 1.1 }}
-                                    whileTap={{ scale: 0.9 }}
+                                    bg="rgba(13, 27, 42, 0.4)"
+                                    backdropFilter="blur(20px) saturate(180%)"
+                                    borderRadius="xl"
+                                    border="1px solid"
+                                    borderColor="rgba(72, 48, 122, 0.4)"
+                                    color="#48307A"
+                                    boxShadow="0 8px 32px rgba(72, 48, 122, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1)"
+                                    position="relative"
+                                    overflow="hidden"
+                                    _before={{
+                                        content: '""',
+                                        position: "absolute",
+                                        top: 0,
+                                        left: "-100%",
+                                        width: "100%",
+                                        height: "100%",
+                                        background: "linear-gradient(90deg, transparent, rgba(72, 48, 122, 0.3), transparent)",
+                                        transition: "left 0.5s ease"
+                                    }}
+                                    _hover={{
+                                        bg: "rgba(72, 48, 122, 0.25)",
+                                        borderColor: "#48307A",
+                                        boxShadow: "0 12px 40px rgba(72, 48, 122, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
+                                        transform: "translateY(-2px)",
+                                        _before: {
+                                            left: "100%"
+                                        }
+                                    }}
+                                    whileHover={{ scale: 1.05, y: -2 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    transition="all 0.3s ease"
                                 />
                             </Link>
                         </Flex>
                         <Link display={"flex"} justifyContent={"center"} href="https://bronze-stormy-55.tiiny.site" isExternal mt={4} width="100%">
                             <IconButton
                                 as={motion.button}
-                                width={["100px","100%", "50%", "100%" ]}
-                                aria-label="Portfólio"
-                                icon={< FaDownload color="#096666FF" />}
+                                width={["100px", "100%", "50%", "100%"]}
+                                aria-label="Download CV"
+                                icon={<FaDownload size={20} />}
                                 variant="solid"
-                                colorScheme="teal"
                                 size="lg"
-                                bg="#0D1B2A"
-                                borderRadius="md"
-                                border="0.2px solid"
-                                borderColor="#9AA6C4FF"
-                                whileHover={{ scale: 1.1 }}
-                                whileTap={{ scale: 0.9 }}
+                                bgGradient="linear(to-r, #B650F2, #48307A)"
+                                backdropFilter="blur(20px) saturate(180%)"
+                                borderRadius="xl"
+                                border="1px solid"
+                                borderColor="rgba(182, 80, 242, 0.6)"
+                                color="white"
+                                boxShadow="0 8px 32px rgba(182, 80, 242, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2)"
+                                position="relative"
+                                overflow="hidden"
+                                _before={{
+                                    content: '""',
+                                    position: "absolute",
+                                    top: 0,
+                                    left: "-100%",
+                                    width: "100%",
+                                    height: "100%",
+                                    background: "linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)",
+                                    transition: "left 0.5s ease"
+                                }}
+                                _hover={{
+                                    bgGradient: "linear(to-r, #C86BFD, #5A4494)",
+                                    boxShadow: "0 12px 40px rgba(182, 80, 242, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.3)",
+                                    transform: "translateY(-2px)",
+                                    _before: {
+                                        left: "100%"
+                                    }
+                                }}
+                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileTap={{ scale: 0.95 }}
+                                transition="all 0.3s ease"
                             />
                         </Link>
                     </MotionFlex>
@@ -187,62 +306,76 @@ const Header = () => {
                 >
                     <Flex>
                         <VStack>
-                            <Box
+                            <MotionBox
                                 position="relative"
                                 w={200}
                                 h={{ base: "100vw", md: "55vh" }}
                                 maxH={{ base: "6000px", md: "400px" }}
-                                borderRadius="md"
-                                overflow="hidden"
-                                boxShadow="2px 15px 50px 0.1px rgba(182, 80, 242, 0.25)"
-                                _before={{
-                                    content: '""',
-                                    position: "absolute",
-                                    top: "-2px",
-                                    left: "-2px",
-                                    right: "-2px",
-                                    bottom: "-2px",
-                                    borderRadius: "md",
-                                    background: "linear-gradient(to top, #B650F2 0%, #362558 100%)",
-                                    zIndex: 0,
-                                    filter: "blur(8px)",
-                                    opacity: 0.7,
-                                }}
-                                _after={{
-                                    content: '""',
-                                    position: "absolute",
-                                    top: 0,
-                                    left: 0,
-                                    right: 0,
-                                    bottom: 0,
-                                    borderRadius: "md",
-                                    border: "2px solid",
-                                    background: "linear-gradient(to top, #362558 0%, #B650F2 100%)",
-                                    borderColor: "rgba(182, 80, 242, 0.15)",
-                                    mixBlendMode: "soft-light",
-                                }}
+                                initial={{ opacity: 0, scale: 0.8 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.8, delay: 0.4 }}
+                                whileHover={{ scale: 1.05 }}
                             >
+                                {/* Borda animada com gradiente rotativo */}
                                 <Box
-                                    as="img"
-                                    src="assets/perfil.png"
-                                    alt="Minha Foto"
                                     position="absolute"
-                                    w="100%"
-                                    h="100%"
-                                    top="50%"
-                                    left="50%"
-                                    transform="translate(-50%, -50%)"
-                                    zIndex="1"
+                                    top="-4px"
+                                    left="-4px"
+                                    right="-4px"
+                                    bottom="-4px"
+                                    borderRadius="2xl"
+                                    overflow="hidden"
+                                    _before={{
+                                        content: '""',
+                                        position: "absolute",
+                                        top: "-50%",
+                                        left: "-50%",
+                                        width: "200%",
+                                        height: "200%",
+                                        background: "conic-gradient(from 0deg, #B650F2, #C86BFD, #48307A, #9AA6C4, #B650F2, #C86BFD, #48307A, #9AA6C4, #B650F2)",
+                                        animation: "rotateBorder 4s linear infinite",
+                                    }}
                                     sx={{
-                                        "&": {
-                                            minWidth: "100%",
-                                            minHeight: "100%",
-                                            objectFit: "cover",
-                                            objectPosition: "center top",
-                                        },
+                                        "@keyframes rotateBorder": {
+                                            "0%": { transform: "rotate(0deg)" },
+                                            "100%": { transform: "rotate(360deg)" },
+                                        }
                                     }}
                                 />
-                            </Box>
+
+                                {/* Container da imagem */}
+                                <Box
+                                    position="relative"
+                                    w="100%"
+                                    h="100%"
+                                    borderRadius="2xl"
+                                    overflow="hidden"
+                                    boxShadow="0 20px 60px rgba(182, 80, 242, 0.4)"
+                                    bg="#0D1B2A"
+                                    zIndex={1}
+                                >
+                                    <Box
+                                        as="img"
+                                        src="assets/perfil.png"
+                                        alt="Minha Foto"
+                                        position="absolute"
+                                        w="100%"
+                                        h="100%"
+                                        top="50%"
+                                        left="50%"
+                                        transform="translate(-50%, -50%)"
+                                        zIndex="2"
+                                        sx={{
+                                            "&": {
+                                                minWidth: "100%",
+                                                minHeight: "100%",
+                                                objectFit: "cover",
+                                                objectPosition: "center top",
+                                            },
+                                        }}
+                                    />
+                                </Box>
+                            </MotionBox>
                         </VStack>
                     </Flex>
                 </VStack>

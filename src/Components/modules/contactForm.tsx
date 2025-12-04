@@ -46,22 +46,34 @@ const ContactForm: React.FC = () => {
             mx="auto"
             px={4}
             py={20}
-            bg="linear-gradient(180deg, rgba(54, 37, 88, 0.8) 0%, rgba(13, 27, 42, 0.9) 100%)"
+            bg="rgba(13, 27, 42, 0.6)"
+            border="1px solid rgba(182, 80, 242, 0.2)"
             borderRadius="2xl"
-            backdropFilter="blur(10px)"
-            boxShadow="0 8px 32px rgba(0, 0, 0, 0.1)"
+            backdropFilter="blur(20px)"
+            boxShadow="0 20px 50px rgba(0,0,0,0.3)"
             as="form"
             onSubmit={handleSubmit}
         >
             <Text
-                fontSize="4xl"
+                fontSize={{ base: "3xl", md: "4xl" }}
                 fontWeight="bold"
                 bgGradient="linear(to-r, #B650F2, #9AA6C4)"
                 bgClip="text"
                 textAlign="center"
+                mb={4}
+            >
+                Tem um projeto em mente?
+            </Text>
+
+            <Text
+                color="gray.400"
+                fontSize="lg"
+                textAlign="center"
+                maxW="600px"
+                mx="auto"
                 mb={12}
             >
-                Vamos Trabalhar Juntos?
+                Mande uma mensagem para nós e vamos retornar contato!
             </Text>
 
             <Flex direction="column" maxW="600px" mx="auto" gap={6}>

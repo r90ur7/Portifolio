@@ -14,22 +14,38 @@ import {
     Skeleton,
     Image,
     Button,
-    HStack
+    HStack,
+    Input,
+    InputGroup,
+    InputLeftElement,
+    useDisclosure,
+    Badge,
+    Tabs,
+    TabList,
+    Tab,
+    SimpleGrid
 } from "@chakra-ui/react";
-import { FaGithub, FaStar, FaCodeBranch } from "react-icons/fa";
-import { motion, useAnimation } from "framer-motion";
+import { FaGithub, FaStar, FaCodeBranch, FaSearch, FaExternalLinkAlt, FaPlay, FaFire } from "react-icons/fa";
+import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import setupGithubApi from "@/pages/api/setupGithubApi";
 import Masonry from 'react-masonry-css';
 import projectImages from "@/data/projectImages.json";
+import ProjectModal from "./projectModal";
 
 const MotionBox = motion(Box);
+const MotionImage = motion(Image);
 
 const Projects = () => {
     const [repositories, setRepositories] = useState([] as any);
+    const [filteredRepos, setFilteredRepos] = useState([] as any);
     const [loading, setLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 6;
+    const [searchTerm, setSearchTerm] = useState("");
+    const [activeFilter, setActiveFilter] = useState("Todos");
+    const [selectedProject, setSelectedProject] = useState(null);
+
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
     const githubToken = process.env.NEXT_PUBLIC_GITHUB_TOKEN!;
     const githubUsername = process.env.NEXT_PUBLIC_GITHUB_USERNAME!;
     const githubList = process.env.NEXT_PUBLIC_GITHUB_LIST!;
@@ -42,112 +58,87 @@ const Projects = () => {
         triggerOnce: false,
         rootMargin: "-50px 0px",
     });
-    const [pageTrigger, setPageTrigger] = useState(0);
 
     useEffect(() => {
         if (inView) {
             controls.start("visible");
-        } else {
-            controls.start("hidden");
         }
-    }, [controls, inView, pageTrigger]);
+    }, [controls, inView]);
 
     const containerVariants = {
-        hidden: { opacity: 0, y: 50, transition: { duration: 0.5 } },
+        hidden: { opacity: 0, y: 50 },
         visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
     };
 
-    const itemVariants = (index: number) => ({
-        hidden: { opacity: 0, y: 50 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: index * 0.2 } },
-    });
+    const itemVariants = {
+        hidden: { opacity: 0, scale: 0.9 },
+        visible: { opacity: 1, scale: 1, transition: { duration: 0.4 } },
+        hover: {
+            y: -10,
+            scale: 1.02,
+            boxShadow: "0 20px 40px rgba(182, 80, 242, 0.2)",
+            transition: { duration: 0.3 }
+        }
+    };
 
     useEffect(() => {
-        const fetchRepositories = async () => {
-            try {
-                const reposResponse = await api.get(`/users/${githubUsername}/repos`);
-                console.log('Total repos from GitHub:', reposResponse.data.length);
-                console.log('Looking for topic:', githubList);
-
-                const reposFromList = reposResponse.data.filter((repo: any) => {
-                    console.log(`Repo: ${repo.name}, topics:`, repo.topics);
-                    return repo.topics.includes(githubList) || repo.topics.includes('new');
-                });
-                console.log('Filtered repos with topic:', reposFromList.length);
-
-                reposFromList.sort((a: any, b: any) => {
-                    const aHasNew = a.topics.includes('new');
-                    const bHasNew = b.topics.includes('new');
-
-                    if (aHasNew && !bHasNew) return -1;
-                    if (!aHasNew && bHasNew) return 1;
-                    return 0;
-                });
-
-                const postsWithImages = reposFromList.map((repo: any) => {
-                    console.log('Repo name:', repo.name);
-                    const match = projectImages.projects.find((img: any) => img.projectName === repo.name);
-                    if (match) {
-                        console.log('Match found:', match);
-                        repo.featureImage = match.imageURL;
-                    } else {
-                        console.log('No match for:', repo.name);
-                    }
-                    return repo;
-                });
-
-                const reposWithLanguages = await Promise.all(
-                    postsWithImages.map(async (repo: any) => {
-                        const languagesResponse = await api.get(repo.languages_url);
-                        const languages = Object.entries(languagesResponse.data)
-                            .sort((a: any, b: any) => b[1] - a[1])
-                            .slice(0, 3)
-                            .map(([language]) => language);
-
-                        return {
-                            ...repo,
-                            languages
-                        };
-                    })
-                );
-
-                setRepositories(reposWithLanguages);
-                Cookies.set('portfolio_github_projects_cached', JSON.stringify(reposWithLanguages), { expires: 2 / 24 });
-            } catch (error) {
-                console.error("Erro ao buscar repositórios:", error);
-            } finally {
-                setLoading(false);
+        // Dados estáticos apenas do Portfólio
+        const portfolioProject = [
+            {
+                id: 1,
+                name: "Portifolio",
+                description: "Meu portfólio pessoal moderno e interativo, desenvolvido com Next.js, Chakra UI e Framer Motion. Focado em performance, animações fluidas e experiência do usuário.",
+                html_url: "https://github.com/r90ur7/Portifolio",
+                topics: ["portfolio", "react", "nextjs", "chakra-ui", "framer-motion"],
+                languages: ["TypeScript", "SCSS", "JavaScript"],
+                stargazers_count: 10,
+                forks_count: 2,
+                featureImage: null // Usará o fallbackSrc automático
             }
-        };
-        const cachedRepos = Cookies.get('portfolio_github_projects_cached');
-        if (cachedRepos) {
-            setRepositories(JSON.parse(cachedRepos));
-            setLoading(false);
-        } else {
-            fetchRepositories();
+        ];
+
+        setRepositories(portfolioProject);
+        setFilteredRepos(portfolioProject);
+        setLoading(false);
+    }, []);
+
+    useEffect(() => {
+        let result = repositories;
+
+        // Filter by Search
+        if (searchTerm) {
+            result = result.filter((repo: any) =>
+                repo.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                repo.description?.toLowerCase().includes(searchTerm.toLowerCase())
+            );
         }
-    }, [api, githubList, githubUsername]);
 
-    const totalPages = Math.ceil(repositories.length / itemsPerPage);
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    const currentRepositories = repositories.slice(startIndex, endIndex);
+        // Filter by Category
+        if (activeFilter !== "Todos") {
+            if (activeFilter === "Featured") {
+                result = result.filter((repo: any) => repo.stargazers_count > 0 || repo.topics.includes('featured'));
+            } else {
+                result = result.filter((repo: any) =>
+                    repo.languages.some((lang: string) => lang.toLowerCase() === activeFilter.toLowerCase()) ||
+                    repo.topics.includes(activeFilter.toLowerCase())
+                );
+            }
+        }
 
-    const goToPage = (page: number) => {
-        setCurrentPage(page);
-        controls.set("hidden");
-        setPageTrigger(prev => prev + 1);
+        setFilteredRepos(result);
+    }, [searchTerm, activeFilter, repositories]);
+
+    const handleProjectClick = (project: any) => {
+        setSelectedProject(project);
+        onOpen();
     };
+
+    const filters = ["Todos", "Featured", "React", "TypeScript", "C#"];
 
     if (loading) {
         return (
             <Flex justify="center" align="center" minH="50vh">
-                <Spinner
-                    size="xl"
-                    color="purple.500"
-                    thickness="3px"
-                    speed="0.65s"
-                />
+                <Spinner size="xl" color="purple.500" thickness="3px" speed="0.65s" />
             </Flex>
         );
     }
@@ -163,183 +154,228 @@ const Projects = () => {
             id="projects"
             minH="80vh"
         >
-            <Heading
-                as="h2"
-                fontSize="4xl"
-                fontWeight="bold"
-                bgGradient="linear(to-r, #B650F2, #9AA6C4)"
-                bgClip="text"
-                textAlign="center"
-                mb={16}
-            >
-                Meus Projetos
-            </Heading>
             <Box maxW="1200px" mx="auto">
-                {repositories.length > 0 ? (
-                    <>
-                        <Masonry
-                            breakpointCols={{
-                                default: 3,
-                                1200: 3,
-                                900: 2,
-                                600: 1
-                            }}
-                            className="masonry-grid"
-                            columnClassName="masonry-grid_column"
-                            style={{ width: '100%' }}
+                <Flex direction="column" align="center" mb={12}>
+                    <Heading
+                        as="h2"
+                        fontSize={{ base: "3xl", md: "5xl" }}
+                        fontWeight="bold"
+                        bgGradient="linear(to-r, #B650F2, #9AA6C4)"
+                        bgClip="text"
+                        textAlign="center"
+                        mb={8}
+                    >
+                        Meus Projetos
+                    </Heading>
+
+                    {/* Search and Filter Bar */}
+                    <Flex
+                        w="full"
+                        maxW="800px"
+                        direction={{ base: "column", md: "row" }}
+                        gap={4}
+                        align="center"
+                        bg="rgba(13, 27, 42, 0.6)"
+                        p={4}
+                        borderRadius="2xl"
+                        backdropFilter="blur(10px)"
+                        border="1px solid rgba(182, 80, 242, 0.2)"
+                    >
+                        <InputGroup maxW={{ base: "full", md: "300px" }}>
+                            <InputLeftElement pointerEvents="none">
+                                <Icon as={FaSearch} color="gray.400" />
+                            </InputLeftElement>
+                            <Input
+                                placeholder="Buscar projetos..."
+                                variant="filled"
+                                bg="rgba(0,0,0,0.2)"
+                                _hover={{ bg: "rgba(0,0,0,0.3)" }}
+                                _focus={{ bg: "rgba(0,0,0,0.3)", borderColor: "#B650F2" }}
+                                color="white"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                borderRadius="xl"
+                            />
+                        </InputGroup>
+
+                        <Tabs
+                            variant="soft-rounded"
+                            colorScheme="purple"
+                            onChange={(index) => setActiveFilter(filters[index])}
+                            isLazy
                         >
-                            {currentRepositories.map((repo: any, index: number) => (
-                                <MotionBox
-                                    key={repo.id}
-                                    variants={itemVariants(index)}
-                                    initial="hidden"
-                                    animate={controls}
-                                    style={{ width: '100%', marginBottom: 32 }}
-                                >
-                                    <Box
-                                        position="relative"
-                                        p={6}
-                                        bg="rgba(13, 27, 42, 0.7)"
-                                        borderRadius="2xl"
-                                        backdropFilter="blur(10px)"
-                                        boxShadow="0 8px 32px rgba(0, 0, 0, 0.1)"
-                                        _hover={{
-                                            transform: "translateY(-5px)",
-                                            boxShadow: "0 12px 40px rgba(182, 80, 242, 0.2)"
-                                        }}
-                                        transition="all 0.3s cubic-bezier(0.4, 0, 0.2, 1)"
+                            <TabList overflowX="auto" py={1} sx={{
+                                '&::-webkit-scrollbar': { display: 'none' },
+                                scrollbarWidth: 'none'
+                            }}>
+                                {filters.map((filter) => (
+                                    <Tab
+                                        key={filter}
+                                        color="gray.400"
+                                        _selected={{ color: "white", bg: "rgba(182, 80, 242, 0.3)" }}
+                                        whiteSpace="nowrap"
                                     >
-                                        <Box mb={4} w="100%" maxW="480px" mx="auto" display="flex" alignItems="center" justifyContent="center" minH="260px" minW="320px">
-                                            <Link href={repo.homepage || repo.html_url} isExternal>
-                                                <Skeleton isLoaded>
-                                                    <Image
-                                                        src={repo.featureImage}
-                                                        alt={repo.name}
-                                                        borderRadius="lg"
-                                                        objectFit="contain"
-                                                        w="100%"
-                                                        minW="320px"
-                                                        maxW="480px"
-                                                        h="260px"
-                                                        minH="200px"
-                                                        maxH="320px"
-                                                        display="block"
-                                                        mx="auto"
-                                                        my="auto"
-                                                        fallbackSrc={`/api/og?repo=${encodeURIComponent(repo.name)}&desc=${encodeURIComponent(repo.description || '')}&author=${githubUsername}`}
-                                                    />
-                                                </Skeleton>
-                                            </Link>
-                                        </Box>
-
-                                        <Box
-                                            _before={{
-                                                content: '""',
-                                                position: 'absolute',
-                                                top: 0,
-                                                left: 0,
-                                                right: 0,
-                                                bottom: 0,
-                                                borderRadius: '2xl',
-                                                border: '1px solid',
-                                                borderColor: 'rgba(182, 80, 242, 0.3)',
-                                                zIndex: -1
-                                            }}
-                                        >
-                                            <Link href={repo.html_url} isExternal _hover={{ textDecoration: "none" }}>
-                                                <Flex direction="column" h="full">
-                                                    <Flex align="center" mb={4}>
-                                                        <Icon as={FaGithub} boxSize={6} color="purple.400" mr={3} />
-                                                        <Text
-                                                            fontWeight="bold"
-                                                            fontSize="xl"
-                                                            bgGradient="linear(to-r, #B650F2, #9AA6C4)"
-                                                            bgClip="text"
-                                                        >
-                                                            {repo.name}
-                                                        </Text>
-                                                    </Flex>
-
-                                                    <Text color="gray.300" flex={1} mb={6}>
-                                                        {repo.description || ""}
-                                                    </Text>
-                                                    <Flex wrap="wrap" gap={2} mb={6}>
-                                                        {repo.languages.map((language: string) => (
-                                                            <Tooltip key={language} label={language} hasArrow>
-                                                                <Tag
-                                                                    size="md"
-                                                                    variant="subtle"
-                                                                    colorScheme="purple"
-                                                                    borderRadius="full"
-                                                                    bg="rgba(182, 80, 242, 0.1)"
-                                                                >
-                                                                    <TagLabel>{language}</TagLabel>
-                                                                </Tag>
-                                                            </Tooltip>
-                                                        ))}
-                                                    </Flex>
-                                                    <Flex justify="space-between" color="gray.400">
-                                                        <Flex align="center">
-                                                            <Icon as={FaStar} mr={2} />
-                                                            <Text>{repo.stargazers_count}</Text>
-                                                        </Flex>
-                                                        <Flex align="center">
-                                                            <Icon as={FaCodeBranch} mr={2} />
-                                                            <Text>{repo.forks_count}</Text>
-                                                        </Flex>
-                                                    </Flex>
-                                                </Flex>
-                                            </Link>
-                                        </Box>
-                                    </Box>
-                                </MotionBox>
-                            ))}
-                        </Masonry>
-
-                        {/* Controles de Paginação - sempre visíveis */}
-                        <Flex justify="center" align="center" mt={12} gap={2}>
-                            <Button
-                                onClick={() => goToPage(currentPage - 1)}
-                                disabled={currentPage === 1}
-                                variant="outline"
-                                colorScheme="purple"
-                                size="sm"
-                            >
-                                Anterior
-                            </Button>
-
-                            <HStack spacing={1}>
-                                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                                    <Button
-                                        key={page}
-                                        onClick={() => goToPage(page)}
-                                        variant={currentPage === page ? "solid" : "outline"}
-                                        colorScheme="purple"
-                                        size="sm"
-                                        minW="40px"
-                                    >
-                                        {page}
-                                    </Button>
+                                        {filter}
+                                    </Tab>
                                 ))}
-                            </HStack>
+                            </TabList>
+                        </Tabs>
+                    </Flex>
+                </Flex>
 
-                            <Button
-                                onClick={() => goToPage(currentPage + 1)}
-                                disabled={currentPage === totalPages}
-                                variant="outline"
-                                colorScheme="purple"
-                                size="sm"
+                <AnimatePresence>
+                    <Masonry
+                        breakpointCols={{
+                            default: 3,
+                            1100: 2,
+                            700: 1
+                        }}
+                        className="masonry-grid"
+                        columnClassName="masonry-grid_column"
+                        style={{ width: '100%' }}
+                    >
+                        {filteredRepos.map((repo: any) => (
+                            <MotionBox
+                                key={repo.id}
+                                layoutId={repo.id}
+                                variants={itemVariants}
+                                initial="hidden"
+                                animate="visible"
+                                whileHover="hover"
+                                mb={8}
+                                cursor="pointer"
+                                onClick={() => handleProjectClick(repo)}
                             >
-                                Próximo
-                            </Button>
-                        </Flex>
-                    </>
-                ) : (
-                    <Text textAlign="center" color="gray.400">
-                        Nenhum projeto encontrado na lista especificada.
-                    </Text>
+                                <Box
+                                    position="relative"
+                                    bg="rgba(13, 27, 42, 0.8)"
+                                    borderRadius="2xl"
+                                    overflow="hidden"
+                                    border="1px solid"
+                                    borderColor="rgba(182, 80, 242, 0.2)"
+                                    _before={{
+                                        content: '""',
+                                        position: "absolute",
+                                        top: 0,
+                                        left: 0,
+                                        right: 0,
+                                        height: "4px",
+                                        bgGradient: "linear(to-r, #B650F2, #48307A)",
+                                        opacity: 0,
+                                        transition: "opacity 0.3s"
+                                    }}
+                                    _hover={{
+                                        borderColor: "#B650F2",
+                                        _before: { opacity: 1 }
+                                    }}
+                                >
+                                    {/* Image Container */}
+                                    <Box position="relative" h="200px" overflow="hidden">
+                                        <Image
+                                            src={repo.featureImage}
+                                            alt={repo.name}
+                                            w="100%"
+                                            h="100%"
+                                            objectFit="cover"
+                                            transition="transform 0.5s"
+                                            _groupHover={{ transform: "scale(1.1)" }}
+                                            fallbackSrc={`/api/og?repo=${encodeURIComponent(repo.name)}&desc=${encodeURIComponent(repo.description || '')}`}
+                                        />
+                                        <Box
+                                            position="absolute"
+                                            inset={0}
+                                            bg="blackAlpha.600"
+                                            opacity={0}
+                                            transition="opacity 0.3s"
+                                            _groupHover={{ opacity: 1 }}
+                                            display="flex"
+                                            alignItems="center"
+                                            justifyContent="center"
+                                        >
+                                            <Button
+                                                leftIcon={<FaExternalLinkAlt />}
+                                                variant="solid"
+                                                colorScheme="purple"
+                                                size="sm"
+                                                borderRadius="full"
+                                            >
+                                                Ver Detalhes
+                                            </Button>
+                                        </Box>
+
+                                        {/* Featured Badge */}
+                                        {(repo.stargazers_count > 0 || repo.topics.includes('featured')) && (
+                                            <Badge
+                                                position="absolute"
+                                                top={3}
+                                                right={3}
+                                                colorScheme="yellow"
+                                                variant="solid"
+                                                borderRadius="full"
+                                                px={2}
+                                                display="flex"
+                                                alignItems="center"
+                                                boxShadow="0 2px 10px rgba(0,0,0,0.3)"
+                                            >
+                                                <Icon as={FaStar} mr={1} size="xs" /> Featured
+                                            </Badge>
+                                        )}
+                                    </Box>
+
+                                    {/* Content */}
+                                    <Box p={6}>
+                                        <Heading size="md" color="white" mb={2} noOfLines={1}>
+                                            {repo.name}
+                                        </Heading>
+                                        <Text color="gray.400" fontSize="sm" mb={4} noOfLines={2}>
+                                            {repo.description}
+                                        </Text>
+
+                                        <Flex wrap="wrap" gap={2} mb={4}>
+                                            {repo.languages.slice(0, 3).map((lang: string) => (
+                                                <Tag
+                                                    key={lang}
+                                                    size="sm"
+                                                    variant="subtle"
+                                                    colorScheme="purple"
+                                                    bg="rgba(182, 80, 242, 0.15)"
+                                                >
+                                                    {lang}
+                                                </Tag>
+                                            ))}
+                                        </Flex>
+
+                                        <Flex justify="space-between" align="center" pt={4} borderTop="1px solid rgba(255,255,255,0.1)">
+                                            <HStack color="gray.500" spacing={4} fontSize="sm">
+                                                <Flex align="center">
+                                                    <Icon as={FaStar} mr={1} /> {repo.stargazers_count}
+                                                </Flex>
+                                                <Flex align="center">
+                                                    <Icon as={FaCodeBranch} mr={1} /> {repo.forks_count}
+                                                </Flex>
+                                            </HStack>
+                                            <Icon as={FaGithub} color="gray.500" boxSize={5} />
+                                        </Flex>
+                                    </Box>
+                                </Box>
+                            </MotionBox>
+                        ))}
+                    </Masonry>
+                </AnimatePresence>
+
+                {filteredRepos.length === 0 && (
+                    <Flex direction="column" align="center" justify="center" py={10}>
+                        <Icon as={FaSearch} boxSize={10} color="gray.600" mb={4} />
+                        <Text color="gray.400" fontSize="lg">Nenhum projeto encontrado.</Text>
+                    </Flex>
                 )}
             </Box>
+
+            <ProjectModal
+                isOpen={isOpen}
+                onClose={onClose}
+                project={selectedProject}
+            />
         </MotionBox>
     );
 };
