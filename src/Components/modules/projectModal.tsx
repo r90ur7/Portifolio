@@ -264,28 +264,44 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ isOpen, onClose, project })
                                 </SimpleGrid>
                             </TabPanel>
 
-                            {/* Aba Desafios & Soluções (Mockado por enquanto) */}
+                            {/* Aba Desafios & Soluções */}
                             <TabPanel p={0}>
                                 <VStack align="start" spacing={6} mt={2}>
+                                    {/* Desafio */}
                                     <Box>
                                         <Flex align="center" mb={2} color="red.300">
                                             <Icon as={FaLightbulb} mr={2} />
                                             <Heading size="sm">O Desafio</Heading>
                                         </Flex>
                                         <Text color="gray.400">
-                                            Criar uma interface intuitiva e responsiva que pudesse lidar com grandes volumes de dados sem comprometer a performance, mantendo a consistência visual em todos os dispositivos.
+                                            {project.challenge || "Informações sobre os desafios deste projeto ainda não foram documentadas."}
                                         </Text>
                                     </Box>
 
-                                    <Box>
-                                        <Flex align="center" mb={2} color="green.300">
-                                            <Icon as={FaTools} mr={2} />
-                                            <Heading size="sm">A Solução</Heading>
-                                        </Flex>
-                                        <Text color="gray.400">
-                                            Implementação de arquitetura baseada em componentes reutilizáveis, uso de estratégias de cache avançadas e otimização de renderização. Adoção de design system para garantir consistência.
-                                        </Text>
-                                    </Box>
+                                    {/* Destaques do Projeto */}
+                                    {project.highlights && project.highlights.length > 0 && (
+                                        <Box w="full">
+                                            <Flex align="center" mb={3} color="purple.300">
+                                                <Icon as={FaStar} mr={2} />
+                                                <Heading size="sm">Destaques</Heading>
+                                            </Flex>
+                                            <SimpleGrid columns={{ base: 1, sm: 2 }} spacing={2}>
+                                                {project.highlights.map((highlight: string, idx: number) => (
+                                                    <Flex
+                                                        key={idx}
+                                                        align="center"
+                                                        p={2}
+                                                        bg="rgba(182, 80, 242, 0.1)"
+                                                        borderRadius="md"
+                                                        border="1px solid rgba(182, 80, 242, 0.2)"
+                                                    >
+                                                        <Icon as={FaTools} color="purple.400" mr={2} boxSize={3} />
+                                                        <Text color="gray.300" fontSize="sm">{highlight}</Text>
+                                                    </Flex>
+                                                ))}
+                                            </SimpleGrid>
+                                        </Box>
+                                    )}
                                 </VStack>
                             </TabPanel>
                         </TabPanels>

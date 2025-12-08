@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, startTransition } from 'react';
 import { Box, Flex, Link, IconButton, useColorModeValue, Tooltip } from '@chakra-ui/react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaArrowUp, FaHome, FaUser, FaGraduationCap, FaBriefcase, FaCode, FaProjectDiagram, FaEnvelope, FaMagic } from 'react-icons/fa';
@@ -34,57 +34,65 @@ const Navigation = () => {
     const activeColor = useColorModeValue('#B650F2', '#C86BFD');
 
     useEffect(() => {
+        // Flag para prevenir atualizações durante a hidratação
+        let isMounted = false;
         let ticking = false;
         let lastScrollY = 0;
 
         const handleScroll = () => {
+            // Só processar após o componente estar completamente montado
+            if (!isMounted) return;
+
             const scrollY = window.scrollY;
 
             // Throttle: só processar se passou tempo suficiente ou mudou significativamente
             if (!ticking && Math.abs(scrollY - lastScrollY) > 10) {
                 window.requestAnimationFrame(() => {
-                    // Mostrar menu após rolar 100px
-                    setIsVisible(scrollY > 100);
+                    // Usar startTransition para indicar que essas são atualizações de baixa prioridade
+                    startTransition(() => {
+                        // Mostrar menu após rolar 100px
+                        setIsVisible(scrollY > 100);
 
-                    // Mostrar botão "Voltar ao topo" após rolar 300px
-                    setShowScrollTop(scrollY > 300);
+                        // Mostrar botão "Voltar ao topo" após rolar 300px
+                        setShowScrollTop(scrollY > 300);
 
-                    // Detectar seção ativa (só se mudou significativamente)
-                    if (Math.abs(scrollY - lastScrollY) > 50) {
-                        const sections = navItems.map(item => {
-                            const element = document.getElementById(item.id);
-                            if (element) {
-                                const rect = element.getBoundingClientRect();
-                                return {
-                                    id: item.id,
-                                    top: rect.top,
-                                    bottom: rect.bottom,
-                                };
-                            }
-                            return null;
-                        }).filter(Boolean) as Array<{ id: string; top: number; bottom: number }>;
+                        // Detectar seção ativa (só se mudou significativamente)
+                        if (Math.abs(scrollY - lastScrollY) > 50) {
+                            const sections = navItems.map(item => {
+                                const element = document.getElementById(item.id);
+                                if (element) {
+                                    const rect = element.getBoundingClientRect();
+                                    return {
+                                        id: item.id,
+                                        top: rect.top,
+                                        bottom: rect.bottom,
+                                    };
+                                }
+                                return null;
+                            }).filter(Boolean) as Array<{ id: string; top: number; bottom: number }>;
 
-                        // Verificar se estamos no topo
-                        if (scrollY < 200) {
-                            setActiveSection('home');
-                        } else {
-                            // Encontrar a seção visível
-                            const currentSection = sections.find(section => {
-                                return section.top <= 150 && section.bottom >= 150;
-                            });
-
-                            if (currentSection) {
-                                setActiveSection(currentSection.id);
+                            // Verificar se estamos no topo
+                            if (scrollY < 200) {
+                                setActiveSection('home');
                             } else {
-                                // Se nenhuma seção está visível, usar a última que passou
-                                const passedSections = sections.filter(s => s.top < 150);
-                                if (passedSections.length > 0) {
-                                    const lastPassed = passedSections[passedSections.length - 1];
-                                    setActiveSection(lastPassed.id);
+                                // Encontrar a seção visível
+                                const currentSection = sections.find(section => {
+                                    return section.top <= 150 && section.bottom >= 150;
+                                });
+
+                                if (currentSection) {
+                                    setActiveSection(currentSection.id);
+                                } else {
+                                    // Se nenhuma seção está visível, usar a última que passou
+                                    const passedSections = sections.filter(s => s.top < 150);
+                                    if (passedSections.length > 0) {
+                                        const lastPassed = passedSections[passedSections.length - 1];
+                                        setActiveSection(lastPassed.id);
+                                    }
                                 }
                             }
                         }
-                    }
+                    });
 
                     lastScrollY = scrollY;
                     ticking = false;
@@ -94,10 +102,18 @@ const Navigation = () => {
             }
         };
 
-        window.addEventListener('scroll', handleScroll, { passive: true });
-        handleScroll(); // Verificar estado inicial
+        // Marcar como montado após a hidratação estar completa
+        const timeoutId = setTimeout(() => {
+            isMounted = true;
+            handleScroll(); // Verificar estado inicial apenas após montado
+        }, 0);
 
-        return () => window.removeEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
+
+        return () => {
+            clearTimeout(timeoutId);
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, []);
 
     const scrollToSection = (sectionId: string) => {

@@ -1,12 +1,62 @@
 {
-  "..\\node_modules\\@react-email\\render\\dist\\browser\\index.mjs -> react-dom/server": {
-    "id": null,
-    "files": []
+  "pages\\index.tsx -> @/Components/modules/about": {
+    "id": "pages\\index.tsx -> @/Components/modules/about",
+    "files": [
+      "static/chunks/src_Components_modules_about_tsx.js"
+    ]
+  },
+  "pages\\index.tsx -> @/Components/modules/carrousel": {
+    "id": "pages\\index.tsx -> @/Components/modules/carrousel",
+    "files": [
+      "static/chunks/src_Components_modules_carrousel_tsx.js"
+    ]
+  },
+  "pages\\index.tsx -> @/Components/modules/contactForm": {
+    "id": "pages\\index.tsx -> @/Components/modules/contactForm",
+    "files": [
+      "static/chunks/src_Components_modules_contactForm_tsx.js"
+    ]
+  },
+  "pages\\index.tsx -> @/Components/modules/cta": {
+    "id": "pages\\index.tsx -> @/Components/modules/cta",
+    "files": [
+      "static/chunks/src_Components_modules_cta_tsx.js"
+    ]
+  },
+  "pages\\index.tsx -> @/Components/modules/education": {
+    "id": "pages\\index.tsx -> @/Components/modules/education",
+    "files": [
+      "static/chunks/src_Components_modules_education_tsx.js"
+    ]
+  },
+  "pages\\index.tsx -> @/Components/modules/experiencie": {
+    "id": "pages\\index.tsx -> @/Components/modules/experiencie",
+    "files": [
+      "static/chunks/src_Components_modules_experiencie_tsx.js"
+    ]
+  },
+  "pages\\index.tsx -> @/Components/modules/projects": {
+    "id": "pages\\index.tsx -> @/Components/modules/projects",
+    "files": [
+      "static/chunks/src_Components_modules_projects_tsx.js"
+    ]
+  },
+  "pages\\index.tsx -> @/Components/modules/skillsRadar": {
+    "id": "pages\\index.tsx -> @/Components/modules/skillsRadar",
+    "files": [
+      "static/chunks/src_Components_modules_skillsRadar_tsx.js"
+    ]
+  },
+  "pages\\index.tsx -> @/Components/modules/stats": {
+    "id": "pages\\index.tsx -> @/Components/modules/stats",
+    "files": [
+      "static/chunks/src_Components_modules_stats_tsx.js"
+    ]
   },
   "reportWebVitals.js -> web-vitals": {
-    "id": 2131,
+    "id": "reportWebVitals.js -> web-vitals",
     "files": [
-      "static/chunks/131.7c5d1e5d56643f2a.js"
+      "static/chunks/node_modules_web-vitals_dist_web-vitals_js.js"
     ]
   }
 }

@@ -1,0 +1,131 @@
+{
+    "projects": [
+        {
+            "name": "Portifolio",
+            "isFeatured": false,
+            "customDescription": "Meu portfólio pessoal moderno e interativo, desenvolvido com Next.js, Chakra UI e Framer Motion. Focado em performance, animações fluidas e experiência do usuário premium.",
+            "challenge": "Criar uma experiência visualmente impressionante sem comprometer a performance, implementando animações complexas e efeitos de partículas enquanto mantém tempos de carregamento rápidos.",
+            "imageURL": null,
+            "highlights": [
+                "Animações complexas com Framer Motion",
+                "Sistema de partículas otimizado",
+                "Design responsivo premium",
+                "Cache inteligente de dados do GitHub"
+            ]
+        },
+        {
+            "name": "Pagina_institucional_em_react",
+            "isFeatured": false,
+            "customDescription": "",
+            "challenge": "",
+            "imageURL": "images/project-images/",
+            "highlights": []
+        },
+        {
+            "name": "PapiroRun",
+            "isFeatured": true,
+            "customDescription": "",
+            "challenge": "",
+            "imageURL": "images/project-images/PapiroRun.png",
+            "highlights": []
+        },
+        {
+            "name": "lpms",
+            "isFeatured": true,
+            "customDescription": "",
+            "challenge": "",
+            "imageURL": "images/project-images/lpms.png",
+            "highlights": []
+        },
+        {
+            "name": "MudaMundo",
+            "isFeatured": true,
+            "customDescription": "Plataforma web desenvolvida com Laravel para facilitar a doação e distribuição de mudas de plantas, conectando doadores e receptores de forma eficiente.",
+            "challenge": "Desenvolver um sistema completo de gerenciamento de doações com autenticação, geolocalização e notificações em tempo real, garantindo uma experiência de usuário intuitiva para todas as idades.",
+            "imageURL": "images/project-images/mudaMundi.jpg",
+            "highlights": [
+                "Sistema completo de autenticação",
+                "Geolocalização de doadores",
+                "Painel administrativo robusto",
+                "Notificações em tempo real"
+            ]
+        },
+        {
+            "name": "OnePiecePage",
+            "isFeatured": false,
+            "customDescription": "Landing page temática de One Piece com design imersivo, animações interativas e elementos visuais cuidadosamente elaborados para fãs da série.",
+            "challenge": "Criar uma experiência visualmente rica que capture a essência do anime, implementando animações complexas e efeitos parallax sem comprometer a performance em dispositivos móveis.",
+            "imageURL": "images/project-images/LuffySite.png",
+            "highlights": [
+                "Design temático imersivo",
+                "Animações parallax suaves",
+                "Totalmente responsivo",
+                "Otimizado para performance"
+            ]
+        },
+        {
+            "name": "Dojo",
+            "isFeatured": false,
+            "customDescription": null,
+            "challenge": null,
+            "imageURL": "images/project-images/Dojo.png",
+            "highlights": []
+        },
+        {
+            "name": "challenge-algorithms",
+            "isFeatured": false,
+            "customDescription": null,
+            "challenge": null,
+            "imageURL": "images/project-images/Chjs.png",
+            "highlights": []
+        },
+        {
+            "name": "challenge-landing-page",
+            "isFeatured": false,
+            "customDescription": null,  
+            "challenge": null,
+            "imageURL": "images/project-images/CHHtml.png",
+            "highlights": []
+        },
+        {
+            "name": "ohana-list",
+            "isFeatured": false,
+            "customDescription": null,
+            "challenge": null,
+            "imageURL": "images/project-images/Ohana_List.png",
+            "highlights": []
+        },
+        {
+            "name": "challenge-tourist-attractions",
+            "isFeatured": false,
+            "customDescription": null,
+            "challenge": null,
+            "imageURL": "images/project-images/Turistico.png",
+            "highlights": []
+        },
+        {
+            "name": "mini-erp",
+            "isFeatured": true,
+            "customDescription": null,
+            "challenge": null,
+            "imageURL": "images/project-images/miniErp.jpg",
+            "highlights": []
+        },
+        {
+            "name": "Django",
+            "isFeatured": false,
+            "customDescription": null,
+            "challenge": null,
+            "imageURL": "images/project-images/Django.png",
+            "highlights": []
+        },
+        {
+            "name": "DSMOVIE",
+            "isFeatured": false,
+            "customDescription": null,
+            "challenge": null,
+            "imageURL": "images/project-images/DSmovie.png",
+            "highlights": []
+        }
+    ]
+}

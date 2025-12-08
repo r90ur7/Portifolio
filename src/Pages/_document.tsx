@@ -2,20 +2,20 @@ import { Html, Head, Main, NextScript } from "next/document";
 import React from "react";
 
 export default function Document() {
-  return (
-      <Html lang="pt">
-        <Head>
-            <title>Portifólio</title>
-            <link rel="icon" type="image/png" href="/images/icons/DevIco.png" />
-            <link rel="shortcut icon" type="image/png" href="/images/icons/DevIco.png" />
-            <link rel="apple-touch-icon" href="/images/icons/DevIco.png" />
-            <link
-                href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap"
-                rel="stylesheet"
-            />
-            <script
-                dangerouslySetInnerHTML={{
-                    __html: `
+    return (
+        <Html lang="pt">
+            <Head>
+                <title>Portifólio</title>
+                <link rel="icon" type="image/png" href="/images/icons/DevIco.png" />
+                <link rel="shortcut icon" type="image/png" href="/images/icons/DevIco.png" />
+                <link rel="apple-touch-icon" href="/images/icons/DevIco.png" />
+                <link
+                    href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap"
+                    rel="stylesheet"
+                />
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `
                         // BLOQUEAR COMPLETAMENTE EXTENSÕES DO NAVEGADOR (Claude, etc)
                         (function() {
                             // Bloquear ANTES de qualquer coisa ser executada
@@ -74,7 +74,14 @@ export default function Document() {
                                     mutation.addedNodes.forEach(function(node) {
                                         if (node.nodeType === 1) {
                                             const id = (node.id || '').toLowerCase();
-                                            const className = (node.className || '').toLowerCase();
+                                            // Tratar corretamente className para elementos SVG
+                                            let className = '';
+                                            if (typeof node.className === 'string') {
+                                                className = node.className.toLowerCase();
+                                            } else if (node.className && typeof node.className.baseVal === 'string') {
+                                                // SVGAnimatedString (elementos SVG)
+                                                className = node.className.baseVal.toLowerCase();
+                                            }
                                             if (shouldBlock(id) || shouldBlock(className)) {
                                                 node.remove();
                                             }
@@ -89,13 +96,13 @@ export default function Document() {
                             });
                         })();
                     `,
-                }}
-            />
-        </Head>
-        <body>
-            <Main />
-            <NextScript />
-        </body>
-      </Html>
-  );
+                    }}
+                />
+            </Head>
+            <body>
+                <Main />
+                <NextScript />
+            </body>
+        </Html>
+    );
 }

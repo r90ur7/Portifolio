@@ -10,6 +10,7 @@ import {
     Image,
     Button,
     HStack,
+    VStack,
     Input,
     InputGroup,
     InputLeftElement,
@@ -24,6 +25,7 @@ import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Masonry from 'react-masonry-css';
 import ProjectModal from "./projectModal";
+import { fetchGitHubProjects } from '@/services/githubApi';
 
 const MotionBox = motion(Box);
 
@@ -67,24 +69,21 @@ const Projects = () => {
     };
 
     useEffect(() => {
-        // Dados estáticos apenas do Portfólio
-        const portfolioProject = [
-            {
-                id: 1,
-                name: "Portifolio",
-                description: "Meu portfólio pessoal moderno e interativo, desenvolvido com Next.js, Chakra UI e Framer Motion. Focado em performance, animações fluidas e experiência do usuário.",
-                html_url: "https://github.com/r90ur7/Portifolio",
-                topics: ["portfolio", "react", "nextjs", "chakra-ui", "framer-motion"],
-                languages: ["TypeScript", "SCSS", "JavaScript"],
-                stargazers_count: 10,
-                forks_count: 2,
-                featureImage: null // Usará o fallbackSrc automático
+        const loadProjects = async () => {
+            setLoading(true);
+            try {
+                const projects = await fetchGitHubProjects();
+                setRepositories(projects);
+                setFilteredRepos(projects);
+            } catch (error) {
+                console.error('Erro ao carregar projetos:', error);
+                // O serviço já retorna fallback data em caso de erro
+            } finally {
+                setLoading(false);
             }
-        ];
+        };
 
-        setRepositories(portfolioProject);
-        setFilteredRepos(portfolioProject);
-        setLoading(false);
+        loadProjects();
     }, []);
 
     useEffect(() => {
@@ -141,17 +140,252 @@ const Projects = () => {
         >
             <Box maxW="1200px" mx="auto">
                 <Flex direction="column" align="center" mb={12}>
-                    <Heading
-                        as="h2"
-                        fontSize={{ base: "3xl", md: "5xl" }}
-                        fontWeight="bold"
-                        bgGradient="linear(to-r, #B650F2, #9AA6C4)"
-                        bgClip="text"
-                        textAlign="center"
-                        mb={8}
-                    >
-                        Meus Projetos
-                    </Heading>
+                    <Flex align="center" gap={3} mb={8}>
+                        <Heading
+                            as="h2"
+                            fontSize={{ base: "3xl", md: "5xl" }}
+                            fontWeight="bold"
+                            bgGradient="linear(to-r, #B650F2, #9AA6C4)"
+                            bgClip="text"
+                            textAlign="center"
+                        >
+                            Meus Projetos
+                        </Heading>
+                        {/* Botão para forçar atualização (modo desenvolvimento) */}
+                        {process.env.NODE_ENV === 'development' && (
+                            <Button
+                                size="xs"
+                                variant="ghost"
+                                colorScheme="purple"
+                                onClick={() => {
+                                    localStorage.removeItem('github_projects_cache');
+                                    window.location.reload();
+                                }}
+                                title="Forçar atualização dos projetos (limpa cache)"
+                            >
+                                🔄
+                            </Button>
+                        )}
+                    </Flex>
+
+                    {/* Featured Projects Section */}
+                    {filteredRepos.filter((repo: any) => repo.isFeatured).length > 0 && (
+                        <Box mb={16} w="full">
+                            <Flex
+                                align="center"
+                                justify="space-between"
+                                mb={8}
+                                pb={4}
+                                borderBottom="2px solid"
+                                borderColor="rgba(182, 80, 242, 0.3)"
+                            >
+                                <Flex align="center" gap={3}>
+                                    <Box
+                                        p={2}
+                                        borderRadius="lg"
+                                        bgGradient="linear(45deg, #B650F2, #C86BFD)"
+                                        boxShadow="0 4px 15px rgba(182, 80, 242, 0.4)"
+                                    >
+                                        <Icon as={FaStar} color="white" boxSize={6} />
+                                    </Box>
+                                    <Heading
+                                        as="h3"
+                                        fontSize={{ base: "2xl", md: "3xl" }}
+                                        fontWeight="extrabold"
+                                        bgGradient="linear(to-r, #B650F2, #9AA6C4)"
+                                        bgClip="text"
+                                    >
+                                        Projetos em Destaque
+                                    </Heading>
+                                </Flex>
+                                <Badge
+                                    colorScheme="purple"
+                                    fontSize="sm"
+                                    px={3}
+                                    py={1}
+                                    borderRadius="full"
+                                >
+                                    {filteredRepos.filter((repo: any) => repo.isFeatured).length} projetos
+                                </Badge>
+                            </Flex>
+
+                            {/* Masonry Grid para Projetos em Destaque */}
+                            <Masonry
+                                breakpointCols={{
+                                    default: 2,
+                                    1100: 1
+                                }}
+                                className="masonry-grid"
+                                columnClassName="masonry-grid_column"
+                                style={{ width: '100%' }}
+                            >
+                                {filteredRepos
+                                    .filter((repo: any) => repo.isFeatured)
+                                    .map((repo: any, index: number) => (
+                                        <MotionBox
+                                            key={`featured-${repo.id}`}
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ duration: 0.5, delay: index * 0.1 }}
+                                            whileHover={{ y: -8 }}
+                                            cursor="pointer"
+                                            onClick={() => handleProjectClick(repo)}
+                                            mb={6}
+                                        >
+                                            <Box
+                                                position="relative"
+                                                bg="rgba(13, 27, 42, 0.6)"
+                                                borderRadius="2xl"
+                                                overflow="hidden"
+                                                border="1px solid rgba(182, 80, 242, 0.3)"
+                                                transition="all 0.3s"
+                                                h="full"
+                                                _hover={{
+                                                    borderColor: "#B650F2",
+                                                    boxShadow: "0 20px 60px rgba(182, 80, 242, 0.3)"
+                                                }}
+                                            >
+                                                {/* Gradiente animado de fundo */}
+                                                <Box
+                                                    position="absolute"
+                                                    top={0}
+                                                    left={0}
+                                                    right={0}
+                                                    bottom={0}
+                                                    bgGradient="linear(135deg, rgba(182, 80, 242, 0.1), transparent)"
+                                                    opacity={0}
+                                                    transition="opacity 0.3s"
+                                                    _groupHover={{ opacity: 1 }}
+                                                    pointerEvents="none"
+                                                />
+
+                                                {/* Imagem */}
+                                                <Box
+                                                    position="relative"
+                                                    h="280px"
+                                                    overflow="hidden"
+                                                >
+                                                    {/* Badge Destaque */}
+                                                    <Badge
+                                                        position="absolute"
+                                                        top={4}
+                                                        left={4}
+                                                        colorScheme="yellow"
+                                                        variant="solid"
+                                                        borderRadius="full"
+                                                        px={3}
+                                                        py={1}
+                                                        fontSize="xs"
+                                                        fontWeight="bold"
+                                                        zIndex={3}
+                                                        display="flex"
+                                                        alignItems="center"
+                                                        gap={1}
+                                                        boxShadow="0 4px 12px rgba(0,0,0,0.3)"
+                                                    >
+                                                        <Icon as={FaStar} boxSize={3} />
+                                                        DESTAQUE
+                                                    </Badge>
+
+                                                    <Image
+                                                        src={repo.featureImage}
+                                                        alt={repo.name}
+                                                        w="100%"
+                                                        h="100%"
+                                                        objectFit="cover"
+                                                        transition="transform 0.5s"
+                                                        _groupHover={{ transform: "scale(1.1)" }}
+                                                        fallbackSrc={`/api/og?repo=${encodeURIComponent(repo.name)}&desc=${encodeURIComponent(repo.description || '')}`}
+                                                    />
+
+                                                    {/* Overlay gradiente */}
+                                                    <Box
+                                                        position="absolute"
+                                                        inset={0}
+                                                        bgGradient="linear(to-b, transparent, rgba(13, 27, 42, 0.9))"
+                                                    />
+                                                </Box>
+
+                                                {/* Conteúdo */}
+                                                <Box p={6} position="relative" zIndex={1}>
+                                                    <Heading
+                                                        size="lg"
+                                                        color="white"
+                                                        mb={3}
+                                                        fontWeight="bold"
+                                                        display="flex"
+                                                        alignItems="center"
+                                                        gap={2}
+                                                    >
+                                                        {repo.name}
+                                                        <Icon
+                                                            as={FaExternalLinkAlt}
+                                                            boxSize={4}
+                                                            color="purple.400"
+                                                            opacity={0}
+                                                            transition="opacity 0.3s"
+                                                            _groupHover={{ opacity: 1 }}
+                                                        />
+                                                    </Heading>
+
+                                                    <Text
+                                                        color="gray.300"
+                                                        fontSize="md"
+                                                        mb={4}
+                                                        lineHeight="tall"
+                                                        noOfLines={3}
+                                                    >
+                                                        {repo.description}
+                                                    </Text>
+
+                                                    <Flex wrap="wrap" gap={2} mb={4}>
+                                                        {repo.languages.slice(0, 4).map((lang: string) => (
+                                                            <Tag
+                                                                key={lang}
+                                                                size="sm"
+                                                                variant="solid"
+                                                                bg="rgba(182, 80, 242, 0.15)"
+                                                                color="#C86BFD"
+                                                                borderRadius="full"
+                                                                px={3}
+                                                                py={1}
+                                                                fontWeight="semibold"
+                                                                border="1px solid rgba(182, 80, 242, 0.3)"
+                                                            >
+                                                                {lang}
+                                                            </Tag>
+                                                        ))}
+                                                    </Flex>
+
+                                                    <Flex justify="space-between" align="center" pt={4} borderTop="1px solid rgba(255,255,255,0.1)">
+                                                        <HStack color="gray.400" spacing={4} fontSize="sm">
+                                                            <Flex align="center" gap={1}>
+                                                                <Icon as={FaStar} color="#B650F2" />
+                                                                <Text fontWeight="semibold">{repo.stargazers_count}</Text>
+                                                            </Flex>
+                                                            <Flex align="center" gap={1}>
+                                                                <Icon as={FaCodeBranch} color="#B650F2" />
+                                                                <Text fontWeight="semibold">{repo.forks_count}</Text>
+                                                            </Flex>
+                                                        </HStack>
+
+                                                        <Button
+                                                            rightIcon={<FaExternalLinkAlt />}
+                                                            variant="ghost"
+                                                            color="purple.400"
+                                                            size="sm"
+                                                            fontSize="xs"
+                                                        >
+                                                            Ver Mais
+                                                        </Button>
+                                                    </Flex>
+                                                </Box>
+                                            </Box>
+                                        </MotionBox>
+                                    ))}
+                            </Masonry>
+                        </Box>
+                    )}
 
                     {/* Search and Filter Bar */}
                     <Flex
@@ -206,7 +440,7 @@ const Projects = () => {
                             </TabList>
                         </Tabs>
                     </Flex>
-                </Flex>
+                </Flex >
 
                 <AnimatePresence>
                     <Masonry
@@ -302,7 +536,7 @@ const Projects = () => {
                                                 alignItems="center"
                                                 boxShadow="0 2px 10px rgba(0,0,0,0.3)"
                                             >
-                                                <Icon as={FaStar} mr={1} size="xs" /> Featured
+                                                <Icon as={FaStar} mr={1} boxSize={3} /> Featured
                                             </Badge>
                                         )}
                                     </Box>
@@ -348,20 +582,22 @@ const Projects = () => {
                     </Masonry>
                 </AnimatePresence>
 
-                {filteredRepos.length === 0 && (
-                    <Flex direction="column" align="center" justify="center" py={10}>
-                        <Icon as={FaSearch} boxSize={10} color="gray.600" mb={4} />
-                        <Text color="gray.400" fontSize="lg">Nenhum projeto encontrado.</Text>
-                    </Flex>
-                )}
-            </Box>
+                {
+                    filteredRepos.length === 0 && (
+                        <Flex direction="column" align="center" justify="center" py={10}>
+                            <Icon as={FaSearch} boxSize={10} color="gray.600" mb={4} />
+                            <Text color="gray.400" fontSize="lg">Nenhum projeto encontrado.</Text>
+                        </Flex>
+                    )
+                }
+            </Box >
 
             <ProjectModal
                 isOpen={isOpen}
                 onClose={onClose}
                 project={selectedProject}
             />
-        </MotionBox>
+        </MotionBox >
     );
 };
 

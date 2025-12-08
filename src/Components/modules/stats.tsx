@@ -1,6 +1,6 @@
 import { Box, Heading, Text, SimpleGrid, VStack, Icon } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, startTransition } from "react";
 import { FaLaptopCode, FaPalette, FaBrain, FaRocket } from "react-icons/fa";
 
 const MotionBox = motion(Box);
@@ -23,7 +23,9 @@ const StatCard: React.FC<StatCardProps> = ({ icon, value, label, suffix = "", co
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    setIsVisible(true);
+                    startTransition(() => {
+                        setIsVisible(true);
+                    });
                 }
             },
             { threshold: 0.3 }

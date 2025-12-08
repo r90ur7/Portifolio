@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, startTransition } from 'react';
 import {
     Radar,
     RadarChart,
@@ -43,18 +43,24 @@ const SkillsRadar = () => {
                 if (container) {
                     const { width, height } = container.getBoundingClientRect();
                     if (width > 0 && height > 0) {
-                        setIsReady(true);
+                        startTransition(() => {
+                            setIsReady(true);
+                        });
                     } else {
                         // Tentar novamente após um pequeno delay
                         setTimeout(checkDimensions, 100);
                     }
                 }
             };
-            
-            // Aguardar um frame para garantir que o layout foi aplicado
-            requestAnimationFrame(() => {
-                setTimeout(checkDimensions, 50);
-            });
+
+            // Aguardar mais tempo para garantir hidratação completa
+            const timeoutId = setTimeout(() => {
+                requestAnimationFrame(() => {
+                    setTimeout(checkDimensions, 50);
+                });
+            }, 200);
+
+            return () => clearTimeout(timeoutId);
         }
     }, [inView]);
 
@@ -117,18 +123,18 @@ const SkillsRadar = () => {
                     position="relative"
                     overflow="hidden"
                 >
-                    <Box 
+                    <Box
                         ref={chartContainerRef}
-                        width="100%" 
-                        height="100%" 
+                        width="100%"
+                        height="100%"
                         minWidth="300px"
                         minHeight="300px"
                         position="relative"
                     >
                         {isReady && (
-                            <ResponsiveContainer 
-                                width="100%" 
-                                height="100%" 
+                            <ResponsiveContainer
+                                width="100%"
+                                height="100%"
                                 minHeight={300}
                                 minWidth={300}
                             >

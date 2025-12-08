@@ -2,7 +2,7 @@ import { Box, Heading, Text, Flex } from "@chakra-ui/react";
 import { FaBriefcase } from "react-icons/fa";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { useEffect, useState } from "react";
+import { useEffect, useState, startTransition } from "react";
 
 const MotionBox = motion(Box);
 const MotionFlex = motion(Flex);
@@ -56,15 +56,21 @@ const ProfessionalExperience = () => {
         visible: { opacity: 1, x: 0, transition: { duration: 0.5, delay: index * 0.2 } },
     });
 
-    const [flippedCards, setFlippedCards] = useState<boolean[]>(
-        new Array(experiences.length).fill(false)
-    );
+    const [flippedCards, setFlippedCards] = useState<boolean[]>([]);
+
+    useEffect(() => {
+        startTransition(() => {
+            setFlippedCards(new Array(experiences.length).fill(false));
+        });
+    }, [experiences.length]);
 
     const toggleFlip = (index: number) => {
-        setFlippedCards((prev) => {
-            const newFlippedCards = [...prev];
-            newFlippedCards[index] = !newFlippedCards[index];
-            return newFlippedCards;
+        startTransition(() => {
+            setFlippedCards((prev) => {
+                const newFlippedCards = [...prev];
+                newFlippedCards[index] = !newFlippedCards[index];
+                return newFlippedCards;
+            });
         });
     };
 
