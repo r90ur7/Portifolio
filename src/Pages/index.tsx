@@ -1,12 +1,14 @@
 import React from "react";
 import { Box, VStack, Spinner, Center } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
+import { GetStaticProps } from "next";
 import Header from "@/Components/Header/header";
 import Footer from "@/Components/Footer/footer";
 import Navigation from "@/Components/Navigation";
 import AnimatedSection from "@/Components/AnimatedSection";
 import SectionSeparator from "@/Components/common/SectionSeparator";
 import BackgroundEffects from "@/Components/common/BackgroundEffects";
+import { fetchGitHubProjects } from '@/services/githubApi';
 
 // Loading component
 const LoadingFallback = () => (
@@ -163,5 +165,31 @@ const IndexPage = () => (
         </Box>
     </Box>
 );
+
+// Pré-carrega os projetos do GitHub durante o build
+// Isso garante que os projetos apareçam mesmo na Vercel
+export const getStaticProps: GetStaticProps = async () => {
+    try {
+        console.log('🔄 [Build] Pré-carregando projetos do GitHub...');
+        const projects = await fetchGitHubProjects();
+        console.log(`✅ [Build] ${projects.length} projetos carregados`);
+
+        return {
+            props: {
+                initialProjects: projects,
+            },
+            revalidate: 1800, // Revalida a cada 30 minutos
+        };
+    } catch (error) {
+        console.error('❌ [Build] Erro ao carregar projetos:', error);
+        // Mesmo com erro, retorna props vazias para não quebrar o build
+        return {
+            props: {
+                initialProjects: [],
+            },
+            revalidate: 1800,
+        };
+    }
+};
 
 export default IndexPage;
