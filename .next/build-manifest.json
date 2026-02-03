@@ -5,40 +5,40 @@
   "devFiles": [],
   "ampDevFiles": [],
   "lowPriorityFiles": [
-    "static/nloAf82iTVzQmnSWJSQJB/_buildManifest.js",
-    "static/nloAf82iTVzQmnSWJSQJB/_ssgManifest.js"
+    "static/RyDArpMCnjylENY7-zZRl/_buildManifest.js",
+    "static/RyDArpMCnjylENY7-zZRl/_ssgManifest.js"
   ],
   "rootMainFiles": [],
   "pages": {
     "/": [
-      "static/chunks/webpack-2771a4341463b4b3.js",
+      "static/chunks/webpack-dc58af723436b807.js",
       "static/chunks/framework-64ad27b21261a9ce.js",
       "static/chunks/main-515b38ec503781c4.js",
       "static/chunks/cb355538-211c7bbb8e44153a.js",
       "static/chunks/321-ee56d65e5ad87dea.js",
-      "static/chunks/pages/index-6f76c256bb4dc712.js"
+      "static/chunks/pages/index-4a08d880fbafc1c0.js"
     ],
     "/_app": [
-      "static/chunks/webpack-2771a4341463b4b3.js",
+      "static/chunks/webpack-dc58af723436b807.js",
       "static/chunks/framework-64ad27b21261a9ce.js",
       "static/chunks/main-515b38ec503781c4.js",
       "static/css/a10e7d28686bd434.css",
       "static/chunks/pages/_app-2ce64b00d0c8ba2f.js"
     ],
     "/_error": [
-      "static/chunks/webpack-2771a4341463b4b3.js",
+      "static/chunks/webpack-dc58af723436b807.js",
       "static/chunks/framework-64ad27b21261a9ce.js",
       "static/chunks/main-515b38ec503781c4.js",
       "static/chunks/pages/_error-7a92967bea80186d.js"
     ],
     "/emailTemplate": [
-      "static/chunks/webpack-2771a4341463b4b3.js",
+      "static/chunks/webpack-dc58af723436b807.js",
       "static/chunks/framework-64ad27b21261a9ce.js",
       "static/chunks/main-515b38ec503781c4.js",
       "static/chunks/pages/emailTemplate-17b949ad9e4dcd05.js"
     ],
     "/emailTemplate/Email": [
-      "static/chunks/webpack-2771a4341463b4b3.js",
+      "static/chunks/webpack-dc58af723436b807.js",
       "static/chunks/framework-64ad27b21261a9ce.js",
       "static/chunks/main-515b38ec503781c4.js",
       "static/chunks/pages/emailTemplate/Email-891ce8a24a35810f.js"

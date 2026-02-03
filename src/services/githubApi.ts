@@ -54,39 +54,55 @@ function getProjectConfig(projectName: string) {
 
 /**
  * Busca os repositórios do GitHub do usuário
+ * SEMPRE retorna projetos - prioriza fallback e tenta enriquecer com dados da API
  */
 export async function fetchGitHubProjects(): Promise<Repository[]> {
     const isServer = typeof window === 'undefined';
     console.log(`🔍 [${isServer ? 'SERVER' : 'CLIENT'}] Iniciando fetchGitHubProjects`);
 
+    // SEMPRE começa com os dados do fallback como base
+    const fallbackProjects = getFallbackData();
+    console.log(`✅ [${isServer ? 'SERVER' : 'CLIENT'}] Fallback carregado:`, fallbackProjects.length, 'projetos');
+
     // 1. Verificar cache primeiro (apenas no cliente)
-    const cached = getCachedData();
-    if (cached) {
-        console.log(`✅ [${isServer ? 'SERVER' : 'CLIENT'}] Usando dados em cache:`, cached.length, 'projetos');
-        return cached;
+    if (!isServer) {
+        const cached = getCachedData();
+        if (cached && cached.length > 0) {
+            console.log(`✅ [CLIENT] Usando dados em cache:`, cached.length, 'projetos');
+            return cached;
+        }
     }
 
-    // 2. Obter credenciais
+    // 2. Tentar enriquecer com dados da API do GitHub (opcional)
     const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
     const username = process.env.NEXT_PUBLIC_GITHUB_USERNAME || 'r90ur7';
 
     console.log(`🔐 [${isServer ? 'SERVER' : 'CLIENT'}] Token disponível:`, !!token);
-    console.log(`👤 [${isServer ? 'SERVER' : 'CLIENT'}] Username:`, username);
 
-    // Se não houver token, usar fallback imediatamente
+    // Se não houver token, retorna o fallback direto
     if (!token) {
-        console.warn(`⚠️ [${isServer ? 'SERVER' : 'CLIENT'}] GitHub token não configurado. Usando dados de fallback.`);
-        return getFallbackData();
+        console.warn(`⚠️ [${isServer ? 'SERVER' : 'CLIENT'}] Sem token - usando apenas fallback`);
+        return fallbackProjects;
     }
 
     try {
-        console.log(`🔄 [${isServer ? 'SERVER' : 'CLIENT'}] Buscando repositórios do GitHub...`);
+        console.log(`🔄 [${isServer ? 'SERVER' : 'CLIENT'}] Tentando enriquecer com API do GitHub...`);
 
-        // 3. Buscar repositórios (públicos e privados com token)
-        const repos = await fetchAllRepositories(username, token);
-        console.log(`📦 [${isServer ? 'SERVER' : 'CLIENT'}] Total de repositórios encontrados:`, repos.length);
+        // Timeout de 5 segundos para não travar o build
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
 
-        // 4. Filtrar por tag "project" OU se está no projectsConfig.json
+        const repos = await fetchAllRepositories(username, token, controller.signal);
+        clearTimeout(timeoutId);
+
+        console.log(`📦 [${isServer ? 'SERVER' : 'CLIENT'}] Repos da API:`, repos.length);
+
+        if (repos.length === 0) {
+            console.warn(`⚠️ [${isServer ? 'SERVER' : 'CLIENT'}] API vazia - usando fallback`);
+            return fallbackProjects;
+        }
+
+        // Filtrar por tag "project" ou se está no config
         const configuredProjectNames = projectsConfig.projects.map(p => p.name.toLowerCase());
         const projectRepos = repos.filter(repo => {
             const hasProjectTag = repo.topics && repo.topics.includes('project');
@@ -94,24 +110,22 @@ export async function fetchGitHubProjects(): Promise<Repository[]> {
             return hasProjectTag || isInConfig;
         });
 
-        console.log(`🏷️ [${isServer ? 'SERVER' : 'CLIENT'}] Repositórios com tag "project" ou em config:`, projectRepos.length);
-        console.log(`📋 [${isServer ? 'SERVER' : 'CLIENT'}] Projetos encontrados:`, projectRepos.map(r => r.name));
+        console.log(`🏷️ [${isServer ? 'SERVER' : 'CLIENT'}] Projetos filtrados:`, projectRepos.length);
 
-        // Se não encontrou nenhum projeto na API, usar fallback
         if (projectRepos.length === 0) {
-            console.warn(`⚠️ [${isServer ? 'SERVER' : 'CLIENT'}] Nenhum projeto encontrado na API do GitHub. Usando fallback.`);
-            return getFallbackData();
+            console.warn(`⚠️ [${isServer ? 'SERVER' : 'CLIENT'}] Nenhum projeto na API - usando fallback`);
+            return fallbackProjects;
         }
 
-        // 5. Buscar linguagens e aplicar configurações personalizadas
-        const reposWithLanguages = await Promise.all(
+        // Enriquecer com linguagens
+        const enrichedProjects = await Promise.all(
             projectRepos.map(async (repo) => {
-                const languages = await fetchRepoLanguages(repo.name, username, token);
+                const languages = await fetchRepoLanguages(repo.name, username, token).catch(() => []);
                 const config = getProjectConfig(repo.name);
 
                 return {
                     ...repo,
-                    description: config.customDescription || repo.description, // Usa descrição personalizada se existir
+                    description: config.customDescription || repo.description,
                     customDescription: config.customDescription,
                     challenge: config.challenge,
                     highlights: config.highlights,
@@ -122,31 +136,25 @@ export async function fetchGitHubProjects(): Promise<Repository[]> {
             })
         );
 
-        // 6. Salvar no cache (apenas no cliente)
-        setCachedData(reposWithLanguages);
-
-        console.log(`✅ [${isServer ? 'SERVER' : 'CLIENT'}] ${reposWithLanguages.length} projetos carregados do GitHub`);
-        return reposWithLanguages;
-    } catch (error: any) {
-        console.error(`❌ [${isServer ? 'SERVER' : 'CLIENT'}] Erro ao buscar projetos do GitHub:`, error.message);
-
-        // Se houver erro, tentar retornar cache expirado
-        const expiredCache = getCachedData(true);
-        if (expiredCache && expiredCache.length > 0) {
-            console.warn(`⚠️ [${isServer ? 'SERVER' : 'CLIENT'}] Usando cache expirado devido a erro na API`);
-            return expiredCache;
+        // Salvar no cache (apenas no cliente)
+        if (!isServer) {
+            setCachedData(enrichedProjects);
         }
 
-        // Último recurso: dados de fallback completos
-        console.warn(`⚠️ [${isServer ? 'SERVER' : 'CLIENT'}] Usando dados de fallback devido a erro na API`);
-        return getFallbackData();
+        console.log(`✅ [${isServer ? 'SERVER' : 'CLIENT'}] ${enrichedProjects.length} projetos enriquecidos`);
+        return enrichedProjects;
+
+    } catch (error: any) {
+        console.error(`❌ [${isServer ? 'SERVER' : 'CLIENT'}] Erro na API:`, error.message);
+        console.warn(`⚠️ [${isServer ? 'SERVER' : 'CLIENT'}] Retornando fallback`);
+        return fallbackProjects;
     }
 }
 
 /**
- * Busca todos os repositórios do usuário (com paginação e timeout)
+ * Busca todos os repositórios do usuário (com paginação, timeout e signal)
  */
-async function fetchAllRepositories(username: string, token: string): Promise<any[]> {
+async function fetchAllRepositories(username: string, token: string, signal?: AbortSignal): Promise<any[]> {
     const headers = {
         'Authorization': `token ${token}`,
         'Accept': 'application/vnd.github.v3+json',
@@ -155,28 +163,20 @@ async function fetchAllRepositories(username: string, token: string): Promise<an
     let page = 1;
     let allRepos: any[] = [];
     const perPage = 100;
-    const timeout = 10000; // 10 segundos de timeout
 
-    while (true) {
+    while (page <= 3) { // Máximo 3 páginas para não demorar muito
         try {
-            // Criar uma Promise com timeout
-            const fetchPromise = fetch(
+            const response = await fetch(
                 `${GITHUB_API_BASE}/user/repos?per_page=${perPage}&page=${page}&sort=updated&affiliation=owner`,
-                { headers }
+                { headers, signal }
             );
-
-            const timeoutPromise = new Promise((_, reject) =>
-                setTimeout(() => reject(new Error('Request timeout')), timeout)
-            );
-
-            const response = await Promise.race([fetchPromise, timeoutPromise]) as Response;
 
             if (!response.ok) {
                 if (response.status === 403) {
-                    throw new Error('Rate limit excedido. Por favor, aguarde alguns minutos.');
+                    throw new Error('Rate limit excedido');
                 }
                 if (response.status === 401) {
-                    throw new Error('Token de autenticação inválido.');
+                    throw new Error('Token inválido');
                 }
                 throw new Error(`GitHub API error: ${response.status}`);
             }
@@ -187,13 +187,13 @@ async function fetchAllRepositories(username: string, token: string): Promise<an
 
             allRepos = allRepos.concat(repos);
 
-            // Se retornou menos que perPage, não há mais páginas
             if (repos.length < perPage) break;
 
             page++;
-        } catch (error) {
-            console.error(`Erro na página ${page}:`, error);
-            throw error;
+        } catch (error: any) {
+            if (error.name === 'AbortError') {
+                console.warn('⏱️ Request timeout - usando fallback');
+            }
         }
     }
 
