@@ -28,10 +28,14 @@ import { fetchGitHubProjects } from '@/services/githubApi';
 
 const MotionBox = motion(Box);
 
-const Projects = () => {
-    const [repositories, setRepositories] = useState([] as any);
-    const [filteredRepos, setFilteredRepos] = useState([] as any);
-    const [loading, setLoading] = useState(true);
+interface ProjectsProps {
+    initialProjects?: any[];
+}
+
+const Projects: React.FC<ProjectsProps> = ({ initialProjects = [] }) => {
+    const [repositories, setRepositories] = useState(initialProjects);
+    const [filteredRepos, setFilteredRepos] = useState(initialProjects);
+    const [loading, setLoading] = useState(initialProjects.length === 0);
     const [searchTerm, setSearchTerm] = useState("");
     const [activeFilter, setActiveFilter] = useState("Todos");
     const [selectedProject, setSelectedProject] = useState(null);
@@ -68,16 +72,24 @@ const Projects = () => {
     };
 
     useEffect(() => {
+        // Se já tem projetos pré-carregados, não precisa buscar novamente
+        if (initialProjects && initialProjects.length > 0) {
+            console.log('✅ Usando projetos pré-carregados do SSG:', initialProjects.length);
+            return;
+        }
+
+        // Caso contrário, busca os projetos (fallback para client-side)
         const loadProjects = async () => {
             setLoading(true);
             try {
+                console.log('🔄 Carregando projetos no cliente...');
                 const projects = await fetchGitHubProjects();
                 console.log('🎯 Projetos carregados no componente:', projects.length);
                 console.log('📝 Lista de projetos:', projects.map((p: any) => p.name));
                 setRepositories(projects);
                 setFilteredRepos(projects);
             } catch (error) {
-                console.error('Erro ao carregar projetos:', error);
+                console.error('❌ Erro ao carregar projetos:', error);
                 // O serviço já retorna fallback data em caso de erro
             } finally {
                 setLoading(false);
@@ -85,7 +97,7 @@ const Projects = () => {
         };
 
         loadProjects();
-    }, []);
+    }, [initialProjects]);
 
     useEffect(() => {
         let result = repositories;
