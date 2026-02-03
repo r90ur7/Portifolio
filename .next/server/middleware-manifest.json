@@ -32,8 +32,11 @@
         }
       ],
       "env": {
-        "__NEXT_BUILD_ID": "development",
-        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "C6IF3un0sjGXIwhM+KpFlCjvXAHzt5kTTdu4lBfKHHw="
+        "__NEXT_BUILD_ID": "nloAf82iTVzQmnSWJSQJB",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "7oOgi184y5Me7PqaAXX1JFa1IdaJA2hA0AAT9ghCTYw=",
+        "__NEXT_PREVIEW_MODE_ID": "5b12c0e7048d29a8017b18b4bfd18582",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "273e607f186f4c4c44a2e5d1225a79ba4c324061e9259a19385e2943dd41632e",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "ae6ce1604fc8a484b1ba0ea0d1f266035c5d06a8170dec1b7dfa6c2303bb72ca"
       }
     }
   },

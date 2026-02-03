@@ -1,86 +1,81 @@
-"use strict";
-/*
- * ATTENTION: An "eval-source-map" devtool has been used.
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
-(() => {
-var exports = {};
-exports.id = "pages/_document";
-exports.ids = ["pages/_document"];
-exports.modules = {
-
-/***/ "./src/pages/_document.tsx":
-/*!*********************************!*\
-  !*** ./src/pages/_document.tsx ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Document)\n/* harmony export */ });\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-dev-runtime */ \"react/jsx-dev-runtime\");\n/* harmony import */ var react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var next_document__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/document */ \"./node_modules/next/document.js\");\n/* harmony import */ var next_document__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_document__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ \"react\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\nfunction Document() {\n    return /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_document__WEBPACK_IMPORTED_MODULE_1__.Html, {\n        lang: \"pt\",\n        children: [\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_document__WEBPACK_IMPORTED_MODULE_1__.Head, {\n                children: [\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"title\", {\n                        children: \"Portif\\xf3lio\"\n                    }, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                        lineNumber: 8,\n                        columnNumber: 17\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"link\", {\n                        rel: \"icon\",\n                        type: \"image/png\",\n                        href: \"/images/icons/DevIco.png\"\n                    }, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                        lineNumber: 9,\n                        columnNumber: 17\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"link\", {\n                        rel: \"shortcut icon\",\n                        type: \"image/png\",\n                        href: \"/images/icons/DevIco.png\"\n                    }, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                        lineNumber: 10,\n                        columnNumber: 17\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"link\", {\n                        rel: \"apple-touch-icon\",\n                        href: \"/images/icons/DevIco.png\"\n                    }, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                        lineNumber: 11,\n                        columnNumber: 17\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"link\", {\n                        href: \"https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap\",\n                        rel: \"stylesheet\"\n                    }, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                        lineNumber: 12,\n                        columnNumber: 17\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"script\", {\n                        dangerouslySetInnerHTML: {\n                            __html: `\n                        // BLOQUEAR COMPLETAMENTE EXTENSÕES DO NAVEGADOR (Claude, etc)\n                        (function() {\n                            // Bloquear ANTES de qualquer coisa ser executada\n                            const blockPatterns = ['claude', 'inject.js', 'chrome-extension://', 'web_accessible_resources'];\n                            \n                            // Interceptar console ANTES de qualquer extensão\n                            const originalError = console.error;\n                            const originalWarn = console.warn;\n                            const originalLog = console.log;\n                            \n                            const shouldBlock = (message) => {\n                                const msg = String(message).toLowerCase();\n                                return blockPatterns.some(pattern => msg.includes(pattern));\n                            };\n                            \n                            console.error = function(...args) {\n                                if (shouldBlock(args.join(' '))) return;\n                                originalError.apply(console, args);\n                            };\n                            \n                            console.warn = function(...args) {\n                                if (shouldBlock(args.join(' '))) return;\n                                originalWarn.apply(console, args);\n                            };\n                            \n                            console.log = function(...args) {\n                                if (shouldBlock(args.join(' '))) return;\n                                originalLog.apply(console, args);\n                            };\n                            \n                            // Bloquear erros ANTES que sejam lançados\n                            const errorHandler = function(e) {\n                                const msg = (e.message || '').toLowerCase();\n                                const src = (e.filename || e.source || '').toLowerCase();\n                                if (shouldBlock(msg) || shouldBlock(src)) {\n                                    e.stopImmediatePropagation();\n                                    e.preventDefault();\n                                    e.stopPropagation();\n                                    return false;\n                                }\n                            };\n                            \n                            window.addEventListener('error', errorHandler, true);\n                            window.addEventListener('unhandledrejection', function(e) {\n                                const reason = String(e.reason || '').toLowerCase();\n                                if (shouldBlock(reason)) {\n                                    e.preventDefault();\n                                    e.stopPropagation();\n                                    return false;\n                                }\n                            }, true);\n                            \n                            // Bloquear tentativas de injeção de scripts\n                            const observer = new MutationObserver(function(mutations) {\n                                mutations.forEach(function(mutation) {\n                                    mutation.addedNodes.forEach(function(node) {\n                                        if (node.nodeType === 1) {\n                                            const id = (node.id || '').toLowerCase();\n                                            // Tratar corretamente className para elementos SVG\n                                            let className = '';\n                                            if (typeof node.className === 'string') {\n                                                className = node.className.toLowerCase();\n                                            } else if (node.className && typeof node.className.baseVal === 'string') {\n                                                // SVGAnimatedString (elementos SVG)\n                                                className = node.className.baseVal.toLowerCase();\n                                            }\n                                            if (shouldBlock(id) || shouldBlock(className)) {\n                                                node.remove();\n                                            }\n                                        }\n                                    });\n                                });\n                            });\n                            \n                            observer.observe(document.documentElement, {\n                                childList: true,\n                                subtree: true\n                            });\n                        })();\n                    `\n                        }\n                    }, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                        lineNumber: 16,\n                        columnNumber: 17\n                    }, this)\n                ]\n            }, void 0, true, {\n                fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                lineNumber: 7,\n                columnNumber: 13\n            }, this),\n            /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(\"body\", {\n                children: [\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_document__WEBPACK_IMPORTED_MODULE_1__.Main, {}, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                        lineNumber: 103,\n                        columnNumber: 17\n                    }, this),\n                    /*#__PURE__*/ (0,react_jsx_dev_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxDEV)(next_document__WEBPACK_IMPORTED_MODULE_1__.NextScript, {}, void 0, false, {\n                        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                        lineNumber: 104,\n                        columnNumber: 17\n                    }, this)\n                ]\n            }, void 0, true, {\n                fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n                lineNumber: 102,\n                columnNumber: 13\n            }, this)\n        ]\n    }, void 0, true, {\n        fileName: \"C:\\\\Users\\\\Duck\\\\source\\\\repos\\\\Portifolio\\\\src\\\\pages\\\\_document.tsx\",\n        lineNumber: 6,\n        columnNumber: 9\n    }, this);\n}\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9zcmMvcGFnZXMvX2RvY3VtZW50LnRzeCIsIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7OztBQUE2RDtBQUNuQztBQUVYLFNBQVNLO0lBQ3BCLHFCQUNJLDhEQUFDTCwrQ0FBSUE7UUFBQ00sTUFBSzs7MEJBQ1AsOERBQUNMLCtDQUFJQTs7a0NBQ0QsOERBQUNNO2tDQUFNOzs7Ozs7a0NBQ1AsOERBQUNDO3dCQUFLQyxLQUFJO3dCQUFPQyxNQUFLO3dCQUFZQyxNQUFLOzs7Ozs7a0NBQ3ZDLDhEQUFDSDt3QkFBS0MsS0FBSTt3QkFBZ0JDLE1BQUs7d0JBQVlDLE1BQUs7Ozs7OztrQ0FDaEQsOERBQUNIO3dCQUFLQyxLQUFJO3dCQUFtQkUsTUFBSzs7Ozs7O2tDQUNsQyw4REFBQ0g7d0JBQ0dHLE1BQUs7d0JBQ0xGLEtBQUk7Ozs7OztrQ0FFUiw4REFBQ0c7d0JBQ0dDLHlCQUF5Qjs0QkFDckJDLFFBQVEsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7b0JBZ0ZiLENBQUM7d0JBQ0Q7Ozs7Ozs7Ozs7OzswQkFHUiw4REFBQ0M7O2tDQUNHLDhEQUFDYiwrQ0FBSUE7Ozs7O2tDQUNMLDhEQUFDQyxxREFBVUE7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBSTNCIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vcmVhY3RhcHAvLi9zcmMvcGFnZXMvX2RvY3VtZW50LnRzeD8xODhlIl0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCB7IEh0bWwsIEhlYWQsIE1haW4sIE5leHRTY3JpcHQgfSBmcm9tIFwibmV4dC9kb2N1bWVudFwiO1xuaW1wb3J0IFJlYWN0IGZyb20gXCJyZWFjdFwiO1xuXG5leHBvcnQgZGVmYXVsdCBmdW5jdGlvbiBEb2N1bWVudCgpIHtcbiAgICByZXR1cm4gKFxuICAgICAgICA8SHRtbCBsYW5nPVwicHRcIj5cbiAgICAgICAgICAgIDxIZWFkPlxuICAgICAgICAgICAgICAgIDx0aXRsZT5Qb3J0aWbDs2xpbzwvdGl0bGU+XG4gICAgICAgICAgICAgICAgPGxpbmsgcmVsPVwiaWNvblwiIHR5cGU9XCJpbWFnZS9wbmdcIiBocmVmPVwiL2ltYWdlcy9pY29ucy9EZXZJY28ucG5nXCIgLz5cbiAgICAgICAgICAgICAgICA8bGluayByZWw9XCJzaG9ydGN1dCBpY29uXCIgdHlwZT1cImltYWdlL3BuZ1wiIGhyZWY9XCIvaW1hZ2VzL2ljb25zL0Rldkljby5wbmdcIiAvPlxuICAgICAgICAgICAgICAgIDxsaW5rIHJlbD1cImFwcGxlLXRvdWNoLWljb25cIiBocmVmPVwiL2ltYWdlcy9pY29ucy9EZXZJY28ucG5nXCIgLz5cbiAgICAgICAgICAgICAgICA8bGlua1xuICAgICAgICAgICAgICAgICAgICBocmVmPVwiaHR0cHM6Ly9mb250cy5nb29nbGVhcGlzLmNvbS9jc3MyP2ZhbWlseT1Xb3JrK1NhbnM6d2dodEA0MDA7NTAwOzYwMDs3MDA7ODAwJmRpc3BsYXk9c3dhcFwiXG4gICAgICAgICAgICAgICAgICAgIHJlbD1cInN0eWxlc2hlZXRcIlxuICAgICAgICAgICAgICAgIC8+XG4gICAgICAgICAgICAgICAgPHNjcmlwdFxuICAgICAgICAgICAgICAgICAgICBkYW5nZXJvdXNseVNldElubmVySFRNTD17e1xuICAgICAgICAgICAgICAgICAgICAgICAgX19odG1sOiBgXG4gICAgICAgICAgICAgICAgICAgICAgICAvLyBCTE9RVUVBUiBDT01QTEVUQU1FTlRFIEVYVEVOU8OVRVMgRE8gTkFWRUdBRE9SIChDbGF1ZGUsIGV0YylcbiAgICAgICAgICAgICAgICAgICAgICAgIChmdW5jdGlvbigpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAvLyBCbG9xdWVhciBBTlRFUyBkZSBxdWFscXVlciBjb2lzYSBzZXIgZXhlY3V0YWRhXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc3QgYmxvY2tQYXR0ZXJucyA9IFsnY2xhdWRlJywgJ2luamVjdC5qcycsICdjaHJvbWUtZXh0ZW5zaW9uOi8vJywgJ3dlYl9hY2Nlc3NpYmxlX3Jlc291cmNlcyddO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIEludGVyY2VwdGFyIGNvbnNvbGUgQU5URVMgZGUgcXVhbHF1ZXIgZXh0ZW5zw6NvXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc3Qgb3JpZ2luYWxFcnJvciA9IGNvbnNvbGUuZXJyb3I7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc3Qgb3JpZ2luYWxXYXJuID0gY29uc29sZS53YXJuO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNvbnN0IG9yaWdpbmFsTG9nID0gY29uc29sZS5sb2c7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc3Qgc2hvdWxkQmxvY2sgPSAobWVzc2FnZSkgPT4ge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBtc2cgPSBTdHJpbmcobWVzc2FnZSkudG9Mb3dlckNhc2UoKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIGJsb2NrUGF0dGVybnMuc29tZShwYXR0ZXJuID0+IG1zZy5pbmNsdWRlcyhwYXR0ZXJuKSk7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgfTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zb2xlLmVycm9yID0gZnVuY3Rpb24oLi4uYXJncykge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZiAoc2hvdWxkQmxvY2soYXJncy5qb2luKCcgJykpKSByZXR1cm47XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIG9yaWdpbmFsRXJyb3IuYXBwbHkoY29uc29sZSwgYXJncyk7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgfTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zb2xlLndhcm4gPSBmdW5jdGlvbiguLi5hcmdzKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmIChzaG91bGRCbG9jayhhcmdzLmpvaW4oJyAnKSkpIHJldHVybjtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgb3JpZ2luYWxXYXJuLmFwcGx5KGNvbnNvbGUsIGFyZ3MpO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIH07XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc29sZS5sb2cgPSBmdW5jdGlvbiguLi5hcmdzKSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmIChzaG91bGRCbG9jayhhcmdzLmpvaW4oJyAnKSkpIHJldHVybjtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgb3JpZ2luYWxMb2cuYXBwbHkoY29uc29sZSwgYXJncyk7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgfTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAvLyBCbG9xdWVhciBlcnJvcyBBTlRFUyBxdWUgc2VqYW0gbGFuw6dhZG9zXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc3QgZXJyb3JIYW5kbGVyID0gZnVuY3Rpb24oZSkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBtc2cgPSAoZS5tZXNzYWdlIHx8ICcnKS50b0xvd2VyQ2FzZSgpO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBzcmMgPSAoZS5maWxlbmFtZSB8fCBlLnNvdXJjZSB8fCAnJykudG9Mb3dlckNhc2UoKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgaWYgKHNob3VsZEJsb2NrKG1zZykgfHwgc2hvdWxkQmxvY2soc3JjKSkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZS5zdG9wSW1tZWRpYXRlUHJvcGFnYXRpb24oKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGUucHJldmVudERlZmF1bHQoKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGUuc3RvcFByb3BhZ2F0aW9uKCk7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gZmFsc2U7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICB9O1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIHdpbmRvdy5hZGRFdmVudExpc3RlbmVyKCdlcnJvcicsIGVycm9ySGFuZGxlciwgdHJ1ZSk7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgd2luZG93LmFkZEV2ZW50TGlzdGVuZXIoJ3VuaGFuZGxlZHJlamVjdGlvbicsIGZ1bmN0aW9uKGUpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY29uc3QgcmVhc29uID0gU3RyaW5nKGUucmVhc29uIHx8ICcnKS50b0xvd2VyQ2FzZSgpO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZiAoc2hvdWxkQmxvY2socmVhc29uKSkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgZS5zdG9wUHJvcGFnYXRpb24oKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiBmYWxzZTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0sIHRydWUpO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgIFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIEJsb3F1ZWFyIHRlbnRhdGl2YXMgZGUgaW5qZcOnw6NvIGRlIHNjcmlwdHNcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBvYnNlcnZlciA9IG5ldyBNdXRhdGlvbk9ic2VydmVyKGZ1bmN0aW9uKG11dGF0aW9ucykge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBtdXRhdGlvbnMuZm9yRWFjaChmdW5jdGlvbihtdXRhdGlvbikge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbXV0YXRpb24uYWRkZWROb2Rlcy5mb3JFYWNoKGZ1bmN0aW9uKG5vZGUpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZiAobm9kZS5ub2RlVHlwZSA9PT0gMSkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjb25zdCBpZCA9IChub2RlLmlkIHx8ICcnKS50b0xvd2VyQ2FzZSgpO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAvLyBUcmF0YXIgY29ycmV0YW1lbnRlIGNsYXNzTmFtZSBwYXJhIGVsZW1lbnRvcyBTVkdcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbGV0IGNsYXNzTmFtZSA9ICcnO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpZiAodHlwZW9mIG5vZGUuY2xhc3NOYW1lID09PSAnc3RyaW5nJykge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lID0gbm9kZS5jbGFzc05hbWUudG9Mb3dlckNhc2UoKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfSBlbHNlIGlmIChub2RlLmNsYXNzTmFtZSAmJiB0eXBlb2Ygbm9kZS5jbGFzc05hbWUuYmFzZVZhbCA9PT0gJ3N0cmluZycpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIC8vIFNWR0FuaW1hdGVkU3RyaW5nIChlbGVtZW50b3MgU1ZHKVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY2xhc3NOYW1lID0gbm9kZS5jbGFzc05hbWUuYmFzZVZhbC50b0xvd2VyQ2FzZSgpO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlmIChzaG91bGRCbG9jayhpZCkgfHwgc2hvdWxkQmxvY2soY2xhc3NOYW1lKSkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgbm9kZS5yZW1vdmUoKTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0pO1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9KTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICB9KTtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBvYnNlcnZlci5vYnNlcnZlKGRvY3VtZW50LmRvY3VtZW50RWxlbWVudCwge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjaGlsZExpc3Q6IHRydWUsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN1YnRyZWU6IHRydWVcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICB9KTtcbiAgICAgICAgICAgICAgICAgICAgICAgIH0pKCk7XG4gICAgICAgICAgICAgICAgICAgIGAsXG4gICAgICAgICAgICAgICAgICAgIH19XG4gICAgICAgICAgICAgICAgLz5cbiAgICAgICAgICAgIDwvSGVhZD5cbiAgICAgICAgICAgIDxib2R5PlxuICAgICAgICAgICAgICAgIDxNYWluIC8+XG4gICAgICAgICAgICAgICAgPE5leHRTY3JpcHQgLz5cbiAgICAgICAgICAgIDwvYm9keT5cbiAgICAgICAgPC9IdG1sPlxuICAgICk7XG59Il0sIm5hbWVzIjpbIkh0bWwiLCJIZWFkIiwiTWFpbiIsIk5leHRTY3JpcHQiLCJSZWFjdCIsIkRvY3VtZW50IiwibGFuZyIsInRpdGxlIiwibGluayIsInJlbCIsInR5cGUiLCJocmVmIiwic2NyaXB0IiwiZGFuZ2Vyb3VzbHlTZXRJbm5lckhUTUwiLCJfX2h0bWwiLCJib2R5Il0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./src/pages/_document.tsx\n");
-
-/***/ }),
-
-/***/ "next/dist/compiled/next-server/pages.runtime.dev.js":
-/*!**********************************************************************!*\
-  !*** external "next/dist/compiled/next-server/pages.runtime.dev.js" ***!
-  \**********************************************************************/
-/***/ ((module) => {
-
-module.exports = require("next/dist/compiled/next-server/pages.runtime.dev.js");
-
-/***/ }),
-
-/***/ "react":
-/*!************************!*\
-  !*** external "react" ***!
-  \************************/
-/***/ ((module) => {
-
-module.exports = require("react");
-
-/***/ }),
-
-/***/ "react/jsx-dev-runtime":
-/*!****************************************!*\
-  !*** external "react/jsx-dev-runtime" ***!
-  \****************************************/
-/***/ ((module) => {
-
-module.exports = require("react/jsx-dev-runtime");
-
-/***/ }),
-
-/***/ "react/jsx-runtime":
-/*!************************************!*\
-  !*** external "react/jsx-runtime" ***!
-  \************************************/
-/***/ ((module) => {
-
-module.exports = require("react/jsx-runtime");
-
-/***/ }),
-
-/***/ "path":
-/*!***********************!*\
-  !*** external "path" ***!
-  \***********************/
-/***/ ((module) => {
-
-module.exports = require("path");
-
-/***/ })
-
-};
-;
-
-// load runtime
-var __webpack_require__ = require("../webpack-runtime.js");
-__webpack_require__.C(exports);
-var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, ["vendor-chunks/next","vendor-chunks/@swc"], () => (__webpack_exec__("./src/pages/_document.tsx")));
-module.exports = __webpack_exports__;
-
-})();
+"use strict";(()=>{var e={};e.id=660,e.ids=[660],e.modules={1070:(e,o,s)=>{s.r(o),s.d(o,{default:()=>t});var r=s(997),n=s(6859);function t(){return(0,r.jsxs)(n.Html,{lang:"pt",children:[(0,r.jsxs)(n.Head,{children:[r.jsx("title",{children:"Portif\xf3lio"}),r.jsx("link",{rel:"icon",type:"image/png",href:"/images/icons/DevIco.png"}),r.jsx("link",{rel:"shortcut icon",type:"image/png",href:"/images/icons/DevIco.png"}),r.jsx("link",{rel:"apple-touch-icon",href:"/images/icons/DevIco.png"}),r.jsx("link",{href:"https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600;700;800&display=swap",rel:"stylesheet"}),r.jsx("script",{dangerouslySetInnerHTML:{__html:`
+                        // BLOQUEAR COMPLETAMENTE EXTENS\xd5ES DO NAVEGADOR (Claude, etc)
+                        (function() {
+                            // Bloquear ANTES de qualquer coisa ser executada
+                            const blockPatterns = ['claude', 'inject.js', 'chrome-extension://', 'web_accessible_resources'];
+                            
+                            // Interceptar console ANTES de qualquer extens\xe3o
+                            const originalError = console.error;
+                            const originalWarn = console.warn;
+                            const originalLog = console.log;
+                            
+                            const shouldBlock = (message) => {
+                                const msg = String(message).toLowerCase();
+                                return blockPatterns.some(pattern => msg.includes(pattern));
+                            };
+                            
+                            console.error = function(...args) {
+                                if (shouldBlock(args.join(' '))) return;
+                                originalError.apply(console, args);
+                            };
+                            
+                            console.warn = function(...args) {
+                                if (shouldBlock(args.join(' '))) return;
+                                originalWarn.apply(console, args);
+                            };
+                            
+                            console.log = function(...args) {
+                                if (shouldBlock(args.join(' '))) return;
+                                originalLog.apply(console, args);
+                            };
+                            
+                            // Bloquear erros ANTES que sejam lan\xe7ados
+                            const errorHandler = function(e) {
+                                const msg = (e.message || '').toLowerCase();
+                                const src = (e.filename || e.source || '').toLowerCase();
+                                if (shouldBlock(msg) || shouldBlock(src)) {
+                                    e.stopImmediatePropagation();
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    return false;
+                                }
+                            };
+                            
+                            window.addEventListener('error', errorHandler, true);
+                            window.addEventListener('unhandledrejection', function(e) {
+                                const reason = String(e.reason || '').toLowerCase();
+                                if (shouldBlock(reason)) {
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                    return false;
+                                }
+                            }, true);
+                            
+                            // Bloquear tentativas de inje\xe7\xe3o de scripts
+                            const observer = new MutationObserver(function(mutations) {
+                                mutations.forEach(function(mutation) {
+                                    mutation.addedNodes.forEach(function(node) {
+                                        if (node.nodeType === 1) {
+                                            const id = (node.id || '').toLowerCase();
+                                            // Tratar corretamente className para elementos SVG
+                                            let className = '';
+                                            if (typeof node.className === 'string') {
+                                                className = node.className.toLowerCase();
+                                            } else if (node.className && typeof node.className.baseVal === 'string') {
+                                                // SVGAnimatedString (elementos SVG)
+                                                className = node.className.baseVal.toLowerCase();
+                                            }
+                                            if (shouldBlock(id) || shouldBlock(className)) {
+                                                node.remove();
+                                            }
+                                        }
+                                    });
+                                });
+                            });
+                            
+                            observer.observe(document.documentElement, {
+                                childList: true,
+                                subtree: true
+                            });
+                        })();
+                    `}})]}),(0,r.jsxs)("body",{children:[r.jsx(n.Main,{}),r.jsx(n.NextScript,{})]})]})}s(6689)},2785:e=>{e.exports=require("next/dist/compiled/next-server/pages.runtime.prod.js")},6689:e=>{e.exports=require("react")},997:e=>{e.exports=require("react/jsx-runtime")},5315:e=>{e.exports=require("path")}};var o=require("../webpack-runtime.js");o.C(e);var s=e=>o(o.s=e),r=o.X(0,[859],()=>s(1070));module.exports=r})();

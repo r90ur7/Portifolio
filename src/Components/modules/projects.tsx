@@ -10,7 +10,6 @@ import {
     Image,
     Button,
     HStack,
-    VStack,
     Input,
     InputGroup,
     InputLeftElement,
@@ -73,6 +72,8 @@ const Projects = () => {
             setLoading(true);
             try {
                 const projects = await fetchGitHubProjects();
+                console.log('🎯 Projetos carregados no componente:', projects.length);
+                console.log('📝 Lista de projetos:', projects.map((p: any) => p.name));
                 setRepositories(projects);
                 setFilteredRepos(projects);
             } catch (error) {
@@ -151,21 +152,6 @@ const Projects = () => {
                         >
                             Meus Projetos
                         </Heading>
-                        {/* Botão para forçar atualização (modo desenvolvimento) */}
-                        {process.env.NODE_ENV === 'development' && (
-                            <Button
-                                size="xs"
-                                variant="ghost"
-                                colorScheme="purple"
-                                onClick={() => {
-                                    localStorage.removeItem('github_projects_cache');
-                                    window.location.reload();
-                                }}
-                                title="Forçar atualização dos projetos (limpa cache)"
-                            >
-                                🔄
-                            </Button>
-                        )}
                     </Flex>
 
                     {/* Featured Projects Section */}

@@ -44,8 +44,11 @@ const ParticlesBackground = () => {
                     height={`${Math.random() * 3 + 2}px`}
                     left={`${Math.random() * 100}%`}
                     top={`${Math.random() * 100}%`}
-                    animation={`float ${Math.random() * 20 + 10}s linear infinite`}
-                    animationDelay={`${Math.random() * -20}s`}
+                    as="div"
+                    style={{
+                        animation: `float ${Math.random() * 20 + 10}s linear infinite`,
+                        animationDelay: `${Math.random() * -20}s`
+                    }}
                     sx={{
                         "@keyframes float": {
                             "0%": {
@@ -102,8 +105,11 @@ const ParticlesBackground = () => {
                 borderRadius="50%"
                 bg="radial-gradient(circle, rgba(236, 72, 153, 0.1) 0%, transparent 70%)"
                 filter="blur(60px)"
-                animation="pulse 10s ease-in-out infinite"
-                animationDelay="2s"
+                as="div"
+                style={{
+                    animation: "pulse 10s ease-in-out infinite",
+                    animationDelay: "2s"
+                }}
             />
         </Box>
     );

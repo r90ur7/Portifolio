@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 interface AnimationContextType {
     animationsEnabled: boolean;
@@ -9,13 +9,18 @@ const AnimationContext = createContext<AnimationContextType | undefined>(undefin
 
 export const AnimationProvider = ({ children }: { children: ReactNode }) => {
     const [animationsEnabled, setAnimationsEnabled] = useState(true);
+    const [isMounted, setIsMounted] = useState(false);
+
+    useEffect(() => {
+        setIsMounted(true);
+    }, []);
 
     const toggleAnimations = () => {
         setAnimationsEnabled(prev => !prev);
     };
 
     return (
-        <AnimationContext.Provider value={{ animationsEnabled, toggleAnimations }}>
+        <AnimationContext.Provider value={{ animationsEnabled: isMounted && animationsEnabled, toggleAnimations }}>
             {children}
         </AnimationContext.Provider>
     );
