@@ -56,10 +56,13 @@ function getProjectConfig(projectName: string) {
  * Busca os repositórios do GitHub do usuário
  */
 export async function fetchGitHubProjects(): Promise<Repository[]> {
+    const isServer = typeof window === 'undefined';
+    console.log(`🔍 [${isServer ? 'SERVER' : 'CLIENT'}] Iniciando fetchGitHubProjects`);
+
     // 1. Verificar cache primeiro (apenas no cliente)
     const cached = getCachedData();
     if (cached) {
-        console.log('✅ Usando dados em cache do GitHub');
+        console.log(`✅ [${isServer ? 'SERVER' : 'CLIENT'}] Usando dados em cache:`, cached.length, 'projetos');
         return cached;
     }
 
@@ -67,18 +70,21 @@ export async function fetchGitHubProjects(): Promise<Repository[]> {
     const token = process.env.NEXT_PUBLIC_GITHUB_TOKEN;
     const username = process.env.NEXT_PUBLIC_GITHUB_USERNAME || 'r90ur7';
 
+    console.log(`🔐 [${isServer ? 'SERVER' : 'CLIENT'}] Token disponível:`, !!token);
+    console.log(`👤 [${isServer ? 'SERVER' : 'CLIENT'}] Username:`, username);
+
     // Se não houver token, usar fallback imediatamente
     if (!token) {
-        console.warn('⚠️ GitHub token não configurado. Usando dados de fallback.');
+        console.warn(`⚠️ [${isServer ? 'SERVER' : 'CLIENT'}] GitHub token não configurado. Usando dados de fallback.`);
         return getFallbackData();
     }
 
     try {
-        console.log('🔄 Buscando repositórios do GitHub...');
+        console.log(`🔄 [${isServer ? 'SERVER' : 'CLIENT'}] Buscando repositórios do GitHub...`);
 
         // 3. Buscar repositórios (públicos e privados com token)
         const repos = await fetchAllRepositories(username, token);
-        console.log(`📦 Total de repositórios encontrados: ${repos.length}`);
+        console.log(`📦 [${isServer ? 'SERVER' : 'CLIENT'}] Total de repositórios encontrados:`, repos.length);
 
         // 4. Filtrar por tag "project" OU se está no projectsConfig.json
         const configuredProjectNames = projectsConfig.projects.map(p => p.name.toLowerCase());
@@ -88,12 +94,12 @@ export async function fetchGitHubProjects(): Promise<Repository[]> {
             return hasProjectTag || isInConfig;
         });
 
-        console.log(`🏷️ Repositórios com tag "project" ou em config: ${projectRepos.length}`);
-        console.log('📋 Projetos encontrados:', projectRepos.map(r => r.name));
+        console.log(`🏷️ [${isServer ? 'SERVER' : 'CLIENT'}] Repositórios com tag "project" ou em config:`, projectRepos.length);
+        console.log(`📋 [${isServer ? 'SERVER' : 'CLIENT'}] Projetos encontrados:`, projectRepos.map(r => r.name));
 
         // Se não encontrou nenhum projeto na API, usar fallback
         if (projectRepos.length === 0) {
-            console.warn('⚠️ Nenhum projeto encontrado na API do GitHub. Usando fallback.');
+            console.warn(`⚠️ [${isServer ? 'SERVER' : 'CLIENT'}] Nenhum projeto encontrado na API do GitHub. Usando fallback.`);
             return getFallbackData();
         }
 
@@ -119,20 +125,20 @@ export async function fetchGitHubProjects(): Promise<Repository[]> {
         // 6. Salvar no cache (apenas no cliente)
         setCachedData(reposWithLanguages);
 
-        console.log(`✅ ${reposWithLanguages.length} projetos carregados do GitHub`);
+        console.log(`✅ [${isServer ? 'SERVER' : 'CLIENT'}] ${reposWithLanguages.length} projetos carregados do GitHub`);
         return reposWithLanguages;
     } catch (error: any) {
-        console.error('❌ Erro ao buscar projetos do GitHub:', error);
+        console.error(`❌ [${isServer ? 'SERVER' : 'CLIENT'}] Erro ao buscar projetos do GitHub:`, error.message);
 
         // Se houver erro, tentar retornar cache expirado
         const expiredCache = getCachedData(true);
         if (expiredCache && expiredCache.length > 0) {
-            console.warn('⚠️ Usando cache expirado devido a erro na API');
+            console.warn(`⚠️ [${isServer ? 'SERVER' : 'CLIENT'}] Usando cache expirado devido a erro na API`);
             return expiredCache;
         }
 
         // Último recurso: dados de fallback completos
-        console.warn('⚠️ Usando dados de fallback devido a erro na API');
+        console.warn(`⚠️ [${isServer ? 'SERVER' : 'CLIENT'}] Usando dados de fallback devido a erro na API`);
         return getFallbackData();
     }
 }

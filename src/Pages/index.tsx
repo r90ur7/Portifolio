@@ -63,7 +63,11 @@ const ContactForm = dynamic(() => import("@/Components/modules/contactForm"), {
     ssr: true
 });
 
-const IndexPage = () => (
+interface IndexPageProps {
+    initialProjects?: any[];
+}
+
+const IndexPage: React.FC<IndexPageProps> = ({ initialProjects = [] }) => (
     <Box
         as="main"
         bg="transparent"
@@ -135,10 +139,10 @@ const IndexPage = () => (
 
                 <SectionSeparator />
 
-                {/* Projects Section */}
+                {/* Projects Section - Passa os projetos pré-carregados */}
                 <Box width="100%">
                     <AnimatedSection delay={0.2}>
-                        <Projects />
+                        <Projects initialProjects={initialProjects} />
                     </AnimatedSection>
                 </Box>
 
